@@ -1,11 +1,8 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import {
-  MapContainer,
-  TileLayer,
-  useMap,
-} from "https://cdn.esm.sh/react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 import {
   FaMapMarkerAlt,
   FaSyncAlt,
@@ -61,6 +58,8 @@ const CropRecommendationInput = () => {
     }
   };
 
+  
+
   return (
     <section className="py-20 px-6 bg-white" id="crop-recommendation-input">
       <div className="max-w-7xl mx-auto">
@@ -112,9 +111,8 @@ const CropRecommendationInput = () => {
                 className="w-full p-3 border border-green-200 rounded-md text-black bg-white focus:ring-2 focus:ring-green-400 focus:border-transparent transition"
                 value={latitude}
                 onChange={(e) => setLatitude(e.target.value)}
-                placeholder="e.g., 34.0522"
+                placeholder="e.g., 31.253910"
                 aria-label="Latitude input"
-                readOnly // Make readOnly if only automatic fetching is desired
               />
             </div>
             <div>
@@ -130,9 +128,8 @@ const CropRecommendationInput = () => {
                 className="w-full p-3 border border-green-200 rounded-md text-black bg-white focus:ring-2 focus:ring-green-400 focus:border-transparent transition"
                 value={longitude}
                 onChange={(e) => setLongitude(e.target.value)}
-                placeholder="e.g., -118.2437"
+                placeholder="e.g., 75.692311"
                 aria-label="Longitude input"
-                readOnly // Make readOnly if only automatic fetching is desired
               />
             </div>
 
@@ -182,6 +179,24 @@ const CropRecommendationInput = () => {
           </div>
         </motion.div>
       </div>
+
+      <MapContainer
+        id="find-me"
+        className="h-128 w-full mt-8 rounded-lg shadow-lg"
+        center={[latitude > 0 ? latitude : 31.253910, longitude > 0 ? longitude : 75.692311]}
+        zoom={13}
+        scrollWheelZoom={false}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <Marker position={[latitude > 0 ? latitude : 31.253910, longitude > 0 ? longitude : 75.692311]}>
+          <Popup>
+            Longitude: {latitude > 0 ? latitude : 31.253910} <br /> Latitude: { longitude > 0 ? longitude : 75.692311}
+          </Popup>
+        </Marker>
+      </MapContainer>
     </section>
   );
 };
