@@ -5,4 +5,5 @@ Libreary / Dependencies / Tools
 3. Toastify 
 4. React Router DOM
 5. Light Gallery
-6. 
+6. Framer Motion
+7. 
