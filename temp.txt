@@ -1,0 +1,8 @@
+Libreary / Dependencies / Tools 
+
+1. Tailwind
+2. Daisyui
+3. Toastify 
+4. React Router DOM
+5. Light Gallery
+6. 
