@@ -16,6 +16,7 @@ import ScreenshotsSection from "./ScreenshotsSec";
 import CropRecommendationInput from "./CropRecommendationInput";
 import CropRecommendationResult from "./CropRecommendationResult";
 import DiseaseDiagnosisOutput from "./DiseaseDiagnosisOutput";
+import VirtualSensorModule from "./VirtualSensorModule";
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
         <CropRecommendationResult></CropRecommendationResult>
         <DiseaseDetection></DiseaseDetection>
         <DiseaseDiagnosisOutput></DiseaseDiagnosisOutput>
+        <VirtualSensorModule></VirtualSensorModule>
         <AboutSection></AboutSection>
         <FeaturesSection></FeaturesSection>
         <HowItWorksSection></HowItWorksSection>
@@ -39,7 +41,6 @@ export default function Home() {
           <CropCompare></CropCompare>
         </div>
         <HistorySection></HistorySection>
-        <DiseaseDetection></DiseaseDetection>
       </div>
       <Carousel></Carousel>
     </div>

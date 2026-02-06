@@ -6,6 +6,9 @@ import gallery from "../data/gallery.json"
 
 import React from "react";
 
+// !!!!!!!======= Change carousal into a simple one
+
+  
 export default function Carousel() {
   // const lightGalleryRef = useRef(null);
   // eslint-disable-next-line no-unused-vars
@@ -32,11 +35,11 @@ export default function Carousel() {
       </div>
       <div
         ref={containerRef}
-        className="border-2 border-black rounded-2xl h-168 w-1/2 mx-auto text-right"
+        className="border-2 border-black rounded-2xl h-168 w-1/2 max-sm:h-60 mx-auto text-right"
       ></div>
       <div>
         <LightGallery
-          className="h-40"
+          className="md:h-40"
           // eslint-disable-next-line react-hooks/refs
           container={containerRef.current}
           onInit={onInit}
@@ -45,7 +48,7 @@ export default function Carousel() {
           showMaximizeIcon={true}
           slideDelay={400}
           thumbWidth={130}
-          thumbHeight={"100px"}
+          thumbHeight={"50px"}
           thumbMargin={6}
           appendSubHtmlTo={".lg-item"}
           dynamic={true}

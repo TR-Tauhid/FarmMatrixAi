@@ -182,7 +182,7 @@ const CropRecommendationInput = () => {
 
       <MapContainer
         id="find-me"
-        className="h-128 w-full mt-8 rounded-lg shadow-lg"
+        className="h-80 md:h-128 w-full mt-8 rounded-lg shadow-lg"
         center={[latitude > 0 ? latitude : 31.253910, longitude > 0 ? longitude : 75.692311]}
         zoom={13}
         scrollWheelZoom={false}

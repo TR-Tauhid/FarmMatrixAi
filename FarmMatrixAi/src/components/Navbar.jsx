@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "../assets/farmMatrixAI.png";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
   return (
@@ -46,7 +47,7 @@ export default function Navbar() {
               alt="Farm Matrix AI"
               className="w-10 h-10 md:w-20 md:h-20 rounded-xl md:rounded-3xl "
             />
-            <a className="btn btn-ghost text-xl md:text-4xl font-bold">Farm Matrix AI</a>
+            <NavLink to="./" className="btn btn-ghost text-xl md:text-4xl font-bold">Farm Matrix AI</NavLink>
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">
