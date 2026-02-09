@@ -10,7 +10,7 @@ import HistorySection from "./HistorySection";
 import DiseaseDetection from "./DiseaseDetection";
 import AboutSection from "./AboutSection";
 import HowItWorksSection from "./HowItWorks";
-import AIModelsSection from "./AiModelsSection";
+import AIModelsSection from "./AIModelsSection";
 import SystemArchSec from "./SystemArchSec";
 import ScreenshotsSection from "./ScreenshotsSec";
 import CropRecommendationInput from "./CropRecommendationInput";
@@ -22,27 +22,27 @@ export default function Home() {
   return (
     <div className="text-center w-11/12 mx-auto">
       <div className="*:rounded-2xl flex flex-col gap-6 my-10">
-        <HeroSection></HeroSection>
-        <CropRecommendationInput></CropRecommendationInput>
-        <CropRecommendationResult></CropRecommendationResult>
-        <DiseaseDetection></DiseaseDetection>
-        <DiseaseDiagnosisOutput></DiseaseDiagnosisOutput>
-        <VirtualSensorModule></VirtualSensorModule>
-        <AboutSection></AboutSection>
-        <FeaturesSection></FeaturesSection>
-        <HowItWorksSection></HowItWorksSection>
-        <AIModelsSection></AIModelsSection>
-        <SystemArchSec></SystemArchSec>
-        <ScreenshotsSection></ScreenshotsSection>
-        <CropRecCard></CropRecCard>
+        <HeroSection/>
+        <CropRecommendationInput/>
+        <CropRecommendationResult/>
+        <DiseaseDetection/>
+        <DiseaseDiagnosisOutput/>
+        <VirtualSensorModule/>
+        <AboutSection/>
+        <FeaturesSection/>
+        <HowItWorksSection/>
+        <AIModelsSection/>
+        <SystemArchSec/>
+        <ScreenshotsSection/>
+        <CropRecCard/>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 *:grow">
-          <WeatherSection></WeatherSection>
-          <SoilSection></SoilSection>
-          <CropCompare></CropCompare>
+          <WeatherSection/>
+          <SoilSection/>
+          <CropCompare/>
         </div>
-        <HistorySection></HistorySection>
+        <HistorySection/>
       </div>
-      <Carousel></Carousel>
+      <Carousel/>
     </div>
   );
 }
