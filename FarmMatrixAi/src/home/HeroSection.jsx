@@ -28,10 +28,11 @@ const HeroSection = () => {
                 Crop Recommendation
               </button>
             </NavLink>
-
-            <button className="px-6 py-3 border border-green-700 text-green-700 font-semibold rounded-lg hover:bg-green-200 transition">
-              AI Doctor
-            </button>
+            <NavLink to="DiseaseDetectionUpload">
+              <button className="px-6 py-3 border border-green-700 text-green-700 font-semibold rounded-lg hover:bg-green-200 transition">
+                AI Doctor
+              </button>
+            </NavLink>
           </div>
         </motion.div>
 
