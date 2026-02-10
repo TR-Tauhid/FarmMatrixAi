@@ -1,62 +1,58 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import LightGallery from "lightgallery/react";
-import lgZoom from "lightgallery/plugins/zoom";
-import lgThumbnail from "lightgallery/plugins/thumbnail";
-import gallery from "../data/gallery.json"
+import { useKeenSlider } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css";
+import "../index.css";
 
-import React from "react";
+const animation = { duration: 85000, easing: (t) => t };
 
-// !!!!!!!======= Change carousal into a simple one
+const Carousel = () => {
+  const [sliderRef] = useKeenSlider({
+    loop: true,
+    mode: "free",
+    renderMode: "performance",
+    drag: true,
+    created(s) {
+      s.moveToIdx(5, true, animation);
+    },
+    updated(s) {
+      s.moveToIdx(s.track.details.abs + 5, true, animation);
+    },
+    animationEnded(s) {
+      s.moveToIdx(s.track.details.abs + 5, true, animation);
+    },
 
-  
-export default function Carousel() {
-  // const lightGalleryRef = useRef(null);
-  // eslint-disable-next-line no-unused-vars
-  const [galleryContainer, setGalleryContainer] = useState(null);
-  const containerRef = useRef(null);
-
-  const onInit = useCallback((detail) => {
-    if (detail) {
-      // lightGalleryRef.current = detail.instance;
-      detail.instance.openGallery();
-    }
-  }, []);
-
-  useEffect(() => {
-    if (containerRef.current) {
-      setGalleryContainer("aaa");
-    }
-  }, []);
+    slides: {
+      perView: 2,
+      spacing: 0,
+    },
+  });
 
   return (
-    <div className="App ">
-      <div>
-        <h1 className="text-5xl text-black font-bold my-5">Our Clients</h1>
-      </div>
-      <div
-        ref={containerRef}
-        className="border-2 border-black rounded-2xl h-168 w-1/2 max-sm:h-60 mx-auto text-right"
-      ></div>
-      <div>
-        <LightGallery
-          className="md:h-40"
-          // eslint-disable-next-line react-hooks/refs
-          container={containerRef.current}
-          onInit={onInit}
-          plugins={[lgZoom, lgThumbnail]}
-          closable={false}
-          showMaximizeIcon={true}
-          slideDelay={400}
-          thumbWidth={130}
-          thumbHeight={"50px"}
-          thumbMargin={6}
-          appendSubHtmlTo={".lg-item"}
-          dynamic={true}
-          dynamicEl={gallery}
-          hash={false}
-          elementClassNames={"inline-gallery-container"}
-        ></LightGallery>
+    <div className="shadow-2xl rounded-2xl p-3 pb-10">
+      <h1 className="text-4xl font-bold text-green-700 text-center mb-4">
+        Our Clients
+      </h1>
+      <div ref={sliderRef} className="keen-slider rounded-2xl shadow-2xl">
+        <div className="keen-slider__slide number-slide1">
+          <img src="/happyClient(1).jpg" alt="Happy client 1" />
+        </div>
+        <div className="keen-slider__slide number-slide2">
+          <img src="/happyClient(2).jpg" alt="Happy client 2" />
+        </div>
+        <div className="keen-slider__slide number-slide3">
+          <img src="/happyClient(3).jpg" alt="Happy client 3" />
+        </div>
+        <div className="keen-slider__slide number-slide4">
+          <img src="/happyClient(4).jpg" alt="Happy client 4" />
+        </div>
+        <div className="keen-slider__slide number-slide5">
+          <img src="/happyClient(5).jpg" alt="Happy client 5" />
+        </div>
+        <div className="keen-slider__slide number-slide6">
+          <img src="/happyClient(6).jpg" alt="Happy client 6" />
+        </div>
       </div>
     </div>
   );
-}
+};
+
+export default Carousel;

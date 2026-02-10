@@ -3,6 +3,8 @@ import Navbar from "./components/Navbar";
 import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Footer from "./shared/Footer";
+import KeenSlider from 'keen-slider'
+
 
 export default function Root() {
   return (

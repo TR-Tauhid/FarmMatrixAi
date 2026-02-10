@@ -1,20 +1,5 @@
 @import "tailwindcss";
 @plugin "daisyui";
 @import "lightgallery/css/lightgallery-bundle.css";
+@import 'keen-slider/keen-slider.min.css';
 
-
-/* Carousal */
-
-.lg-backdrop {
-    background-color: #70f8705b;
-}
-
-.lg-outer .lg-thumb-item.active, .lg-outer .lg-thumb-item:hover {
-    border-color: rgb(124, 87, 255);
-}
-
-.lg-outer .lg-thumb-outer {
-    border-radius: 0px 0px 15px 15px;
-    padding: 10px;
-    margin: 1px;
-}
