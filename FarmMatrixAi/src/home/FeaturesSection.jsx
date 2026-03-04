@@ -1,8 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaLeaf, FaCloudSun, FaBrain, FaMicroscope } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const FeaturesSection = () => {
+  const { t } = useTranslation();
   const features = [
     {
       title: "AI Crop Recommendation Engine",
@@ -42,7 +44,7 @@ const FeaturesSection = () => {
           viewport={{ once: true }}
           className="text-4xl font-bold text-green-700"
         >
-          Core Features of the System
+          {t("features.title")}
         </motion.h2>
 
         <motion.p
@@ -52,7 +54,7 @@ const FeaturesSection = () => {
           viewport={{ once: true }}
           className="mt-3 text-gray-700 max-w-2xl mx-auto"
         >
-          The Unified AI Framework brings modern agricultural intelligence directly to farmers—making farming smarter, faster, and more efficient.
+          {t("features.description")}
         </motion.p>
 
         {/* Features Grid */}

@@ -1,0 +1,116 @@
+{
+  "navbar": {
+    "title": "Farm Matrix AI",
+    "home": "Home",
+    "language": "Language"
+  },
+  "hero": {
+    "title": "Farm Matrix AI",
+    "subtitle": "Smart Agriculture for Better Harvests"
+  },
+  "features": {
+    "title": "Core Features of the System",
+    "description": "The Unified AI Framework brings modern agricultural intelligence directly to farmers—making farming smarter, faster, and more efficient.",
+    "cropRecommendation": "Crop Recommendation",
+    "diseaseDetection": "Disease Detection",
+    "weatherForecast": "Weather Forecast",
+    "soilAnalysis": "Soil Analysis"
+  },
+  "cropRecommendation": {
+    "title": "Crop Recommendation Engine",
+    "description": "Get AI-powered crop recommendations based on your soil and weather conditions",
+    "inputLabel": "Enter Your Soil Data",
+    "resultLabel": "Recommended Crops"
+  },
+  "cropRecommendationInput": {
+    "title": "Crop Recommendation",
+    "description": "Input your location to get tailored crop recommendations. Our system leverages your GPS coordinates for precise guidance.",
+    "locationInputLabel": "Location Input",
+    "latitude": "Latitude:",
+    "longitude": "Longitude:",
+    "latitudePlaceholder": "e.g., 31.253910",
+    "longitudePlaceholder": "e.g., 75.692311",
+    "getLocation": "Get My Location",
+    "locationFetched": "Location fetched successfully!",
+    "permissionDenied": "Permission denied to access location. Please enable location services for your browser.",
+    "locationUnavailable": "Location information is unavailable. Please try again later.",
+    "timeoutError": "The request to get user location timed out.",
+    "unknownError": "An unknown error occurred while fetching location.",
+    "geolocationNotSupported": "Geolocation is not supported by your browser."
+  },
+  "cropRecommendationResult": {
+    "title": "Your Personalized Recommendation",
+    "description": "The system has analyzed real-time environmental data and soil parameters to determine the most optimal crop for your location.",
+    "nitrogen": "Nitrogen (N)",
+    "phosphorus": "Phosphorus (P)",
+    "potassium": "Potassium (K)",
+    "soilPH": "Soil pH",
+    "temperature": "Temperature",
+    "humidity": "Humidity",
+    "recommendedBy": "Recommended by:",
+    "analysisNote": "Analysis based on API-fetched soil and weather data."
+  },
+  "cropRecCard": {
+    "title": "AI Crop Recommendation",
+    "description": "Get the best crop suggestions based on soil & weather.",
+    "buttonText": "Try Recommendation"
+  },
+  "diseaseDetection": {
+    "title": "Disease Detection",
+    "description": "Upload images of your crops to detect diseases early",
+    "uploadButton": "Upload Image",
+    "analyzing": "Analyzing..."
+  },
+  "diseaseDetectionUpload": {
+    "title": "Disease Detection",
+    "description": "Upload a clear image of the affected plant leaf to receive an immediate AI-powered diagnostic.",
+    "uploadFormTitle": "Upload Leaf Image",
+    "dragDropText": "Click or Drag File Here",
+    "fileSelectedText": "File Selected:",
+    "fileFormatInfo": "PNG, JPG, or JPEG (Max 5MB)",
+    "analyzeButton": "Analyze Image",
+    "captureButton": "Or Capture using Device Camera",
+    "selectFileAlert": "Please select a file first.",
+    "uploadAlert": "Simulating upload for:",
+    "cameraAlert": "Simulating Camera capture... (Requires access to user's camera)"
+  },
+  "weather": {
+    "title": "Weather Forecast",
+    "temperature": "Temperature",
+    "humidity": "Humidity",
+    "rainfall": "Rainfall"
+  },
+  "soil": {
+    "title": "Soil Analysis",
+    "ph": "pH Level",
+    "nitrogen": "Nitrogen",
+    "phosphorus": "Phosphorus"
+  },
+  "about": {
+    "title": "About Farm Matrix AI",
+    "description": "Empowering farmers with artificial intelligence and smart technology"
+  },
+  "howItWorks": {
+    "title": "How the Unified AI System Works",
+    "description": "From location input to final crop and disease insights, here's how our intelligent system guides farmers step-by-step.",
+    "step1": "Enter your farm data",
+    "step2": "AI analyzes conditions",
+    "step3": "Get recommendations"
+  },
+  "footer": {
+    "copyright": "© 2025 Farm Matrix AI. All rights reserved.",
+    "contact": "Contact Us",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy"
+  },
+  "common": {
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success!",
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Register"
+  }
+}

@@ -1,6 +1,7 @@
 import React from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { FaSeedling, FaFlask, FaSun, FaChartLine } from "react-icons/fa";
 
 // Sample data structure for the result (replace with actual API data in a real app)
@@ -32,15 +33,16 @@ const itemVariants = {
 };
 
 const CropRecommendationResult = () => {
+  const { t } = useTranslation();
   const { optimalCrop, modelUsed, metrics } = mockRecommendationData;
 
   const metricItems = [
-    { label: "Nitrogen (N)", value: metrics.N_Ratio, unit: "mg/kg", icon: <FaFlask /> },
-    { label: "Phosphorus (P)", value: metrics.P_Ratio, unit: "mg/kg", icon: <FaFlask /> },
-    { label: "Potassium (K)", value: metrics.K_Ratio, unit: "mg/kg", icon: <FaFlask /> },
-    { label: "Soil pH", value: metrics.pH, unit: "", icon: <FaChartLine /> },
-    { label: "Temperature", value: metrics.temperature, unit: "°C", icon: <FaSun /> },
-    { label: "Humidity", value: metrics.humidity, unit: "%", icon: <FaChartLine /> },
+    { label: t("cropRecommendationResult.nitrogen"), value: metrics.N_Ratio, unit: "mg/kg", icon: <FaFlask /> },
+    { label: t("cropRecommendationResult.phosphorus"), value: metrics.P_Ratio, unit: "mg/kg", icon: <FaFlask /> },
+    { label: t("cropRecommendationResult.potassium"), value: metrics.K_Ratio, unit: "mg/kg", icon: <FaFlask /> },
+    { label: t("cropRecommendationResult.soilPH"), value: metrics.pH, unit: "", icon: <FaChartLine /> },
+    { label: t("cropRecommendationResult.temperature"), value: metrics.temperature, unit: "°C", icon: <FaSun /> },
+    { label: t("cropRecommendationResult.humidity"), value: metrics.humidity, unit: "%", icon: <FaChartLine /> },
   ];
 
   return (
@@ -55,7 +57,7 @@ const CropRecommendationResult = () => {
           viewport={{ once: true }}
           className="text-4xl font-bold text-green-700 text-center"
         >
-          Your Personalized Recommendation
+          {t("cropRecommendationResult.title")}
         </motion.h2>
 
         <motion.p
@@ -65,7 +67,7 @@ const CropRecommendationResult = () => {
           viewport={{ once: true }}
           className="mt-3 text-gray-700 text-center max-w-3xl mx-auto"
         >
-          The system has analyzed real-time environmental data and soil parameters to determine the most **optimal crop** for your location.
+          {t("cropRecommendationResult.description")}
         </motion.p>
 
         {/* Main Result Card */}
@@ -84,10 +86,10 @@ const CropRecommendationResult = () => {
           </div>
           
           <p className="text-lg text-gray-600 mt-2">
-            **Recommended by:** {modelUsed} model
+            {t("cropRecommendationResult.recommendedBy")} {modelUsed} model
           </p>
           <p className="text-sm text-gray-500 mt-1">
-            *Analysis based on API-fetched soil and weather data.*
+            {t("cropRecommendationResult.analysisNote")}
           </p>
 
         </motion.div>

@@ -14,3 +14,4 @@ const CropCompare = () => {
 };
 
 export default CropCompare;
+

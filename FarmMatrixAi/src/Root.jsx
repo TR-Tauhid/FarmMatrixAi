@@ -4,20 +4,23 @@ import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Footer from "./shared/Footer";
 import KeenSlider from 'keen-slider'
-
+import "./provider/i18n";
+import { LanguageProvider } from "./provider/LanguageProvider";
 
 export default function Root() {
   return (
-    <div className="min-h-screen flex flex-col bg-white">
-      <ToastContainer />
+    <LanguageProvider>
+      <div className="min-h-screen flex flex-col bg-white">
+        <ToastContainer />
 
-      <Navbar />
+        <Navbar />
 
-      <div className="flex-1">
-        <Outlet />
+        <div className="flex-1">
+          <Outlet />
+        </div>
+
+        <Footer />
       </div>
-
-      <Footer />
-    </div>
+    </LanguageProvider>
   );
 }

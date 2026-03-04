@@ -1,24 +1,23 @@
 import React, { useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { FaCloudUploadAlt, FaCameraRetro } from "react-icons/fa";
 
 const DiseaseDetectionUpload = () => {
+  const { t } = useTranslation();
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
-    // Optionally, you can trigger the upload or prediction here
-    // For now, we'll just track the file state
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (selectedFile) {
-      alert(`Simulating upload for: ${selectedFile.name}`);
-      // In a real app: call API endpoint to upload and detect
+      alert(`${t("diseaseDetectionUpload.uploadAlert")} ${selectedFile.name}`);
     } else {
-      alert("Please select a file first.");
+      alert(t("diseaseDetectionUpload.selectFileAlert"));
     }
   };
 
@@ -34,7 +33,7 @@ const DiseaseDetectionUpload = () => {
           viewport={{ once: true }}
           className="text-4xl font-bold text-green-700 text-center"
         >
-          Disease Detection
+          {t("diseaseDetectionUpload.title")}
         </motion.h2>
 
         <motion.p
@@ -44,7 +43,7 @@ const DiseaseDetectionUpload = () => {
           viewport={{ once: true }}
           className="mt-3 text-gray-700 text-center max-w-2xl mx-auto"
         >
-          Upload a clear image of the affected plant leaf to receive an immediate AI-powered diagnostic.
+          {t("diseaseDetectionUpload.description")}
         </motion.p>
 
         {/* Upload Card / Dropzone */}
@@ -57,7 +56,7 @@ const DiseaseDetectionUpload = () => {
         >
           <form onSubmit={handleSubmit}>
             <h3 className="text-2xl font-semibold text-green-800 text-center mb-6">
-              Upload Leaf Image
+              {t("diseaseDetectionUpload.uploadFormTitle")}
             </h3>
             
             <label 
@@ -69,10 +68,10 @@ const DiseaseDetectionUpload = () => {
               <div className="text-center">
                 <FaCloudUploadAlt className="text-6xl text-green-500 mx-auto mb-3" />
                 <p className="text-lg font-medium text-green-700">
-                  {selectedFile ? `File Selected: ${selectedFile.name}` : "Click or Drag File Here"}
+                  {selectedFile ? `${t("diseaseDetectionUpload.fileSelectedText")} ${selectedFile.name}` : t("diseaseDetectionUpload.dragDropText")}
                 </p>
                 <p className="text-sm text-gray-500 mt-1">
-                  PNG, JPG, or JPEG (Max 5MB)
+                  {t("diseaseDetectionUpload.fileFormatInfo")}
                 </p>
               </div>
             </label>
@@ -98,16 +97,16 @@ const DiseaseDetectionUpload = () => {
                     className="w-full flex items-center justify-center space-x-2 px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:bg-gray-400 transition"
                 >
                     <FaCameraRetro />
-                    <span>Analyze Image</span>
+                    <span>{t("diseaseDetectionUpload.analyzeButton")}</span>
                 </motion.button>
 
                 {/* Optional: 'Capture from Camera' button */}
                 <button
                     type="button"
                     className="w-full text-center text-sm text-green-600 hover:text-green-800 transition"
-                    onClick={() => alert("Simulating Camera capture... (Requires access to user's camera)")}
+                    onClick={() => alert(t("diseaseDetectionUpload.cameraAlert"))}
                 >
-                    Or Capture using Device Camera
+                    {t("diseaseDetectionUpload.captureButton")}
                 </button>
             </div>
 

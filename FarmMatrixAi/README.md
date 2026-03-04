@@ -1,6 +1,6 @@
 Backlogs .........
 
-1. Change Carousal into a simple and cool one.
+1. Change Carousal into a simple and cool one.      ===  DONE  ===
 2. Language Mode Intregration
 3. Frontend finishing 
 4. Dark Mode
@@ -13,6 +13,10 @@ Backlogs .........
 1. Client Auth
 2. AI intregration 
 
+
+Libreary and Dependencies / Packeges...
+1. react-i18next
+2. 
 
 
 # 🌾 FarmMatrixAI

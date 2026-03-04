@@ -2,8 +2,11 @@ import React from "react";
 import logo from "../assets/farmMatrixAI.png";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function Navbar() {
+  const { t } = useTranslation();
+
   return (
     <div className="w-11/12 mx-auto mt-6">
       <div className="navbar shadow-sm rounded-2xl bg-white">
@@ -31,7 +34,7 @@ export default function Navbar() {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               <li>
-                <a>Home</a>
+                <a>{t("navbar.home")}</a>
               </li>
               <li>
                 <a>Item 2</a>
@@ -47,13 +50,13 @@ export default function Navbar() {
               alt="Farm Matrix AI"
               className="w-10 h-10 md:w-20 md:h-20 rounded-xl md:rounded-3xl "
             />
-            <NavLink to="./" className="btn btn-ghost text-xl md:text-4xl font-bold">Farm Matrix AI</NavLink>
+            <NavLink to="./" className="btn btn-ghost text-xl md:text-4xl font-bold">{t("navbar.title")}</NavLink>
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <a>Home</a>
+              <a>{t("navbar.home")}</a>
             </li>
             <li>
               <a>Item 2</a>

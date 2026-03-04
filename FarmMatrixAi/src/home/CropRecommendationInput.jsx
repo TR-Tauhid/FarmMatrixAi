@@ -2,6 +2,7 @@ import React, { useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { useTranslation } from "react-i18next";
 import "leaflet/dist/leaflet.css";
 import {
   FaMapMarkerAlt,
@@ -10,6 +11,7 @@ import {
 } from "react-icons/fa"; // Icons for location, loading, error
 
 const CropRecommendationInput = () => {
+  const { t } = useTranslation();
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [loading, setLoading] = useState(false);
@@ -33,20 +35,16 @@ const CropRecommendationInput = () => {
           setLoading(false);
           switch (err.code) {
             case err.PERMISSION_DENIED:
-              setError(
-                "Permission denied to access location. Please enable location services for your browser."
-              );
+              setError(t("cropRecommendationInput.permissionDenied"));
               break;
             case err.POSITION_UNAVAILABLE:
-              setError(
-                "Location information is unavailable. Please try again later."
-              );
+              setError(t("cropRecommendationInput.locationUnavailable"));
               break;
             case err.TIMEOUT:
-              setError("The request to get user location timed out.");
+              setError(t("cropRecommendationInput.timeoutError"));
               break;
             default:
-              setError("An unknown error occurred while fetching location.");
+              setError(t("cropRecommendationInput.unknownError"));
               break;
           }
         },
@@ -54,7 +52,7 @@ const CropRecommendationInput = () => {
       );
     } else {
       setLoading(false);
-      setError("Geolocation is not supported by your browser.");
+      setError(t("cropRecommendationInput.geolocationNotSupported"));
     }
   };
 
@@ -71,7 +69,7 @@ const CropRecommendationInput = () => {
           viewport={{ once: true }}
           className="text-4xl font-bold text-green-700 text-center"
         >
-          Crop Recommendation
+          {t("cropRecommendationInput.title")}
         </motion.h2>
 
         <motion.p
@@ -81,8 +79,7 @@ const CropRecommendationInput = () => {
           viewport={{ once: true }}
           className="mt-3 text-gray-700 text-center max-w-2xl mx-auto"
         >
-          Input your location to get tailored crop recommendations. Our system
-          leverages your GPS coordinates for precise guidance.
+          {t("cropRecommendationInput.description")}
         </motion.p>
 
         {/* Input Card */}
@@ -94,7 +91,7 @@ const CropRecommendationInput = () => {
           className="mt-14 bg-green-50 p-8 rounded-xl shadow-xl border border-green-100 max-w-lg mx-auto"
         >
           <h3 className="text-2xl font-semibold text-green-800 text-center mb-6">
-            Location Input
+            {t("cropRecommendationInput.locationInputLabel")}
           </h3>
 
           <div className="flex flex-col space-y-4">
@@ -103,7 +100,7 @@ const CropRecommendationInput = () => {
                 htmlFor="latitude"
                 className="block text-gray-700 font-medium mb-1"
               >
-                Latitude:
+                {t("cropRecommendationInput.latitude")}
               </label>
               <input
                 type="text"
@@ -111,8 +108,8 @@ const CropRecommendationInput = () => {
                 className="w-full p-3 border border-green-200 rounded-md text-black bg-white focus:ring-2 focus:ring-green-400 focus:border-transparent transition"
                 value={latitude}
                 onChange={(e) => setLatitude(e.target.value)}
-                placeholder="e.g., 31.253910"
-                aria-label="Latitude input"
+                placeholder={t("cropRecommendationInput.latitudePlaceholder")}
+                aria-label={t("cropRecommendationInput.latitude")}
               />
             </div>
             <div>
@@ -120,7 +117,7 @@ const CropRecommendationInput = () => {
                 htmlFor="longitude"
                 className="block text-gray-700 font-medium mb-1"
               >
-                Longitude:
+                {t("cropRecommendationInput.longitude")}
               </label>
               <input
                 type="text"
@@ -128,8 +125,8 @@ const CropRecommendationInput = () => {
                 className="w-full p-3 border border-green-200 rounded-md text-black bg-white focus:ring-2 focus:ring-green-400 focus:border-transparent transition"
                 value={longitude}
                 onChange={(e) => setLongitude(e.target.value)}
-                placeholder="e.g., 75.692311"
-                aria-label="Longitude input"
+                placeholder={t("cropRecommendationInput.longitudePlaceholder")}
+                aria-label={t("cropRecommendationInput.longitude")}
               />
             </div>
 
@@ -143,12 +140,12 @@ const CropRecommendationInput = () => {
               {loading ? (
                 <>
                   <FaSyncAlt className="animate-spin" />
-                  <span>Fetching Location...</span>
+                  <span>{t("common.loading")}</span>
                 </>
               ) : (
                 <>
                   <FaMapMarkerAlt />
-                  <span>Get My Location</span>
+                  <span>{t("cropRecommendationInput.getLocation")}</span>
                 </>
               )}
             </motion.button>
@@ -170,9 +167,9 @@ const CropRecommendationInput = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="mt-4 p-3 bg-green-100 text-green-700 border border-green-200 rounded-md text-center"
               >
-                <p className="font-medium">Location fetched successfully!</p>
+                <p className="font-medium">{t("cropRecommendationInput.locationFetched")}</p>
                 <p className="text-sm">
-                  Latitude: {latitude}, Longitude: {longitude}
+                  {t("cropRecommendationInput.latitude")} {latitude}, {t("cropRecommendationInput.longitude")} {longitude}
                 </p>
               </motion.div>
             )}
@@ -193,7 +190,7 @@ const CropRecommendationInput = () => {
         />
         <Marker position={[latitude > 0 ? latitude : 31.253910, longitude > 0 ? longitude : 75.692311]}>
           <Popup>
-            Longitude: {latitude > 0 ? latitude : 31.253910} <br /> Latitude: { longitude > 0 ? longitude : 75.692311}
+            {t("cropRecommendationInput.latitude")} {latitude > 0 ? latitude : 31.253910} <br /> {t("cropRecommendationInput.longitude")} {longitude > 0 ? longitude : 75.692311}
           </Popup>
         </Marker>
       </MapContainer>

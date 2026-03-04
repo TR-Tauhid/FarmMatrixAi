@@ -2,8 +2,10 @@ import React from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import humanFarmGreenhouse from "../assets/human-greenhouse-farm.jpg"
+import { useTranslation } from "react-i18next";
 
 export default function AboutSection() {
+  const { t } = useTranslation();
   return (
     <section className="py-20 px-6 bg-white" id="about">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
@@ -16,17 +18,11 @@ export default function AboutSection() {
           viewport={{ once: true }}
         >
           <h2 className="text-4xl font-bold text-green-700 leading-snug">
-            About the Unified AI Framework
+            {t("about.title")}
           </h2>
 
           <p className="mt-5 text-gray-700 text-lg leading-relaxed">
-            The Unified AI Framework for Precision Crop Recommendation and Disease 
-            Detection is a smart agricultural decision-support system that brings 
-            the power of modern Machine Learning and Deep Learning directly to the 
-            farmer. Instead of relying on guesswork or outdated tools, our system 
-            intelligently analyzes soil parameters, real-time weather data, and 
-            plant leaf images to provide accurate crop suggestions and instant 
-            disease diagnosis.
+            {t("about.description")}
           </p>
 
           <p className="mt-4 text-gray-700 text-lg leading-relaxed">

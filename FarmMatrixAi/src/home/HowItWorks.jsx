@@ -2,8 +2,10 @@ import React from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { FaMapMarkerAlt, FaFlask, FaCloud, FaLeaf, FaBug } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const HowItWorksSection = () => {
+  const { t } = useTranslation();
   const steps = [
     {
       title: "1. Get Location",
@@ -49,7 +51,7 @@ const HowItWorksSection = () => {
           viewport={{ once: true }}
           className="text-4xl font-bold text-green-700"
         >
-          How the Unified AI System Works
+          {t("howItWorks.title")}
         </motion.h2>
 
         <motion.p
@@ -59,7 +61,7 @@ const HowItWorksSection = () => {
           viewport={{ once: true }}
           className="mt-3 text-gray-700 max-w-2xl mx-auto"
         >
-          From location input to final crop and disease insights, here’s how our intelligent system guides farmers step-by-step.
+          {t("howItWorks.description")}
         </motion.p>
 
         {/* Steps Timeline */}
@@ -94,7 +96,7 @@ const HowItWorksSection = () => {
           ))}
 
           {/* Decorative Vertical Line */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 top-0 h-full w-1 bg-green-200 rounded-full"></div>
+          <div className="hidden min-[800px]:block absolute left-1/2 transform -translate-x-1/2 top-0 h-full w-1 bg-green-200 rounded-full"></div>
 
         </div>
       </div>

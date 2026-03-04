@@ -1,7 +1,9 @@
 import React from "react";
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
   return (
     <footer className="bg-green-800 text-gray-200 py-10 w-full mt-20 mx-auto">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -10,8 +12,7 @@ const Footer = () => {
         <div>
           <h2 className="text-2xl font-bold text-white">Farm Matrix AI</h2>
           <p className="mt-3 text-gray-300 text-sm">
-            Smart farming powered by AI – helping farmers make better decisions
-            using soil data, weather insights, and machine learning.
+            {t("about.description")}
           </p>
         </div>
 
@@ -52,7 +53,7 @@ const Footer = () => {
 
       {/* Bottom Line */}
       <div className="border-t border-green-700 mt-8 pt-5 text-center text-sm text-gray-400">
-        © {new Date().getFullYear()} Farm Matrix AI. All rights reserved.
+        {t("footer.copyright")}
       </div>
     </footer>
   );
