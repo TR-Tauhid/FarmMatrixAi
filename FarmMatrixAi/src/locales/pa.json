@@ -72,8 +72,11 @@
   },
   "carousel": {
     "heading": "ਸਾਡਾ ਕਲਾਈ੩ਟ"
-  },
-  "history": {
+  },  "cropCompare": {
+    "heading": "ਫਸਲ ਤੁਲਨਾ",
+    "description": "ਕਈ ਫਸਲਾਂ ਦੀ ਉਪਜ, ਮਿਆਦ ਅਤੇ ਲਾਭਦਾਇਕਤਾ ਦੀ ਤੁਲਨਾ ਕਰੋ।",
+    "button": "ਫਸਲਾਂ ਦੀ ਤੁਲਨਾ ਕਰੋ"
+  },  "history": {
     "heading": "सिफारिश इतिहास",
     "description": "अपनी सभी पिछली AI-जनित फसल सुझाव देखें।",
     "soilLabel": "मिट्टी",

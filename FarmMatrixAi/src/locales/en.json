@@ -74,6 +74,11 @@
   "carousel": {
     "heading": "Our Clients"
   },
+  "cropCompare": {
+    "heading": "Crop Comparison",
+    "description": "Compare yield, duration & profitability of multiple crops.",
+    "button": "Compare Crops"
+  },
   "history": {
     "heading": "Recommendation History",
     "description": "Review all your past AI-generated crop suggestions.",
