@@ -55,11 +55,137 @@
     "description": "Get the best crop suggestions based on soil & weather.",
     "buttonText": "Try Recommendation"
   },
+  "footer": {
+    "quickLinks": "Quick Links",
+    "support": "Support",
+    "followUs": "Follow Us",
+    "links": {
+      "home": "Home",
+      "cropRecommendation": "Crop Recommendation",
+      "soilAnalysis": "Soil Analysis",
+      "cropComparison": "Crop Comparison",
+      "faq": "FAQ",
+      "contact": "Contact",
+      "privacy": "Privacy Policy",
+      "terms": "Terms & Conditions"
+    },
+    "copyright": "© 2025 Farm Matrix AI. All rights reserved."
+  },
+  "carousel": {
+    "heading": "Our Clients"
+  },
+  "history": {
+    "heading": "Recommendation History",
+    "description": "Review all your past AI-generated crop suggestions.",
+    "soilLabel": "Soil",
+    "weatherLabel": "Weather",
+    "recommendedLabel": "Recommended Crop",
+    "viewDetails": "View Details"
+  },
+  "screenshots": {
+    "heading": "System Snapshots",
+    "description": "A quick look at how the Unified AI Framework appears in real usage — from predictions to visual diagnostics.",
+    "items": [
+      "Crop Recommendation Output",
+      "Disease Detection – Leaf Upload",
+      "Weather & Soil API Integration",
+      "User Dashboard & History"
+    ]
+  },
+  "workflowPipeline": {
+    "heading": "Workflow Pipeline",
+    "mobileHint": "(Swipe to view full workflow)",
+    "steps": [
+      "User Input",
+      "Frontend UI",
+      "Backend API",
+      "Data Fusion",
+      "Crop Prediction (RF)",
+      "Disease Detection (CNN)",
+      "Final Output"
+    ]
+  },
+  "systemArchitecture": {
+    "heading": "System Architecture",
+    "description": "The architecture integrates multiple intelligent layers — providing a seamless flow from user input to AI-powered output.",
+    "layers": {
+      "frontend": {
+        "title": "Frontend (React JS)",
+        "description": "The user interface allows farmers to input soil data, fetch location, upload leaf images, and visualize crop/disease predictions."
+      },
+      "backend": {
+        "title": "Backend API Layer",
+        "description": "Flask/FastAPI or Node.js processes user requests, connects ML models, and handles data integration between frontend and models."
+      },
+      "externalAPIs": {
+        "title": "External Data APIs",
+        "description": "Weather & Soil APIs (OpenWeatherMap, SoilGrids) provide real-time environmental data, enabling the virtual sensor functionality."
+      },
+      "mlModels": {
+        "title": "Machine Learning Models",
+        "description": "Random Forest recommends the most suitable crop, while the CNN model performs disease classification from leaf images."
+      },
+      "database": {
+        "title": "Database Layer",
+        "description": "Stores user history, crop data, model files, and prediction analytics for ongoing system improvement and retraining."
+      }
+    }
+  },
+  "aiModels": {
+    "title": "AI Models Behind the System",
+    "description": "Our system is powered by two intelligent machine learning models designed to enhance crop productivity and protect plants from diseases.",
+    "models": [
+      {
+        "title": "Random Forest Classifier",
+        "description": "The Random Forest algorithm analyzes soil nutrients (N-P-K), pH, temperature, and rainfall data to recommend the best crop for the farmer’s exact location. It handles non-linear relationships exceptionally well, making it ideal for agricultural predictions.",
+        "highlight": [
+          "Uses multiple decision trees",
+          "High accuracy & low overfitting",
+          "Perfect for mixed soil-weather inputs"
+        ]
+      },
+      {
+        "title": "CNN – Disease Detection Model",
+        "description": "A Convolutional Neural Network trained on the PlantVillage dataset identifies plant diseases instantly from leaf images. It classifies diseases with high precision and provides quick diagnosis for timely crop protection.",
+        "highlight": [
+          "Trained on thousands of leaf images",
+          "Fast & accurate image diagnosis",
+          "Supports multiple disease categories"
+        ]
+      }
+    ]
+  },
   "diseaseDetection": {
     "title": "Disease Detection",
     "description": "Upload images of your crops to detect diseases early",
+    "uploadPrompt": "Click to Upload Leaf Image",
     "uploadButton": "Upload Image",
+    "removeImage": "Remove Image",
+    "analyzeButton": "Analyze Disease",
+    "resultTitle": "Result",
+    "resultPlaceholder": "(AI prediction will show here after integration.)",
     "analyzing": "Analyzing..."
+  },
+  "diseaseDiagnosisOutput": {
+    "title": "Disease Diagnosis Output",
+    "description": "The Convolutional Neural Network (CNN) has processed the image to identify the specific pathogen affecting your crop.",
+    "diagnosisLabel": "Diagnosis:",
+    "plantLabel": "Plant Identified",
+    "causalAgentLabel": "Causal Agent",
+    "confidenceLabel": "Confidence Score",
+    "symptomsLabel": "Observed Symptoms",
+    "managementLabel": "Management & Cure",
+    "symptoms": [
+      "Small, scattered chlorotic (yellow) spots on young leaves.",
+      "Spots typically develop a gray/tan center with a dark purple border as they mature.",
+      "Affects leaf area, leading to premature defoliation and yield loss."
+    ],
+    "management": [
+      "Apply broad-spectrum fungicides (Strobilurins/Triazoles) early in the season.",
+      "Use resistant soybean varieties for future planting.",
+      "Implement crop rotation with non-host crops.",
+      "Bury infected crop residue through tillage."
+    ]
   },
   "diseaseDetectionUpload": {
     "title": "Disease Detection",
@@ -73,6 +199,60 @@
     "selectFileAlert": "Please select a file first.",
     "uploadAlert": "Simulating upload for:",
     "cameraAlert": "Simulating Camera capture... (Requires access to user's camera)"
+  },
+  "virtualSensor": {
+    "title": "The Virtual Sensor",
+    "locationInput": {
+      "title": "Location Input",
+      "latitude": "Latitude:",
+      "longitude": "Longitude:"
+    },
+    "buttons": {
+      "fetching": "Fetching GPS...",
+      "getLocation": "Get My Current Location"
+    },
+    "errors": {
+      "permissionDenied": "Permission denied. Please enable location services.",
+      "timeout": "Location request timed out.",
+      "unknown": "An unknown error occurred while fetching location.",
+      "geolocationNotSupported": "Geolocation is not supported by your browser."
+    },
+    "loading": {
+      "analyzingTitle": "Analyzing Data Fusion...",
+      "analyzingDesc": "Running Random Forest Model on real-time soil and weather parameters."
+    },
+    "steps": {
+      "dataFusion": {
+        "title": "Data Fusion",
+        "desc": "(Soil Grids & Weather API)"
+      },
+      "aiBrain": {
+        "title": "AI Brain",
+        "desc": "(Random Forest Model)"
+      },
+      "output": {
+        "title": "Scientific",
+        "desc": "Recommendation"
+      }
+    },
+    "result": {
+      "title": "AI Recommendation Result",
+      "recommendedBy": "Recommended by:",
+      "modelSuffix": "model",
+      "runNewAnalysis": "Run New Analysis"
+    },
+    "metrics": {
+      "N_Ratio": "Nitrogen (N)",
+      "P_Ratio": "Phosphorus (P)",
+      "K_Ratio": "Potassium (K)",
+      "pH": "Soil pH",
+      "temperature": "Temperature",
+      "humidity": "Humidity"
+    },
+    "popup": {
+      "defaultLocation": "Default Location: LPU Jalandhar",
+      "currentLocation": "Current Location:"
+    }
   },
   "weather": {
     "title": "Weather Forecast",
@@ -93,15 +273,32 @@
   "howItWorks": {
     "title": "How the Unified AI System Works",
     "description": "From location input to final crop and disease insights, here's how our intelligent system guides farmers step-by-step.",
+    "steps": {
+      "step1": {
+        "title": "1. Get Location",
+        "description": "The farmer allows GPS access, and the system automatically reads the exact location for site-specific prediction."
+      },
+      "step2": {
+        "title": "2. Fetch Soil & Weather Data",
+        "description": "The system pulls real-time temperature, humidity, rainfall, and soil nutrient data using APIs (Virtual Sensor)."
+      },
+      "step3": {
+        "title": "3. Intelligent Data Fusion",
+        "description": "All environmental parameters are processed and combined to create a precise data vector for ML prediction."
+      },
+      "step4": {
+        "title": "4. AI Crop Recommendation",
+        "description": "The Random Forest model analyzes conditions and suggests the best crop tailored to your land."
+      },
+      "step5": {
+        "title": "5. Disease Detection",
+        "description": "The farmer uploads a leaf image. The CNN model identifies diseases instantly and suggests treatment."
+      }
+    },
+    
     "step1": "Enter your farm data",
     "step2": "AI analyzes conditions",
     "step3": "Get recommendations"
-  },
-  "footer": {
-    "copyright": "© 2025 Farm Matrix AI. All rights reserved.",
-    "contact": "Contact Us",
-    "terms": "Terms & Conditions",
-    "privacy": "Privacy Policy"
   },
   "common": {
     "submit": "Submit",

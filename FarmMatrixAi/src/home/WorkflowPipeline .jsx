@@ -1,5 +1,7 @@
 import React from "react";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import {
   FaUserAlt,
   FaLaptopCode,
@@ -11,33 +13,34 @@ import {
 } from "react-icons/fa";
 
 const WorkflowPipeline = () => {
+  const { t } = useTranslation();
   const steps = [
     {
-      title: "User Input",
+      title: t("workflowPipeline.steps.0"),
       icon: <FaUserAlt size={30} className="text-green-700" />,
     },
     {
-      title: "Frontend UI",
+      title: t("workflowPipeline.steps.1"),
       icon: <FaLaptopCode size={30} className="text-blue-600" />,
     },
     {
-      title: "Backend API",
+      title: t("workflowPipeline.steps.2"),
       icon: <FaCloud size={30} className="text-purple-600" />,
     },
     {
-      title: "Data Fusion",
+      title: t("workflowPipeline.steps.3"),
       icon: <FaFlask size={30} className="text-orange-500" />,
     },
     {
-      title: "Crop Prediction (RF)",
+      title: t("workflowPipeline.steps.4"),
       icon: <FaLeaf size={30} className="text-green-600" />,
     },
     {
-      title: "Disease Detection (CNN)",
+      title: t("workflowPipeline.steps.5"),
       icon: <FaBug size={30} className="text-red-500" />,
     },
     {
-      title: "Final Output",
+      title: t("workflowPipeline.steps.6"),
       icon: <FaCheckCircle size={30} className="text-green-700" />,
     },
   ];
@@ -51,7 +54,7 @@ const WorkflowPipeline = () => {
       className="bg-green-100 py-12 px-6 rounded-2xl shadow-inner mt-20"
     >
       <h3 className="text-3xl font-bold text-green-800 text-center mb-10">
-        Workflow Pipeline
+        {t("workflowPipeline.heading")}
       </h3>
 
       {/* Horizontal Workflow */}
@@ -109,7 +112,7 @@ const WorkflowPipeline = () => {
       {/* Mobile Arrow Connector */}
       <div className="lg:hidden mt-8">
         <p className="text-center text-sm text-gray-600">
-          (Swipe to view full workflow)
+          {t("workflowPipeline.mobileHint")}
         </p>
       </div>
     </motion.div>

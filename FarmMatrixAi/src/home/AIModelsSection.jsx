@@ -2,30 +2,23 @@ import React from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { FaBrain, FaTree, FaImage } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const AIModelsSection = () => {
+  const { t } = useTranslation();
+
   const models = [
     {
-      title: "Random Forest Classifier",
+      title: t("aiModels.models.0.title"),
       icon: <FaTree size={35} className="text-green-700" />,
-      description:
-        "The Random Forest algorithm analyzes soil nutrients (N-P-K), pH, temperature, and rainfall data to recommend the best crop for the farmer’s exact location. It handles non-linear relationships exceptionally well, making it ideal for agricultural predictions.",
-      highlight: [
-        "Uses multiple decision trees",
-        "High accuracy & low overfitting",
-        "Perfect for mixed soil-weather inputs",
-      ],
+      description: t("aiModels.models.0.description"),
+      highlight: t("aiModels.models.0.highlight", { returnObjects: true }),
     },
     {
-      title: "CNN – Disease Detection Model",
+      title: t("aiModels.models.1.title"),
       icon: <FaImage size={35} className="text-blue-700" />,
-      description:
-        "A Convolutional Neural Network trained on the PlantVillage dataset identifies plant diseases instantly from leaf images. It classifies diseases with high precision and provides quick diagnosis for timely crop protection.",
-      highlight: [
-        "Trained on thousands of leaf images",
-        "Fast & accurate image diagnosis",
-        "Supports multiple disease categories",
-      ],
+      description: t("aiModels.models.1.description"),
+      highlight: t("aiModels.models.1.highlight", { returnObjects: true }),
     },
   ];
 
@@ -41,7 +34,7 @@ const AIModelsSection = () => {
           viewport={{ once: true }}
           className="text-4xl font-bold text-green-700 text-center"
         >
-          AI Models Behind the System
+          {t("aiModels.title")}
         </motion.h2>
 
         <motion.p
@@ -51,7 +44,7 @@ const AIModelsSection = () => {
           viewport={{ once: true }}
           className="mt-3 text-gray-700 max-w-2xl mx-auto text-center"
         >
-          Our system is powered by two intelligent machine learning models designed to enhance crop productivity and protect plants from diseases.
+          {t("aiModels.description")}
         </motion.p>
 
         {/* Model Cards */}

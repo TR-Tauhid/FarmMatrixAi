@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import L from "leaflet";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import { useTranslation } from "react-i18next";
 import {
   FaSeedling,
   FaCloud,
@@ -108,6 +109,7 @@ const ChangeView = ({ center, zoom }) => {
 // --------------------------------------------------------
 
 const VirtualSensorModule = () => {
+  const { t } = useTranslation();
   const [latitude, setLatitude] = useState(LPU_COORDS[0].toFixed(6));
   const [longitude, setLongitude] = useState(LPU_COORDS[1].toFixed(6));
   const [mapCenter, setMapCenter] = useState(LPU_COORDS);
@@ -143,13 +145,13 @@ const VirtualSensorModule = () => {
           setLoadingLocation(false);
           switch (err.code) {
             case err.PERMISSION_DENIED:
-              setError("Permission denied. Please enable location services.");
+              setError(t("virtualSensor.errors.permissionDenied"));
               break;
             case err.TIMEOUT:
-              setError("Location request timed out.");
+              setError(t("virtualSensor.errors.timeout"));
               break;
             default:
-              setError("An unknown error occurred while fetching location.");
+              setError(t("virtualSensor.errors.unknown"));
               break;
           }
         },
@@ -157,7 +159,7 @@ const VirtualSensorModule = () => {
       );
     } else {
       setLoadingLocation(false);
-      setError("Geolocation is not supported by your browser.");
+      setError(t("virtualSensor.errors.geolocationNotSupported"));
     }
   };
 
@@ -180,7 +182,7 @@ const VirtualSensorModule = () => {
       className="mt-14 bg-green-50 p-8 rounded-xl shadow-xl border border-green-100 max-w-lg mx-auto"
     >
       <h3 className="text-2xl font-semibold text-green-800 text-center mb-6">
-        Location Input
+        {t("virtualSensor.locationInput.title")}
       </h3>
 
       {/* Lat/Lng Display (read only) */}
@@ -190,7 +192,7 @@ const VirtualSensorModule = () => {
             htmlFor="latitude"
             className="block text-gray-700 font-medium mb-1"
           >
-            Latitude:
+            {t("virtualSensor.locationInput.latitude")}
           </label>
           <input
             type="text"
@@ -205,7 +207,7 @@ const VirtualSensorModule = () => {
             htmlFor="longitude"
             className="block text-gray-700 font-medium mb-1"
           >
-            Longitude:
+            {t("virtualSensor.locationInput.longitude")}
           </label>
           <input
             type="text"
@@ -227,19 +229,17 @@ const VirtualSensorModule = () => {
       >
         {loadingLocation ? (
           <>
-            {" "}
-            <FaSyncAlt className="animate-spin" /> <span>Fetching GPS...</span>{" "}
+            <FaSyncAlt className="animate-spin" /> <span>{t("virtualSensor.buttons.fetching")}</span>
           </>
         ) : (
           <>
-            {" "}
-            <FaMapMarkerAlt /> <span>Get My Current Location</span>{" "}
+            <FaMapMarkerAlt /> <span>{t("virtualSensor.buttons.getLocation")}</span>
           </>
         )}
       </motion.button>
 
       {/* Status Messages */}
-      {error && (
+          {error && (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -261,32 +261,32 @@ const VirtualSensorModule = () => {
     const { optimalCrop, modelUsed, metrics } = resultData;
     const metricItems = [
       {
-        label: "Nitrogen (N)",
+        label: "virtualSensor.metrics.N_Ratio",
         value: metrics.N_Ratio,
         unit: "mg/kg",
         icon: <FaFlask />,
       },
       {
-        label: "Phosphorus (P)",
+        label: "virtualSensor.metrics.P_Ratio",
         value: metrics.P_Ratio,
         unit: "mg/kg",
         icon: <FaFlask />,
       },
       {
-        label: "Potassium (K)",
+        label: "virtualSensor.metrics.K_Ratio",
         value: metrics.K_Ratio,
         unit: "mg/kg",
         icon: <FaFlask />,
       },
-      { label: "Soil pH", value: metrics.pH, unit: "", icon: <FaChartLine /> },
+      { label: "virtualSensor.metrics.pH", value: metrics.pH, unit: "", icon: <FaChartLine /> },
       {
-        label: "Temperature",
+        label: "virtualSensor.metrics.temperature",
         value: metrics.temperature,
         unit: "°C",
         icon: <FaSun />,
       },
       {
-        label: "Humidity",
+        label: "virtualSensor.metrics.humidity",
         value: metrics.humidity,
         unit: "%",
         icon: <FaChartLine />,
@@ -300,7 +300,7 @@ const VirtualSensorModule = () => {
         className="mt-14 max-w-7xl mx-auto"
       >
         <h3 className="text-2xl font-bold text-green-700 text-center mb-8">
-          AI Recommendation Result
+          {t("virtualSensor.result.title")}
         </h3>
 
         {/* Main Crop Result */}
@@ -315,7 +315,7 @@ const VirtualSensorModule = () => {
             </h4>
           </div>
           <p className="text-lg text-gray-600 mt-2">
-            Recommended by: {modelUsed} model
+            {t("virtualSensor.result.recommendedBy")} {modelUsed} {t("virtualSensor.result.modelSuffix")}
           </p>
         </motion.div>
 
@@ -335,8 +335,8 @@ const VirtualSensorModule = () => {
               className="bg-white p-4 rounded-lg shadow-md border border-green-100 flex flex-col items-center text-center transition hover:bg-green-50"
             >
               <div className="text-3xl text-green-500 mb-2">{item.icon}</div>
-              <p className="text-sm text-gray-500 uppercase font-semibold">
-                {item.label}
+                <p className="text-sm text-gray-500 uppercase font-semibold">
+                {t(item.label) || item.label}
               </p>
               <p className="text-3xl font-bold text-green-700 mt-1">
                 {item.value}{" "}
@@ -356,7 +356,7 @@ const VirtualSensorModule = () => {
             }}
             className="px-6 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition"
           >
-            Run New Analysis
+            {t("virtualSensor.result.runNewAnalysis")}
           </button>
         </div>
       </motion.div>
@@ -368,9 +368,9 @@ const VirtualSensorModule = () => {
       <div className="max-w-7xl mx-auto">
         {/* --- Module Header --- */}
         <motion.div {...headingVariant} className="text-center mb-16">
-          <h2 className="text-5xl font-extrabold text-green-800 flex items-center justify-center space-x-3">
+            <h2 className="text-5xl font-extrabold text-green-800 flex items-center justify-center space-x-3">
             <FaSeedling className="text-green-600" />
-            <span>The Virtual Sensor</span>
+            <span>{t("virtualSensor.title")}</span>
           </h2>
           <div className="mt-8 max-w-5xl mx-auto">
             <motion.div
@@ -387,9 +387,9 @@ const VirtualSensorModule = () => {
                 className="flex flex-col items-center p-4 bg-green-100 rounded-xl shadow-lg w-40 h-32 justify-center border-b-4 border-green-500"
               >
                 <FaCloud className="text-3xl text-green-700 mb-1" />
-                <p className="font-bold text-gray-800">Data Fusion</p>
+                <p className="font-bold text-gray-800">{t("virtualSensor.steps.dataFusion.title")}</p>
                 <p className="text-xs text-gray-600 mt-1">
-                  (Soil Grids & Weather API)
+                  {t("virtualSensor.steps.dataFusion.desc")}
                 </p>
               </motion.div>
 
@@ -406,9 +406,9 @@ const VirtualSensorModule = () => {
                 className="flex flex-col items-center p-4 bg-white rounded-xl shadow-2xl w-40 h-32 justify-center border-b-4 border-blue-500 transform hover:scale-105 transition duration-300"
               >
                 <FaSearch className="text-3xl text-blue-700 mb-1" />
-                <p className="font-bold text-gray-800">AI Brain</p>
+                <p className="font-bold text-gray-800">{t("virtualSensor.steps.aiBrain.title")}</p>
                 <p className="text-xs text-gray-600 mt-1">
-                  (Random Forest Model)
+                  {t("virtualSensor.steps.aiBrain.desc")}
                 </p>
               </motion.div>
 
@@ -425,8 +425,8 @@ const VirtualSensorModule = () => {
                 className="flex flex-col items-center p-4 bg-green-200 rounded-xl shadow-lg w-40 h-32 justify-center border-b-4 border-green-700"
               >
                 <FaSeedling className="text-3xl text-green-800 mb-1" />
-                <p className="font-bold text-gray-800">Scientific</p>
-                <p className="text-xs text-gray-600 mt-1">Recommendation</p>
+                <p className="font-bold text-gray-800">{t("virtualSensor.steps.output.title")}</p>
+                <p className="text-xs text-gray-600 mt-1">{t("virtualSensor.steps.output.desc")}</p>
               </motion.div>
             </motion.div>
           </div>
@@ -481,8 +481,8 @@ const VirtualSensorModule = () => {
           <Marker position={userLocation}>
             <Popup>
               {userLocation[0] === LPU_COORDS[0]
-                ? "Default Location: LPU Jalandhar"
-                : `Current Location: ${latitude}, ${longitude}`}
+                ? t("virtualSensor.popup.defaultLocation")
+                : `${t("virtualSensor.popup.currentLocation")} ${latitude}, ${longitude}`}
             </Popup>
           </Marker>
         </MapContainer>

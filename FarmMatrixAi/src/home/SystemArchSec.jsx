@@ -1,40 +1,37 @@
 import React from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { FaLaptopCode, FaServer, FaLink, FaCogs, FaDatabase } from "react-icons/fa";
 import WorkflowPipeline from "./WorkflowPipeline ";
 
 const SystemArchSec = () => {
+  const { t } = useTranslation();
   const layers = [
     {
-      title: "Frontend (React JS)",
+      title: t("systemArchitecture.layers.frontend.title"),
       icon: <FaLaptopCode size={35} className="text-green-700" />,
-      description:
-        "The user interface allows farmers to input soil data, fetch location, upload leaf images, and visualize crop/disease predictions.",
+      description: t("systemArchitecture.layers.frontend.description"),
     },
     {
-      title: "Backend API Layer",
+      title: t("systemArchitecture.layers.backend.title"),
       icon: <FaServer size={35} className="text-blue-700" />,
-      description:
-        "Flask/FastAPI or Node.js processes user requests, connects ML models, and handles data integration between frontend and models.",
+      description: t("systemArchitecture.layers.backend.description"),
     },
     {
-      title: "External Data APIs",
+      title: t("systemArchitecture.layers.externalAPIs.title"),
       icon: <FaLink size={35} className="text-purple-700" />,
-      description:
-        "Weather & Soil APIs (OpenWeatherMap, SoilGrids) provide real-time environmental data, enabling the virtual sensor functionality.",
+      description: t("systemArchitecture.layers.externalAPIs.description"),
     },
     {
-      title: "Machine Learning Models",
+      title: t("systemArchitecture.layers.mlModels.title"),
       icon: <FaCogs size={35} className="text-orange-600" />,
-      description:
-        "Random Forest recommends the most suitable crop, while the CNN model performs disease classification from leaf images.",
+      description: t("systemArchitecture.layers.mlModels.description"),
     },
     {
-      title: "Database Layer",
+      title: t("systemArchitecture.layers.database.title"),
       icon: <FaDatabase size={35} className="text-yellow-600" />,
-      description:
-        "Stores user history, crop data, model files, and prediction analytics for ongoing system improvement and retraining.",
+      description: t("systemArchitecture.layers.database.description"),
     },
   ];
 
@@ -50,7 +47,7 @@ const SystemArchSec = () => {
           viewport={{ once: true }}
           className="text-4xl font-bold text-green-700 text-center"
         >
-          System Architecture
+          {t("systemArchitecture.heading")}
         </motion.h2>
 
         <motion.p
@@ -60,7 +57,7 @@ const SystemArchSec = () => {
           viewport={{ once: true }}
           className="mt-3 text-gray-700 text-center max-w-2xl mx-auto"
         >
-          The architecture integrates multiple intelligent layers — providing a seamless flow from user input to AI-powered output.
+          {t("systemArchitecture.description")}
         </motion.p>
 
         {/* Architecture Layer Cards */}

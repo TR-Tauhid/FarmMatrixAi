@@ -18,29 +18,29 @@ const Footer = () => {
 
         {/* Quick Links */}
         <div>
-          <h3 className="text-lg font-semibold text-white mb-3">Quick Links</h3>
+          <h3 className="text-lg font-semibold text-white mb-3">{t("footer.quickLinks")}</h3>
           <ul className="space-y-2 text-sm">
-            <li><a href="/" className="hover:text-white">Home</a></li>
-            <li><a href="/recommendation" className="hover:text-white">Crop Recommendation</a></li>
-            <li><a href="/soil" className="hover:text-white">Soil Analysis</a></li>
-            <li><a href="/compare" className="hover:text-white">Crop Comparison</a></li>
+            <li><a href="/" className="hover:text-white">{t("footer.links.home")}</a></li>
+            <li><a href="/recommendation" className="hover:text-white">{t("footer.links.cropRecommendation")}</a></li>
+            <li><a href="/soil" className="hover:text-white">{t("footer.links.soilAnalysis")}</a></li>
+            <li><a href="/compare" className="hover:text-white">{t("footer.links.cropComparison")}</a></li>
           </ul>
         </div>
 
         {/* Support */}
         <div>
-          <h3 className="text-lg font-semibold text-white mb-3">Support</h3>
+          <h3 className="text-lg font-semibold text-white mb-3">{t("footer.support")}</h3>
           <ul className="space-y-2 text-sm">
-            <li><a href="/faq" className="hover:text-white">FAQ</a></li>
-            <li><a href="/contact" className="hover:text-white">Contact</a></li>
-            <li><a href="/privacy" className="hover:text-white">Privacy Policy</a></li>
-            <li><a href="/terms" className="hover:text-white">Terms & Conditions</a></li>
+            <li><a href="/faq" className="hover:text-white">{t("footer.links.faq")}</a></li>
+            <li><a href="/contact" className="hover:text-white">{t("footer.links.contact")}</a></li>
+            <li><a href="/privacy" className="hover:text-white">{t("footer.links.privacy")}</a></li>
+            <li><a href="/terms" className="hover:text-white">{t("footer.links.terms")}</a></li>
           </ul>
         </div>
 
         {/* Social Icons */}
         <div>
-          <h3 className="text-lg font-semibold text-white mb-3">Follow Us</h3>
+          <h3 className="text-lg font-semibold text-white mb-3">{t("footer.followUs")}</h3>
           <div className="flex space-x-4 text-xl">
             <a href="#" className="hover:text-white"><FaFacebookF /></a>
             <a href="#" className="hover:text-white"><FaTwitter /></a>

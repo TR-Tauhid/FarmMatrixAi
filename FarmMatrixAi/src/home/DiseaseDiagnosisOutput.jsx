@@ -2,6 +2,7 @@ import React from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { FaMicroscope, FaCheckCircle, FaChartPie, FaLeaf } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 // Sample diagnosis data based on the provided image
 const mockDiagnosisResult = {
@@ -29,7 +30,13 @@ const listItemVariants = {
 };
 
 const DiseaseDiagnosisOutput = () => {
+  const { t } = useTranslation();
   const { disease, confidence, symptoms, management, plant, causalAgent } = mockDiagnosisResult;
+
+  const translatedSymptoms = t("diseaseDiagnosisOutput.symptoms", { returnObjects: true });
+  const translatedManagement = t("diseaseDiagnosisOutput.management", { returnObjects: true });
+  const symptomsList = Array.isArray(translatedSymptoms) && translatedSymptoms.length ? translatedSymptoms : symptoms;
+  const managementList = Array.isArray(translatedManagement) && translatedManagement.length ? translatedManagement : management;
 
   return (
     <section className="py-20 px-6 bg-white" id="disease-diagnosis-output">
@@ -43,7 +50,7 @@ const DiseaseDiagnosisOutput = () => {
           viewport={{ once: true }}
           className="text-4xl font-bold text-green-700 text-center"
         >
-          Disease Diagnosis Output
+          {t("diseaseDiagnosisOutput.title")}
         </motion.h2>
 
         <motion.p
@@ -53,7 +60,7 @@ const DiseaseDiagnosisOutput = () => {
           viewport={{ once: true }}
           className="mt-3 text-gray-700 text-center max-w-3xl mx-auto"
         >
-          The Convolutional Neural Network (CNN) has processed the image to identify the specific pathogen affecting your crop.
+          {t("diseaseDiagnosisOutput.description")}
         </motion.p>
 
         {/* Main Diagnosis Card */}
@@ -67,7 +74,7 @@ const DiseaseDiagnosisOutput = () => {
           <div className="flex items-center justify-center space-x-4 mb-4 border-b pb-4">
             <FaMicroscope className="text-6xl text-green-600" />
             <div className="text-left">
-              <p className="md:text-xl text-gray-600">Diagnosis:</p>
+              <p className="md:text-xl text-gray-600">{t("diseaseDiagnosisOutput.diagnosisLabel")}</p>
               <h3 className="text-xl md:text-4xl font-extrabold text-red-700">
                 {disease}
               </h3>
@@ -76,15 +83,15 @@ const DiseaseDiagnosisOutput = () => {
           
           <div className="flex max-sm:flex-col gap-y-8 justify-between items-center text-center mt-4">
              <div className="flex-1">
-                <p className="text-sm text-gray-500 uppercase font-semibold">Plant Identified</p>
+                 <p className="text-sm text-gray-500 uppercase font-semibold">{t("diseaseDiagnosisOutput.plantLabel")}</p>
                 <p className="text-xl font-bold text-green-800">{plant}</p>
              </div>
              <div className="flex-1 border-x border-green-200">
-                <p className="text-sm text-gray-500 uppercase font-semibold">Causal Agent</p>
+                 <p className="text-sm text-gray-500 uppercase font-semibold">{t("diseaseDiagnosisOutput.causalAgentLabel")}</p>
                 <p className="text-xl font-bold text-gray-800 italic">{causalAgent}</p>
              </div>
              <div className="flex-1">
-                <p className="text-sm text-gray-500 uppercase font-semibold">Confidence Score</p>
+                 <p className="text-sm text-gray-500 uppercase font-semibold">{t("diseaseDiagnosisOutput.confidenceLabel")}</p>
                 <p className="text-3xl font-bold text-green-600 flex items-center justify-center space-x-2">
                     <FaChartPie className="text-2xl" />
                     <span>{confidence}%</span>
@@ -104,9 +111,9 @@ const DiseaseDiagnosisOutput = () => {
             viewport={{ once: true }}
             className="bg-red-50 p-6 rounded-xl shadow-lg border border-red-200"
           >
-            <h4 className="text-2xl font-semibold text-red-700 mb-4 flex items-center space-x-2">
+              <h4 className="text-2xl font-semibold text-red-700 mb-4 flex items-center space-x-2">
               <FaLeaf />
-              <span>Observed Symptoms</span>
+              <span>{t("diseaseDiagnosisOutput.symptomsLabel")}</span>
             </h4>
             <motion.ul 
               className="space-y-3"
@@ -115,8 +122,8 @@ const DiseaseDiagnosisOutput = () => {
               viewport={{ once: true, amount: 0.5 }}
               transition={{ staggerChildren: 0.15 }}
             >
-              {symptoms.map((symptom, index) => (
-                <motion.li key={index} variants={listItemVariants} className="text-gray-700 flex items-start space-x-2">
+              {symptomsList.map((symptom, index) => (
+                <motion.li key={index} variants={listItemVariants} className="text-sm text-gray-700 flex items-start space-x-2">
                   <span className="text-red-500 mt-1">•</span>
                   <span>{symptom}</span>
                 </motion.li>
@@ -132,9 +139,9 @@ const DiseaseDiagnosisOutput = () => {
             viewport={{ once: true }}
             className="bg-green-100 p-6 rounded-xl shadow-lg border border-green-200"
           >
-            <h4 className="text-2xl font-semibold text-green-700 mb-4 flex items-center space-x-2">
+              <h4 className="text-2xl font-semibold text-green-700 mb-4 flex items-center space-x-2">
               <FaCheckCircle />
-              <span>Management & Cure</span>
+              <span>{t("diseaseDiagnosisOutput.managementLabel")}</span>
             </h4>
             <motion.ul 
               className="space-y-3"
@@ -143,8 +150,8 @@ const DiseaseDiagnosisOutput = () => {
               viewport={{ once: true, amount: 0.5 }}
               transition={{ staggerChildren: 0.15 }}
             >
-              {management.map((action, index) => (
-                <motion.li key={index} variants={listItemVariants} className="text-gray-700 flex items-start space-x-2">
+              {managementList.map((action, index) => (
+                <motion.li key={index} variants={listItemVariants} className="text-sm text-gray-700 flex items-start space-x-2">
                   <span className="text-green-500 mt-1">•</span>
                   <span>{action}</span>
                 </motion.li>

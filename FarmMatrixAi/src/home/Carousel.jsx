@@ -1,10 +1,12 @@
 import { useKeenSlider } from "keen-slider/react";
+import { useTranslation } from "react-i18next";
 import "keen-slider/keen-slider.min.css";
 import "../index.css";
 
 const animation = { duration: 85000, easing: (t) => t };
 
 const Carousel = () => {
+  const { t } = useTranslation();
   const [sliderRef] = useKeenSlider({
     loop: true,
     mode: "free",
@@ -29,7 +31,7 @@ const Carousel = () => {
   return (
     <div className="shadow-2xl rounded-2xl p-3 pb-10">
       <h1 className="text-4xl font-bold text-green-700 text-center mb-4">
-        Our Clients
+        {t("carousel.heading")}
       </h1>
       <div ref={sliderRef} className="keen-slider rounded-2xl shadow-2xl">
         <div className="keen-slider__slide number-slide1">

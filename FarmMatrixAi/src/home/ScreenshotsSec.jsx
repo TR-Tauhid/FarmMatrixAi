@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 // Import all images for correct bundling (Assuming they are in '../assets/')
 import snap1 from "../assets/snap-1.png";
@@ -8,11 +9,11 @@ import snap2 from "../assets/snap-2.png";
 import snap3 from "../assets/snap-3.png";
 import snap4 from "../assets/snap-4.png";
 
-const screenshots = [
-  { src: snap1, title: "Crop Recommendation Output" },
-  { src: snap2, title: "Disease Detection – Leaf Upload" },
-  { src: snap3, title: "Weather & Soil API Integration" },
-  { src: snap4, title: "User Dashboard & History" },
+const getScreenshots = (t) => [
+  { src: snap1, title: t("screenshots.items.0") },
+  { src: snap2, title: t("screenshots.items.1") },
+  { src: snap3, title: t("screenshots.items.2") },
+  { src: snap4, title: t("screenshots.items.3") },
 ];
 
 // Modal Animation Variants
@@ -77,6 +78,8 @@ const ScreenshotModal = ({ shot, onClose }) => {
 // --- END MODAL COMPONENT ---
 
 const ScreenshotsSection = () => {
+  const { t } = useTranslation();
+  const screenshots = getScreenshots(t);
   // State to hold the data of the currently selected screenshot
   const [selectedShot, setSelectedShot] = useState(null);
 
@@ -100,7 +103,7 @@ const ScreenshotsSection = () => {
             viewport={{ once: true }}
             className="text-4xl font-bold text-green-700 text-center"
           >
-            System Snapshots
+            {t("screenshots.heading")}
           </motion.h2>
 
           <motion.p
@@ -110,8 +113,7 @@ const ScreenshotsSection = () => {
             viewport={{ once: true }}
             className="mt-3 text-gray-700 text-center max-w-2xl mx-auto"
           >
-            A quick look at how the Unified AI Framework appears in real usage —
-            from predictions to visual diagnostics.
+            {t("screenshots.description")}
           </motion.p>
 
           {/* Screenshot Grid */}

@@ -1,4 +1,5 @@
 import { FiCalendar, FiTrendingUp, FiChevronRight } from "react-icons/fi";
+import { useTranslation } from "react-i18next";
 
 const mockHistory = [
   {
@@ -25,13 +26,14 @@ const mockHistory = [
 ];
 
 const HistorySection = () => {
+  const { t } = useTranslation();
   return (
     <section className="py-16 px-6 w-full mx-auto shadow">
       <h2 className="text-3xl font-bold text-gray-800 text-center">
-        Recommendation History
+        {t("history.heading")}
       </h2>
       <p className="text-center text-gray-600 mt-2">
-        Review all your past AI-generated crop suggestions.
+        {t("history.description")}
       </p>
 
       <div className="mt-10 space-y-6 relative">
@@ -54,16 +56,16 @@ const HistorySection = () => {
 
             {/* Info */}
             <div className="mt-3 md:mt-0 md:ml-10 flex-1">
-              <p className="text-gray-700"><strong>Soil:</strong> {item.soil}</p>
-              <p className="text-gray-700 mt-1"><strong>Weather:</strong> {item.weather}</p>
+              <p className="text-gray-700"><strong>{t("history.soilLabel")}:</strong> {item.soil}</p>
+              <p className="text-gray-700 mt-1"><strong>{t("history.weatherLabel")}:</strong> {item.weather}</p>
               <p className="text-green-700 font-semibold mt-2">
-                Recommended Crop: <span className="text-green-600">{item.recommended}</span>
+                {t("history.recommendedLabel")}: <span className="text-green-600">{item.recommended}</span>
               </p>
             </div>
 
             {/* View button */}
             <button className="mt-4 md:mt-0 flex items-center gap-2 text-green-600 hover:text-green-800 transition">
-              <span>View Details</span>
+              <span>{t("history.viewDetails")}</span>
               <FiChevronRight />
             </button>
           </div>

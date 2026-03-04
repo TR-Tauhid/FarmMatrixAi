@@ -8,33 +8,28 @@ const HowItWorksSection = () => {
   const { t } = useTranslation();
   const steps = [
     {
-      title: "1. Get Location",
-      description:
-        "The farmer allows GPS access, and the system automatically reads the exact location for site-specific prediction.",
+      title: t("howItWorks.steps.step1.title"),
+      description: t("howItWorks.steps.step1.description"),
       icon: <FaMapMarkerAlt className="text-red-500" size={30} />,
     },
     {
-      title: "2. Fetch Soil & Weather Data",
-      description:
-        "The system pulls real-time temperature, humidity, rainfall, and soil nutrient data using APIs (Virtual Sensor).",
+      title: t("howItWorks.steps.step2.title"),
+      description: t("howItWorks.steps.step2.description"),
       icon: <FaCloud className="text-blue-600" size={30} />,
     },
     {
-      title: "3. Intelligent Data Fusion",
-      description:
-        "All environmental parameters are processed and combined to create a precise data vector for ML prediction.",
+      title: t("howItWorks.steps.step3.title"),
+      description: t("howItWorks.steps.step3.description"),
       icon: <FaFlask className="text-purple-600" size={30} />,
     },
     {
-      title: "4. AI Crop Recommendation",
-      description:
-        "The Random Forest model analyzes conditions and suggests the best crop tailored to your land.",
+      title: t("howItWorks.steps.step4.title"),
+      description: t("howItWorks.steps.step4.description"),
       icon: <FaLeaf className="text-green-600" size={30} />,
     },
     {
-      title: "5. Disease Detection ",
-      description:
-        "The farmer uploads a leaf image. The CNN model identifies diseases instantly and suggests treatment.",
+      title: t("howItWorks.steps.step5.title"),
+      description: t("howItWorks.steps.step5.description"),
       icon: <FaBug className="text-orange-600" size={30} />,
     },
   ];
