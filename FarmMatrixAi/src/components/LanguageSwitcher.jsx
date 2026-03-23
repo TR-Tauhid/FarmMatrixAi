@@ -1,5 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useLanguage } from "../provider/LanguageProvider";
+import { FaLanguage } from "react-icons/fa6";
+
 
 const LanguageSwitcher = () => {
   const { t } = useTranslation();
@@ -18,35 +20,37 @@ const LanguageSwitcher = () => {
   };
 
   return (
-    <div className="dropdown dropdown-end z-50">
+    <div className="dropdown z-50 w-full ">
       <button
-        className="btn btn-sm md:btn-md btn-primary font-bold gap-2 text-white"
+        className="btn border-none shadow-none font-bold gap-2 w-full justify-start text-lg"
         tabIndex={0}
         role="button"
       >
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10m-5 10l-4-20" />
-        </svg>
+        <FaLanguage />
         {t("navbar.language")}
       </button>
 
       <ul
         tabIndex={0}
-        className="dropdown-content z-50 menu p-2 shadow bg-base-100 rounded-box w-56 text-base-content border border-gray-200"
+        className="dropdown-content z-50 menu p-2  shadow rounded-2xl overflow-visible md:w-40 text-base-content border bg-[#047857] block"
       >
         {languages.map((lang) => (
-          <li key={lang.code}>
+          <li key={lang.code} className="w-fit">
             <a
               onClick={(e) => {
                 e.preventDefault();
                 handleLanguageChange(lang.code);
               }}
-              className={currentLanguage === lang.code ? "font-bold text-green-700" : ""}
-              style={{ cursor: "pointer" }}
+              className={
+                currentLanguage === lang.code ? "font-extrabold underline " : ""
+              }
+              style={{ cursor: "pointer", maxWidth: "180px" }}
             >
               <span className="text-base">{lang.label}</span>
               {currentLanguage === lang.code && (
-                <span className="badge badge-sm badge-success text-white">✓</span>
+                <span className="badge badge-sm badge-success text-white underline-none">
+                  ✓
+                </span>
               )}
             </a>
           </li>

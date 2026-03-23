@@ -3,3 +3,14 @@
 @import "lightgallery/css/lightgallery-bundle.css";
 @import 'keen-slider/keen-slider.min.css';
 
+
+
+
+
+
+
+/* Custom Override styles */
+
+.btn-language {
+    background-color: transparent;
+}
