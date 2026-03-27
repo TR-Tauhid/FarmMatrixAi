@@ -1,8 +1,9 @@
 {
   "navbar": {
     "title": "Farm Matrix AI",
+    "subTitle": "Precision Agronomy",
     "home": "Home",
-    "language": "Language"
+    "language": "Ln"
   },
   "hero": {
     "title": "Farm Matrix AI",

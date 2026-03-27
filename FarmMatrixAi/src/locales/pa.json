@@ -1,6 +1,8 @@
 {
   "navbar": {
     "title": "ਫਾਰਮ ਮੈਟ੍ਰਿਕਸ ਏਆਈ",
+    "subTitle": "ਸ਼ੁੱਧਤਾ ਖੇਤੀਬਾੜੀ ਵਿਗਿਆਨ",
+
     "home": "ਘਰ",
     "language": "ਭਾਸ਼ਾ"
   },
@@ -72,11 +74,13 @@
   },
   "carousel": {
     "heading": "ਸਾਡਾ ਕਲਾਈ੩ਟ"
-  },  "cropCompare": {
+  },
+  "cropCompare": {
     "heading": "ਫਸਲ ਤੁਲਨਾ",
     "description": "ਕਈ ਫਸਲਾਂ ਦੀ ਉਪਜ, ਮਿਆਦ ਅਤੇ ਲਾਭਦਾਇਕਤਾ ਦੀ ਤੁਲਨਾ ਕਰੋ।",
     "button": "ਫਸਲਾਂ ਦੀ ਤੁਲਨਾ ਕਰੋ"
-  },  "history": {
+  },
+  "history": {
     "heading": "सिफारिश इतिहास",
     "description": "अपनी सभी पिछली AI-जनित फसल सुझाव देखें।",
     "soilLabel": "मिट्टी",

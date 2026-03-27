@@ -1,16 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 @import "tailwindcss";
 @plugin "daisyui";
 @import "lightgallery/css/lightgallery-bundle.css";
-@import 'keen-slider/keen-slider.min.css';
+@import "keen-slider/keen-slider.min.css";
 
+/* Universal Style */
 
-
-
-
-
+* {
+  box-sizing: border-box;
+  font-family: var(--font-lato);
+}
 
 /* Custom Override styles */
 
 .btn-language {
-    background-color: transparent;
+  background-color: transparent;
+}
+
+.custom-s-bar :focus{
+  border: none;
+}
+
+/* Custom Fonts */
+@theme {
+  --font-lato: "Lato", sans-serif;
+}
+
+/* Custom Colors */
+.text-primary {
+  color: #047857;
 }

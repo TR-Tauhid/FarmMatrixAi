@@ -20,22 +20,22 @@ const LanguageSwitcher = () => {
   };
 
   return (
-    <div className="dropdown z-50 w-full ">
+    <div className="dropdown dropdown-center z-50 w-full ">
       <button
-        className="btn border-none shadow-none font-bold gap-2 w-full justify-start text-lg"
+        className="btn btn-neutral btn-outline border-none shadow-none font-bold gap-2 w-full justify-start text-lg"
         tabIndex={0}
         role="button"
       >
-        <FaLanguage />
+        <FaLanguage  className="text-4xl"/>
         {t("navbar.language")}
       </button>
 
       <ul
         tabIndex={0}
-        className="dropdown-content z-50 menu p-2  shadow rounded-2xl overflow-visible md:w-40 text-base-content border bg-[#047857] block"
+        className="dropdown-content text-black font-semibold z-50 menu p-0 shadow rounded-xl overflow-visible md:w-40 backdrop-blur-2xl border block"
       >
         {languages.map((lang) => (
-          <li key={lang.code} className="w-fit">
+          <li key={lang.code} className="w-full border-b rounded-none first:rounded-t-xl last:rounded-b-xl hover:bg-black hover:text-white active:border-0 last:border-0 overflow-hidden">
             <a
               onClick={(e) => {
                 e.preventDefault();
@@ -48,7 +48,7 @@ const LanguageSwitcher = () => {
             >
               <span className="text-base">{lang.label}</span>
               {currentLanguage === lang.code && (
-                <span className="badge badge-sm badge-success text-white underline-none">
+                <span className="badge badge-sm badge-success bg-black border-none text-white underline-offset-0">
                   ✓
                 </span>
               )}
