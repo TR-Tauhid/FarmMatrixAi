@@ -41,7 +41,7 @@ export default function Login() {
               </div>
             </NavLink>
           </div>
-          <div className="space-y-3 mb-10">
+          <div className="space-y-3 mb-6">
             <h1 className="text-black text-4xl font-bold font-inter">
               Welcome back
             </h1>
@@ -56,7 +56,7 @@ export default function Login() {
                 Email or Phone Number
               </label>
 
-              <div className="flex items-center shadow-sm bg-base-100 p-5 rounded-2xl mb-6 border">
+              <div className="flex items-center shadow-sm bg-base-100 p-3 rounded-2xl mb-6 border">
                 <MdOutlineEmail className="text-xl text-[#6C7A71] w-5"></MdOutlineEmail>
                 <input
                   type="email"
@@ -74,7 +74,7 @@ export default function Login() {
                 </label>
               </div>
 
-              <div className="flex items-center shadow-sm bg-base-100 p-5 rounded-2xl border">
+              <div className="flex items-center shadow-sm bg-base-100 p-3 rounded-2xl border">
                 <CiLock className="text-xl text-[#6C7A71] w-5"></CiLock>
 
                 <input
@@ -84,7 +84,7 @@ export default function Login() {
                 />
               </div>
 
-              <button className="btn btn-neutral mt-10 h-15 rounded-xl">
+              <button className="btn btn-neutral mt-6 h-15 rounded-xl">
                 Log In
               </button>
             </fieldset>
@@ -116,6 +116,7 @@ export default function Login() {
                 </svg>
               </button>
             </div>
+
             <div>
               {/* Google */}
               <button className="btn rounded-xl p-5 w-20 h-12 bg-white text-black border-[#e5e5e5]">
@@ -171,9 +172,9 @@ export default function Login() {
             <p className="text-[#3C4A42] font-medium text-lg font-inter">
               Don't have an account ?{" "}
             </p>
-            <p className="font-inter hover:underline underline-offset-2 cursor-pointer font-bold text-lg text-[#006C49]">
-              Sign Up
-            </p>
+            <NavLink to="/register" className="font-inter hover:underline underline-offset-2 cursor-pointer font-bold text-lg text-[#006C49]">
+              Register
+            </NavLink>
           </div>
         </div>
       </div>
