@@ -1,14 +1,39 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../assets/farmMatrixAI.png";
 import greenFarmland from "../assets/greenFarmland.jpg";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { MdOutlineEmail } from "react-icons/md";
 import { CiLock } from "react-icons/ci";
+import AuthContext from "../context/AuthContext";
 
 export default function Login() {
   const { t } = useTranslation();
+  const AuthValue = useContext(AuthContext);
 
+  const [
+    loading,
+    user,
+    createUserWithEmail,
+    loginWithEmailPass,
+    signInWithGoogle,
+    signInWithFacebook,
+    signInWithTwitter,
+  ] = AuthValue;
+
+  const handleSubmitBtn = (e) => {
+    e.preventDefault();
+    const form = new FormData(e.target);
+
+    const email = form.get("email");
+    const password = form.get("password");
+
+    loginWithEmailPass(email, password)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => console.log(error.message));
+  };
   return (
     <div
       className="h-dvh bg-cover "
@@ -19,6 +44,8 @@ export default function Login() {
       <div className="bg-linear-to-r/srgb from-[#ffffffd8] to-[#00000000] h-dvh">
         <div className="w-2/6 p-24 ">
           <div className="mb-10">
+            {/* Title */}
+
             <NavLink
               to="./"
               className="space-x-6 flex w-full grow items-center"
@@ -41,6 +68,7 @@ export default function Login() {
               </div>
             </NavLink>
           </div>
+
           <div className="space-y-3 mb-6">
             <h1 className="text-black text-4xl font-bold font-inter">
               Welcome back
@@ -51,43 +79,50 @@ export default function Login() {
           </div>
 
           <div>
-            <fieldset className="fieldset rounded-box w-full">
-              <label className="label font-inter font-semibold text-sm text-[#3C4A42]">
-                Email or Phone Number
-              </label>
-
-              <div className="flex items-center shadow-sm bg-base-100 p-3 rounded-2xl mb-6 border">
-                <MdOutlineEmail className="text-xl text-[#6C7A71] w-5"></MdOutlineEmail>
-                <input
-                  type="email"
-                  className="input input-ghost border-base-100 outline-0"
-                  placeholder="email@example.com or +1 (555) 000-0000"
-                />
-              </div>
-
-              <div className="flex justify-between">
+            <form onSubmit={handleSubmitBtn}>
+              <fieldset className="fieldset rounded-box w-full">
                 <label className="label font-inter font-semibold text-sm text-[#3C4A42]">
-                  Password
+                  Email or Phone Number
                 </label>
-                <label className="label hover:underline underline-offset-2 cursor-pointer font-inter font-semibold text-lg text-[#006C49]">
-                  Forgotten Password?
-                </label>
-              </div>
 
-              <div className="flex items-center shadow-sm bg-base-100 p-3 rounded-2xl border">
-                <CiLock className="text-xl text-[#6C7A71] w-5"></CiLock>
+                <div className="flex items-center shadow-sm bg-base-100 p-3 rounded-2xl mb-6 border">
+                  <MdOutlineEmail className="text-xl text-[#6C7A71] w-5"></MdOutlineEmail>
+                  <input
+                    type="email"
+                    name="email"
+                    className="input input-ghost border-base-100 outline-0"
+                    placeholder="email@example.com or +1 (555) 000-0000"
+                  />
+                </div>
 
-                <input
-                  type="password"
-                  className="input input-ghost border-base-100 outline-0"
-                  placeholder="Password"
-                />
-              </div>
+                <div className="flex justify-between">
+                  <label className="label font-inter font-semibold text-sm text-[#3C4A42]">
+                    Password
+                  </label>
+                  <label className="label hover:underline underline-offset-2 cursor-pointer font-inter font-semibold text-lg text-[#006C49]">
+                    Forgotten Password?
+                  </label>
+                </div>
 
-              <button className="btn btn-neutral mt-6 h-15 rounded-xl">
-                Log In
-              </button>
-            </fieldset>
+                <div className="flex items-center shadow-sm bg-base-100 p-3 rounded-2xl border">
+                  <CiLock className="text-xl text-[#6C7A71] w-5"></CiLock>
+
+                  <input
+                    type="password"
+                    name="password"
+                    className="input input-ghost border-base-100 outline-0"
+                    placeholder="Password"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="btn btn-neutral mt-6 h-15 rounded-xl"
+                >
+                  Log In
+                </button>
+              </fieldset>
+            </form>
           </div>
 
           <div className="flex items-center my-6">
@@ -172,7 +207,10 @@ export default function Login() {
             <p className="text-[#3C4A42] font-medium text-lg font-inter">
               Don't have an account ?{" "}
             </p>
-            <NavLink to="/register" className="font-inter hover:underline underline-offset-2 cursor-pointer font-bold text-lg text-[#006C49]">
+            <NavLink
+              to="/register"
+              className="font-inter hover:underline underline-offset-2 cursor-pointer font-bold text-lg text-[#006C49]"
+            >
               Register
             </NavLink>
           </div>
