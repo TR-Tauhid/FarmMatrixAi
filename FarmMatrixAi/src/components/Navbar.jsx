@@ -39,7 +39,7 @@ export default function Navbar() {
             </div>
 
             <div className="flex flex-col">
-              <p className="text-xl md:text-2xl lg:text-4xl text-primary font-lato font-black leading-tight">
+              <p className="text-xl md:text-2xl lg:text-4xl text-[#047857] dark:text-[#03b403] font-lato font-black leading-tight">
                 {t("navbar.title")}
               </p>
               <p className="text-xs md:text-sm lg:text-lg  font-medium leading-tight">
@@ -56,8 +56,8 @@ export default function Navbar() {
             <LanguageSwitcher />
           </div>
 
-          {/* Divider for mobile visual clarity */}
-          <div className="hidden sm:block w-px h-8 bg-slate-200 mx-1"></div>
+          {/* Divider */}
+          <div className="hidden sm:block w-px h-8 bg-black dark:bg-white  mx-1"></div>
 
           <div className="flex items-center gap-1 md:gap-3">
             {/* Theme Toggle */}
@@ -96,7 +96,7 @@ export default function Navbar() {
               </div>
               <ul
                 tabIndex={0}
-                className="dropdown-content menu bg-base-100 rounded-box z-10 w-52 p-2 shadow-xl border border-slate-100 mt-2"
+                className="dropdown-content menu backdrop-blur-3xl rounded-box z-10 w-52 p-2 shadow-xl border border-slate-100 mt-2"
               >
                 <li>
                   <a className="py-3">Account Settings</a>
@@ -147,9 +147,9 @@ export default function Navbar() {
               {user ? (
                 <ul
                   tabIndex={0}
-                  className="dropdown-content menu bg-white  font-bold border border-slate-200 p-0 rounded-xl z-10 mt-4 w-48 shadow-2xl overflow-hidden"
+                  className="dropdown-content menu font-bold border backdrop-blur-3xl p-0 rounded-xl z-10 mt-4 w-48 shadow-2xl overflow-hidden"
                 >
-                  <li className="hover:bg-slate-900 hover: transition-colors">
+                  <li className="backdrop-blur-2xl transition-colors">
                     <button
                       onClick={handleLogOutBtn}
                       className="py-4 justify-center"
@@ -161,14 +161,14 @@ export default function Navbar() {
               ) : (
                 <ul
                   tabIndex={0}
-                  className="dropdown-content menu bg-white  font-bold border border-slate-200 p-0 rounded-xl z-10 mt-4 w-48 shadow-2xl overflow-hidden"
+                  className="dropdown-content menu font-bold backdrop-blur-3xl border border-slate-200 p-0 rounded-xl z-10 mt-4 w-48 shadow-2xl overflow-hidden"
                 >
-                  <li className="hover:bg-slate-900 hover: transition-colors">
+                  <li className="transition-colors">
                     <NavLink to="./login" className="py-4 justify-center">
                       Log In
                     </NavLink>
                   </li>
-                  <li className="hover:bg-slate-900 hover: transition-colors border-t border-slate-100">
+                  <li className="transition-colors border-t border-slate-100">
                     <NavLink to="./register" className="py-4 justify-center">
                       Register
                     </NavLink>

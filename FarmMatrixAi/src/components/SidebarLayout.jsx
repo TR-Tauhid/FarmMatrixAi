@@ -27,14 +27,14 @@ const SidebarLayout = ({ children }) => {
   ];
 
   return (
-    <div className="drawer min-h-screen bg-base-100 overflow-x-hidden ">
+    <div className="drawer min-h-screen overflow-x-hidden ">
       <input id="my-sidebar" type="checkbox" className="drawer-toggle peer" />
 
       {/* Toggle Button */}
       <div className="drawer-toggle-btn fixed top-40 left-0 z-30">
         <label
           htmlFor="my-sidebar"
-          className="btn btn-circle btn-sm bg-emerald-600 hover:bg-emerald-700  border-none shadow-xl cursor-pointer flex items-center justify-center transition-all active:scale-90"
+          className="btn btn-circle btn-sm text-white bg-emerald-600 hover:bg-emerald-700  border-none shadow-xl cursor-pointer flex items-center justify-center transition-all active:scale-90"
         >
           <MdChevronRight className="text-2xl transition-transform duration-700" />
         </label>
@@ -54,7 +54,7 @@ const SidebarLayout = ({ children }) => {
         ></label>
 
         {/* The Sidebar Container */}
-        <div className="relative w-72 min-h-full bg-white border-r border-slate-200 flex flex-col pt-10 overflow-visible transition-all duration-300">
+        <div className="relative w-72 min-h-full backdrop-blur-sm bg-[#66e9982d] border-r border-slate-200 flex flex-col pt-10 overflow-visible transition-all duration-300">
           {/* Navigation Links */}
           <nav className="flex-1 px-4 space-y-1">
             {menuItems.map((item) => (
@@ -70,14 +70,16 @@ const SidebarLayout = ({ children }) => {
                   ${
                     isActive
                       ? "bg-emerald-50  border-r-4 border-emerald-600 rounded-r-none"
-                      : " hover:bg-slate-50 hover:"
+                      : "hover:backdrop-blur-3xl"
                   }
                 `}
               >
                 <span className="text-2xl group-hover:scale-110 transition-transform">
                   {item.icon}
                 </span>
-                <span className="text-[15px]">{item.name}</span>
+                <span className="text-[15px] menu-style-unerline menu-style-unerline">
+                  {item.name}
+                </span>
               </NavLink>
             ))}
           </nav>
@@ -94,9 +96,7 @@ const SidebarLayout = ({ children }) => {
                 </div>
               </div>
               <div className="overflow-hidden">
-                <p className="text-sm font-bold  truncate">
-                  Elena Vance
-                </p>
+                <p className="text-sm font-bold  truncate">Elena Vance</p>
                 <p className="text-[10px]  font-bold uppercase tracking-widest">
                   Agronomist
                 </p>

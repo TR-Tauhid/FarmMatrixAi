@@ -18,9 +18,9 @@ const LanguageSwitcher = () => {
   };
 
   return (
-    <div className="dropdown dropdown-end z-50">
+    <div className="dropdown dropdown-end">
       <button
-        className="btn btn-neutral btn-outline border-none shadow-none font-bold gap-2 justify-start text-lg"
+        className="btn btn-neutral dark:text-white border-none shadow-none font-bold gap-2 justify-start text-lg"
         tabIndex={0}
         role="button"
       >
@@ -35,21 +35,19 @@ const LanguageSwitcher = () => {
         {languages.map((lang) => (
           <li
             key={lang.code}
-            className="w-full border-b rounded-none first:rounded-t-xl last:rounded-b-xl hover:bg-black hover: active:border-0 last:border-0 overflow-hidden"
+            className="w-full border-b rounded-none first:rounded-t-xl last:rounded-b-xl active:border-0 last:border-0 overflow-hidden"
           >
             <a
               onClick={(e) => {
                 e.preventDefault();
                 handleLanguageChange(lang.code);
               }}
-              className={
-                currentLanguage === lang.code ? "font-extrabold underline " : ""
-              }
+              className={currentLanguage === lang.code ? "font-extrabold" : ""}
               style={{ cursor: "pointer", maxWidth: "180px" }}
             >
               <span className="text-base">{lang.label}</span>
               {currentLanguage === lang.code && (
-                <span className="badge badge-sm badge-success bg-black border-none  underline-offset-0">
+                <span className="badge badge-md badge-success dark:bg-white border-none">
                   ✓
                 </span>
               )}

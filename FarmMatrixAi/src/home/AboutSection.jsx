@@ -38,16 +38,17 @@ const AboutPage = () => {
   ];
 
   return (
-    <div className="space-y-24 pb-20">
+    <div className="space-y-24 mx-auto w-11/12 pb-20">
       {/* Hero Section */}
       <section className="flex flex-col lg:flex-row items-center gap-12">
         <div className="flex-1 space-y-6">
-          <span className="bg-emerald-100 text-[#267700] px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider">
+          <span className="bg-emerald-200 text-[#267700] px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider">
             Our Origin
           </span>
           <h1 className="text-5xl lg:text-7xl font-black leading-tight">
-            Cultivating the <span className="text-primary" >Future</span> of
-            Soil.
+            Cultivating the{" "}
+            <span className="text-[#047857] dark:text-[#03b403]">Future</span>{" "}
+            of Soil.
           </h1>
           <p className="text-lg max-w-xl leading-relaxed">
             Founded in the heart of the central plains, AgriPulse Pro was born
@@ -58,12 +59,8 @@ const AboutPage = () => {
           <div className="flex gap-12 pt-4">
             {stats.map((stat, i) => (
               <div key={i}>
-                <p className="text-3xl font-black ">
-                  {stat.value}
-                </p>
-                <p className="text-xs font-bold  uppercase">
-                  {stat.label}
-                </p>
+                <p className="text-3xl font-black ">{stat.value}</p>
+                <p className="text-xs font-bold  uppercase">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -91,18 +88,16 @@ const AboutPage = () => {
 
       <section className="py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[280px]">
-          {/* Sustainability Card - Spans 2 columns */}
           <div className="md:col-span-2 relative overflow-hidden rounded-4xl bg-[#f2f4f1] p-10 flex flex-col justify-center border border-slate-100 group">
-            {/* Subtle Background Leaf Image/Icon */}
             <div className="absolute right-0 top-0 opacity-10 pointer-events-none translate-x-1/4 -translate-y-1/4">
-              <LuLeaf className="text-[400px]" />
+              <LuLeaf className="text-[400px] black:text-black" />
             </div>
 
-            <div className="relative z-10 space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center  shadow-sm">
+            <div className="relative z-10 space-y-4 dark:text-black">
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-sm">
                 <LuLeaf className="text-2xl" />
               </div>
-              <h3 className="text-3xl font-bold  tracking-tight">
+              <h3 className="text-3xl font-bold tracking-tight">
                 Sustainability Through Intelligence
               </h3>
               <p className=" max-w-md leading-relaxed">
@@ -128,9 +123,7 @@ const AboutPage = () => {
           {/* Hyper-Local Weather Card - Light Blue */}
           <div className="rounded-4xl bg-[#f0f4ff] p-10 flex flex-col justify-between border border-blue-50">
             <div className="space-y-4">
-              <h3 className="text-2xl font-bold ">
-                Hyper-Local Weather
-              </h3>
+              <h3 className="text-2xl font-bold ">Hyper-Local Weather</h3>
               <p className=" text-sm leading-relaxed">
                 Micro-climate tracking that goes beyond the zip code. We monitor
                 the air exactly where your crops breathe.
@@ -144,9 +137,7 @@ const AboutPage = () => {
           {/* Bridging the Gap Card - Spans 2 columns */}
           <div className="md:col-span-2 rounded-4xl bg-[#dfe7f6] p-10 flex items-center justify-between gap-8 border border-blue-100">
             <div className="space-y-4 max-w-md">
-              <h3 className="text-3xl font-bold ">
-                Bridging the Gap
-              </h3>
+              <h3 className="text-3xl font-bold ">Bridging the Gap</h3>
               <p className=" leading-relaxed">
                 Connecting traditional wisdom with modern algorithmic precision.
                 We respect the intuition of the farmer and empower it with the
@@ -168,9 +159,7 @@ const AboutPage = () => {
       <section className="space-y-12">
         <div className="flex justify-between items-end">
           <div className="space-y-2">
-            <h2 className="text-3xl font-bold ">
-              The Minds Behind the Pulse
-            </h2>
+            <h2 className="text-3xl font-bold ">The Minds Behind the Pulse</h2>
             <p className="">
               An interdisciplinary collective of data scientists and
               agronomists.
@@ -196,9 +185,7 @@ const AboutPage = () => {
                 <p className="text-[10px] font-black  uppercase tracking-widest mb-2">
                   {member.role}
                 </p>
-                <p className="text-sm  leading-relaxed">
-                  {member.desc}
-                </p>
+                <p className="text-sm  leading-relaxed">{member.desc}</p>
               </div>
             </div>
           ))}
@@ -221,9 +208,7 @@ const AboutPage = () => {
                 @
               </div>
               <div>
-                <p className="text-xs  font-bold uppercase">
-                  Email us
-                </p>
+                <p className="text-xs  font-bold uppercase">Email us</p>
                 <p className="font-medium">hello@agripulse.pro</p>
               </div>
             </div>
@@ -232,9 +217,7 @@ const AboutPage = () => {
                 📍
               </div>
               <div>
-                <p className="text-xs  font-bold uppercase">
-                  Our Office
-                </p>
+                <p className="text-xs  font-bold uppercase">Our Office</p>
                 <p className="font-medium">1200 Terra Way, Des Moines, IA</p>
               </div>
             </div>

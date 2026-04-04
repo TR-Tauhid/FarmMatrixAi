@@ -53,7 +53,7 @@ export default function Register() {
               </div>
 
               <div className="flex flex-col gap-1">
-                <p className="text-2xl md:text-4xl text-primary font-lato font-black leading-tight">
+                <p className="text-2xl md:text-4xl text-[#047857] font-lato font-black leading-tight">
                   {t("navbar.title")}
                 </p>
                 <p className="text-sm md:text-lg  leading-tight">

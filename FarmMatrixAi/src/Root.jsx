@@ -8,14 +8,14 @@ import SidebarLayout from "./components/SidebarLayout";
 
 export default function Root() {
   return (
-      <LanguageProvider>
-        <div className="min-h-screen flex flex-col bg-base-100 overflow-scroll">
-          <Navbar />
-          <SidebarLayout>
-            <Outlet />
-          </SidebarLayout>
-          <Footer />
-        </div>
-      </LanguageProvider>
+    <LanguageProvider>
+      <div className="min-h-screen flex flex-col overflow-scroll scroll-smooth">
+        <Navbar />
+        <SidebarLayout>
+          <Outlet />
+        </SidebarLayout>
+        <Footer />
+      </div>
+    </LanguageProvider>
   );
 }
