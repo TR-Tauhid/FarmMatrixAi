@@ -1,26 +1,21 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import { Outlet } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import Footer from "./shared/Footer";
-import KeenSlider from 'keen-slider'
 import "./provider/i18n";
 import { LanguageProvider } from "./provider/LanguageProvider";
+import SidebarLayout from "./components/SidebarLayout";
 
 export default function Root() {
   return (
-    <LanguageProvider>
-      <div className="min-h-screen flex flex-col bg-white overflow-scroll">
-        <ToastContainer />
-
-        <Navbar />
-
-        <div className="flex-1">
-          <Outlet />
+      <LanguageProvider>
+        <div className="min-h-screen flex flex-col bg-base-100 overflow-scroll">
+          <Navbar />
+          <SidebarLayout>
+            <Outlet />
+          </SidebarLayout>
+          <Footer />
         </div>
-
-        <Footer />
-      </div>
-    </LanguageProvider>
+      </LanguageProvider>
   );
 }

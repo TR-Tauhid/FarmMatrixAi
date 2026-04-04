@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 @import "tailwindcss";
 @plugin "daisyui";
@@ -13,14 +13,86 @@
   font-family: var(--font-lato);
 }
 
+/* Theme */
+
+/* Custom Colors */
+.text-primary {
+  color: #0ca70c;
+}
+
+:root {
+  --primary-background-color: #fff;
+  --secondary-background-color: #f7f7f7;
+  --primary-text-color: #000;
+  --secondary-text-color: #4b4c53;
+
+  --primary-border-color: #4b4c53;
+  --button-solid-background-color: #000;
+  --button-solid-text-color: #fff;
+  --button-outlined-background-color: transparent;
+  --button-outlined-text-color: #000;
+}
+
+[data-theme="dark"] {
+  --primary-background-color: #000000;
+  --secondary-background-color: #2d2c35;
+  --primary-text-color: #ffffff;
+  --secondary-text-color: #0ca70c;
+
+  --primary-border-color: #9da1bd;
+  --button-solid-background-color: #8c8597;
+  --button-solid-text-color: #000000;
+  --button-outlined-background-color: transparent;
+  --button-outlined-text-color: #ffffff;
+}
+
+/* Default Light Theme */
+:root {
+  --bg-color: #ffffff;
+  --text-primary: #0f172a;
+  --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+/* Dark  */
+[data-theme="dark"] {
+  --bg-color: #0f172a;
+  --text-primary: #f8fafc;
+  --card-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+}
+
+.about-container {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
 /* Custom Override styles */
 
 .btn-language {
   background-color: transparent;
 }
 
-.custom-s-bar :focus{
+.custom-s-bar :focus {
   border: none;
+}
+
+/* Drawer */
+
+.drawer-button {
+  transition: all 0.3s ease-in-out;
+}
+
+#my-sidebar:checked ~ .drawer-toggle-btn {
+  left: 288px;
+}
+#my-sidebar:not(:checked) ~ .drawer-toggle-btn {
+  left: 0;
+}
+#my-sidebar:checked ~ .drawer-toggle-btn .btn-circle svg {
+  transform: rotate(360deg) scaleX(-1) !important;
+}
+#my-sidebar:not(:checked) ~ .drawer-toggle-btn .btn-circle svg {
+  transform: rotate(0deg) scaleX(1) !important;
 }
 
 /* Custom Fonts */
@@ -28,12 +100,6 @@
   --font-lato: "Lato", sans-serif;
 }
 
-
 .font-inter {
   font-family: "Inter", sans-serif;
-}
-
-/* Custom Colors */
-.text-primary {
-  color: #047857;
 }

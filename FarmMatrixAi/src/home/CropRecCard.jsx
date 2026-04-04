@@ -7,7 +7,7 @@ const CropRecCard = () => {
       <h3 className="text-xl font-bold text-green-700">{t("cropRecCard.title")}</h3>
       <p className="text-gray-700 mt-2">{t("cropRecCard.description")}</p>
 
-      <button className="mt-4 px-5 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+      <button className="mt-4 px-5 py-2 bg-green-600  rounded-lg hover:bg-green-700 transition">
         {t("cropRecCard.buttonText")}
       </button>
     </div>

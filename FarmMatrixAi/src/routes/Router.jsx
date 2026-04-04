@@ -6,6 +6,7 @@ import Login from "../auth/Login";
 import Register from "../auth/Register";
 import CropRecommendationInput from "../home/CropRecommendationInput";
 import DiseaseDetectionUpload from "../home/DiseaseDetectionUpload";
+import AboutSection from "../home/AboutSection";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,8 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "CropRecommendationInput", element: <CropRecommendationInput /> },
       { path: "DiseaseDetectionUpload", element: <DiseaseDetectionUpload /> },
+      { path: "AboutSection", element: <AboutSection /> },
+      { path: "AboutSection", element: <AboutSection /> },
     ],
   },
   { path: "login", element: <Login /> },

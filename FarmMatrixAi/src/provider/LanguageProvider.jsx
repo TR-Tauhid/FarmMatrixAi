@@ -25,7 +25,7 @@ export const LanguageProvider = ({ children }) => {
     try {
       localStorage.setItem("language", lang);
     } catch (e) {
-      console.log("Could not save language to localStorage");
+      console.error("Could not save language to localStorage", e);
     }
     setCurrentLang(lang);
   };
@@ -42,6 +42,7 @@ export const LanguageProvider = ({ children }) => {
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
   if (!context) {

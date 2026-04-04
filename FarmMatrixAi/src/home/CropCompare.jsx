@@ -9,7 +9,7 @@ const CropCompare = () => {
         {t("cropCompare.description")}
       </p>
 
-      <button className="mt-4 px-5 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
+      <button className="mt-4 px-5 py-2 bg-purple-600  rounded-lg hover:bg-purple-700 transition">
         {t("cropCompare.button")}
       </button>
     </section>

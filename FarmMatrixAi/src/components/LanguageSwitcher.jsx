@@ -2,7 +2,6 @@ import { useTranslation } from "react-i18next";
 import { useLanguage } from "../provider/LanguageProvider";
 import { FaLanguage } from "react-icons/fa6";
 
-
 const LanguageSwitcher = () => {
   const { t } = useTranslation();
   const { changeLanguage, currentLanguage } = useLanguage();
@@ -15,27 +14,29 @@ const LanguageSwitcher = () => {
   ];
 
   const handleLanguageChange = (lang) => {
-    console.log("Changing language to:", lang);
     changeLanguage(lang);
   };
 
   return (
-    <div className="dropdown dropdown-center z-50 w-full ">
+    <div className="dropdown dropdown-end z-50">
       <button
-        className="btn btn-neutral btn-outline border-none shadow-none font-bold gap-2 w-full justify-start text-lg"
+        className="btn btn-neutral btn-outline border-none shadow-none font-bold gap-2 justify-start text-lg"
         tabIndex={0}
         role="button"
       >
-        <FaLanguage  className="text-4xl"/>
+        <FaLanguage className="text-4xl" />
         {t("navbar.language")}
       </button>
 
       <ul
         tabIndex={0}
-        className="dropdown-content text-black font-semibold z-50 menu p-0 shadow rounded-xl overflow-visible md:w-40 backdrop-blur-2xl border block"
+        className="dropdown-content  font-semibold z-50 menu p-0 shadow rounded-xl overflow-visible md:w-40 backdrop-blur-2xl border block"
       >
         {languages.map((lang) => (
-          <li key={lang.code} className="w-full border-b rounded-none first:rounded-t-xl last:rounded-b-xl hover:bg-black hover:text-white active:border-0 last:border-0 overflow-hidden">
+          <li
+            key={lang.code}
+            className="w-full border-b rounded-none first:rounded-t-xl last:rounded-b-xl hover:bg-black hover: active:border-0 last:border-0 overflow-hidden"
+          >
             <a
               onClick={(e) => {
                 e.preventDefault();
@@ -48,7 +49,7 @@ const LanguageSwitcher = () => {
             >
               <span className="text-base">{lang.label}</span>
               {currentLanguage === lang.code && (
-                <span className="badge badge-sm badge-success bg-black border-none text-white underline-offset-0">
+                <span className="badge badge-sm badge-success bg-black border-none  underline-offset-0">
                   ✓
                 </span>
               )}

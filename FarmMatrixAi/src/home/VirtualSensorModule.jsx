@@ -197,7 +197,7 @@ const VirtualSensorModule = () => {
           <input
             type="text"
             id="latitude"
-            className="w-full p-3 border border-green-200 rounded-md text-black bg-white transition"
+            className="w-full p-3 border border-green-200 rounded-md  bg-white transition"
             value={latitude}
             readOnly
           />
@@ -212,7 +212,7 @@ const VirtualSensorModule = () => {
           <input
             type="text"
             id="longitude"
-            className="w-full p-3 border border-green-200 rounded-md text-black bg-white transition"
+            className="w-full p-3 border border-green-200 rounded-md  bg-white transition"
             value={longitude}
             readOnly
           />
@@ -225,7 +225,7 @@ const VirtualSensorModule = () => {
         whileTap={{ scale: 0.98 }}
         onClick={handleGetLocation}
         disabled={loadingLocation || loadingAI}
-        className="w-full flex items-center justify-center space-x-2 px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition disabled:bg-green-400"
+        className="w-full flex items-center justify-center space-x-2 px-6 py-3 bg-green-600  font-semibold rounded-lg shadow-md hover:bg-green-700 transition disabled:bg-green-400"
       >
         {loadingLocation ? (
           <>

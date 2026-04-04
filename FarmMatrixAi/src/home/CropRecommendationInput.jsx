@@ -105,7 +105,7 @@ const CropRecommendationInput = () => {
               <input
                 type="text"
                 id="latitude"
-                className="w-full p-3 border border-green-200 rounded-md text-black bg-white focus:ring-2 focus:ring-green-400 focus:border-transparent transition"
+                className="w-full p-3 border border-green-200 rounded-md  bg-white focus:ring-2 focus:ring-green-400 focus:border-transparent transition"
                 value={latitude}
                 onChange={(e) => setLatitude(e.target.value)}
                 placeholder={t("cropRecommendationInput.latitudePlaceholder")}
@@ -122,7 +122,7 @@ const CropRecommendationInput = () => {
               <input
                 type="text"
                 id="longitude"
-                className="w-full p-3 border border-green-200 rounded-md text-black bg-white focus:ring-2 focus:ring-green-400 focus:border-transparent transition"
+                className="w-full p-3 border border-green-200 rounded-md  bg-white focus:ring-2 focus:ring-green-400 focus:border-transparent transition"
                 value={longitude}
                 onChange={(e) => setLongitude(e.target.value)}
                 placeholder={t("cropRecommendationInput.longitudePlaceholder")}
@@ -135,7 +135,7 @@ const CropRecommendationInput = () => {
               whileTap={{ scale: 0.98 }}
               onClick={handleGetLocation}
               disabled={loading}
-              className="mt-6 w-full flex items-center justify-center space-x-2 px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:bg-green-400 transition"
+              className="mt-6 w-full flex items-center justify-center space-x-2 px-6 py-3 bg-green-600  font-semibold rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:bg-green-400 transition"
             >
               {loading ? (
                 <>

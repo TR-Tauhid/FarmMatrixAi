@@ -94,7 +94,7 @@ const DiseaseDetectionUpload = () => {
                     whileTap={{ scale: 0.98 }}
                     type="submit"
                     disabled={!selectedFile}
-                    className="w-full flex items-center justify-center space-x-2 px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:bg-gray-400 transition"
+                    className="w-full flex items-center justify-center space-x-2 px-6 py-3 bg-green-600  font-semibold rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:bg-gray-400 transition"
                 >
                     <FaCameraRetro />
                     <span>{t("diseaseDetectionUpload.analyzeButton")}</span>

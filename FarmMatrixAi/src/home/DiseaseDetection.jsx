@@ -13,7 +13,7 @@ const DiseaseDetection = () => {
   return (
     <section className="py-16 px-6 md:px-16 bg-emerald-50">
       <div className="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow">
-        <h2 className="text-3xl font-bold text-emerald-700 text-center">
+        <h2 className="text-3xl font-bold  text-center">
           {t("diseaseDetection.title")}
         </h2>
         <p className="text-gray-600 text-center mt-2">
@@ -50,7 +50,7 @@ const DiseaseDetection = () => {
 
         {/* Analyze Button */}
         <div className="mt-8 flex justify-center">
-          <button className="px-6 py-3 bg-emerald-600 text-white text-lg font-medium rounded-lg hover:bg-emerald-700 transition">
+          <button className="px-6 py-3 bg-emerald-600  text-lg font-medium rounded-lg hover:bg-emerald-700 transition">
             {t("diseaseDetection.analyzeButton")}
           </button>
         </div>

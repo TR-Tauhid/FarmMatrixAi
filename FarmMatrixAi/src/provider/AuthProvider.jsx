@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import Authcontext from "../context/AuthContext";
 import {
   createUserWithEmailAndPassword,
@@ -14,16 +14,13 @@ import {
 } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 import { Bounce, toast } from "react-toastify";
+import { useTheme } from "../context/ThemeContext";
 
 export default function AuthProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [authChecked, setAuthChecked] = useState(null);
   const [user, setUser] = useState(null);
-  const [theme] = useState(() => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    return mediaQuery.matches ? "dark" : "light";
-  });
-
+  const { theme } = useTheme();
   const notify = useCallback(
     (msg, type) => {
       toast[type](msg, {
@@ -51,6 +48,7 @@ export default function AuthProvider({ children }) {
     await updateProfile(auth.currentUser, {
       displayName: name,
     });
+    notify("worked", name);
   };
 
   const loginWithEmailPass = (email, password) => {
@@ -84,10 +82,8 @@ export default function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log("currentUser,", currentUser);
       setLoading(false);
       setAuthChecked(true);
-      // console.log(currentUser);
       return () => {
         unsubscribe();
       };
@@ -101,6 +97,8 @@ export default function AuthProvider({ children }) {
   const AuthValue = {
     user,
     loading,
+    authChecked,
+    setLoading,
     notify,
     logOut,
     updateName,

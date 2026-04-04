@@ -26,7 +26,7 @@ const HeroSection = () => {
 
           <div className="mt-8 flex max-sm:flex-col gap-4">
             <NavLink to="CropRecommendationInput">
-              <button className="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition">
+              <button className="px-6 py-3 bg-green-600  font-semibold rounded-lg shadow-md hover:bg-green-700 transition">
                 {t("cropRecommendation.title")}
               </button>
             </NavLink>
