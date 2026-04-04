@@ -1,25 +1,32 @@
 import React, { useContext } from "react";
 import logo from "../assets/farmMatrixAI.png";
 import greenFarmland from "../assets/greenFarmland.jpg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { MdOutlineEmail } from "react-icons/md";
+import { BsTwitterX } from "react-icons/bs";
 import { CiLock } from "react-icons/ci";
 import AuthContext from "../context/AuthContext";
+import { ToastContainer } from "react-toastify";
 
 export default function Login() {
   const { t } = useTranslation();
   const AuthValue = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const [
-    loading,
+  const {
     user,
+    notify,
+    logOut,
+    loading,
     createUserWithEmail,
     loginWithEmailPass,
     signInWithGoogle,
     signInWithFacebook,
+    signInWithGithub,
     signInWithTwitter,
-  ] = AuthValue;
+  } = AuthValue;
 
   const handleSubmitBtn = (e) => {
     e.preventDefault();
@@ -30,26 +37,67 @@ export default function Login() {
 
     loginWithEmailPass(email, password)
       .then((res) => {
-        console.log(res.data);
+        console.log(res.user);
+        navigate(location?.state ? location?.state : "/");
+        notify(
+          `Welcome ${(res?.user?.displayName ? res?.user?.displayName : "User", "success")}`,
+        );
       })
       .catch((error) => console.log(error.message));
   };
+
+  const handleGoogeBtn = () => {
+    signInWithGoogle().then((res) => {
+      console.log(res?.user?.displayName);
+      navigate(location?.state ? location?.state : "./");
+      notify(
+        `Welcome ${(res?.user?.displayName ? res?.user?.displayName : "User", "success")}`,
+      );
+    });
+  };
+  const handleFacebookBtn = () => {
+    signInWithFacebook().then((res) => {
+      console.log(res?.user?.displayName);
+      navigate(location?.state ? location?.state : "./");
+      notify(
+        `Welcome ${(res?.user?.displayName ? res?.user?.displayName : "User", "success")}`,
+      );
+    });
+  };
+  const handleGithubBtn = () => {
+    signInWithGithub().then((res) => {
+      console.log(res?.user?.displayName);
+      navigate(location?.state ? location?.state : "./");
+      notify(
+        `Welcome ${(res?.user?.displayName ? res?.user?.displayName : "User", "success")}`,
+      );
+    });
+  };
+
+  const handleTwitterBtn = () => {
+    signInWithTwitter().then((res) => {
+      console.log(res?.user?.displayName);
+      navigate(location?.state ? location?.state : "./");
+      notify(
+        `Welcome ${(res?.user?.displayName ? res?.user?.displayName : "User", "success")}`,
+      );
+    });
+  };
+
   return (
     <div
-      className="h-dvh bg-cover "
+      className="bg-cover overflow-scroll bg-fixed h-dvh"
       style={{
         backgroundImage: `url(${greenFarmland})`,
       }}
     >
-      <div className="bg-linear-to-r/srgb from-[#ffffffd8] to-[#00000000] h-dvh">
-        <div className="w-2/6 p-24 ">
+      <ToastContainer></ToastContainer>
+      <div className="bg-linear-to-r/srgb from-[#ffffffd8] to-[#00000000] bg-cover overflow-scroll bg-fixed min-h-full">
+        <div className="w-2/6 p-24 ml-20">
           <div className="mb-10">
             {/* Title */}
 
-            <NavLink
-              to="./"
-              className="space-x-6 flex w-full grow items-center"
-            >
+            <NavLink to="/" className="space-x-6 flex w-full grow items-center">
               <div>
                 <img
                   className="w-18 h-18 rounded-xl border-2 border-emerald-700"
@@ -90,7 +138,7 @@ export default function Login() {
                   <input
                     type="email"
                     name="email"
-                    className="input input-ghost border-base-100 outline-0"
+                    className="input input-ghost focus-within:bg-[#1D232A] outline-0 w-full"
                     placeholder="email@example.com or +1 (555) 000-0000"
                   />
                 </div>
@@ -110,7 +158,7 @@ export default function Login() {
                   <input
                     type="password"
                     name="password"
-                    className="input input-ghost border-base-100 outline-0"
+                    className="input input-ghost focus-within:bg-[#1D232A] outline-0 w-full"
                     placeholder="Password"
                   />
                 </div>
@@ -136,7 +184,11 @@ export default function Login() {
           <div className="flex justify-between gap-3 max-w-72 mb-6 mx-auto">
             <div>
               {/* GitHub */}
-              <button className="btn rounded-xl p-5 w-20 h-12 bg-black text-white border-black">
+              <button
+                type="submit"
+                onClick={handleGithubBtn}
+                className="btn rounded-xl p-5 w-20 h-12 bg-black text-white border-black"
+              >
                 <svg
                   aria-label="GitHub logo"
                   width="20"
@@ -154,7 +206,11 @@ export default function Login() {
 
             <div>
               {/* Google */}
-              <button className="btn rounded-xl p-5 w-20 h-12 bg-white text-black border-[#e5e5e5]">
+              <button
+                type="submit"
+                onClick={handleGoogeBtn}
+                className="btn rounded-xl p-5 w-20 h-12 bg-white text-black border-[#e5e5e5]"
+              >
                 <svg
                   aria-label="Google logo"
                   width="20"
@@ -185,8 +241,23 @@ export default function Login() {
               </button>
             </div>
             <div>
+              {/* Twitter */}
+              <button
+                type="submit"
+                onClick={handleTwitterBtn}
+                className="btn rounded-xl p-5 w-20 h-12 bg-white text-black border-[#e5e5e5]"
+              >
+                <BsTwitterX></BsTwitterX>
+              </button>
+            </div>
+
+            <div>
               {/* Facebook */}
-              <button className="btn rounded-xl p-5 w-20 h-12 bg-[#1A77F2] text-white border-[#005fd8]">
+              <button
+                type="submit"
+                onClick={handleFacebookBtn}
+                className="btn rounded-xl p-5 w-20 h-12 bg-[#1A77F2] text-white border-[#005fd8]"
+              >
                 <svg
                   aria-label="Facebook logo"
                   width="20"

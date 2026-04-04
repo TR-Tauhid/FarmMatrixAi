@@ -10,7 +10,7 @@ import { LanguageProvider } from "./provider/LanguageProvider";
 export default function Root() {
   return (
     <LanguageProvider>
-      <div className="min-h-screen flex flex-col bg-white">
+      <div className="min-h-screen flex flex-col bg-white overflow-scroll">
         <ToastContainer />
 
         <Navbar />

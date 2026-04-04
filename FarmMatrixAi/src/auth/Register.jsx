@@ -6,12 +6,13 @@ import { useTranslation } from "react-i18next";
 import { MdDriveFileRenameOutline, MdOutlineEmail } from "react-icons/md";
 import { CiLock } from "react-icons/ci";
 import AuthContext from "../context/AuthContext";
+import { ToastContainer } from "react-toastify";
 
 export default function Register() {
   const { t } = useTranslation();
   const AuthValue = useContext(AuthContext);
 
-  const [
+  const {
     loading,
     user,
     updateName,
@@ -20,7 +21,7 @@ export default function Register() {
     signInWithGoogle,
     signInWithFacebook,
     signInWithTwitter,
-  ] = AuthValue;
+  } = AuthValue;
 
   const handleSummitBtn = (e) => {
     e.preventDefault();
@@ -36,18 +37,19 @@ export default function Register() {
         console.log(res);
       })
       .catch((err) => console.log(err));
-      updateName(name);
+    updateName(name);
   };
 
   return (
-    <div
-      className="h-dvh bg-cover "
+  <div
+      className="bg-cover overflow-scroll bg-fixed h-max"
       style={{
         backgroundImage: `url(${greenFarmland})`,
       }}
     >
-      <div className="bg-linear-to-r/srgb from-[#ffffffd8] to-[#00000000] h-dvh">
-        <div className="w-2/6 p-24 ">
+      <ToastContainer></ToastContainer>
+      <div className="bg-linear-to-r/srgb from-[#ffffffd8] to-[#00000000] h-full bg-cover overflow-scroll bg-fixed">
+        <div className="w-2/6 p-24 ml-20">
           <div className="mb-10">
             <NavLink
               to="./"
@@ -87,13 +89,13 @@ export default function Register() {
                   Name *
                 </label>
 
-                <div className="flex items-center shadow-sm bg-base-100 p-3 rounded-2xl mb-6 border">
+                <div className="flex items-center shadow-sm bg-base-100 p-3 rounded-2xl mb-3 border">
                   <MdDriveFileRenameOutline className="text-xl text-[#6C7A71] w-5"></MdDriveFileRenameOutline>
                   <input
                     type="text"
                     name="name"
                     required
-                    className="input input-ghost border-base-100 outline-0"
+                    className="input input-ghost border-base-100 outline-0 font-semibold"
                     placeholder="Your Name"
                   />
                 </div>
@@ -101,12 +103,12 @@ export default function Register() {
                   Email or Phone Number
                 </label>
 
-                <div className="flex items-center shadow-sm bg-base-100 p-3 rounded-2xl mb-6 border">
+                <div className="flex items-center shadow-sm bg-base-100 p-3 rounded-2xl mb-3 border">
                   <MdOutlineEmail className="text-xl text-[#6C7A71] w-5"></MdOutlineEmail>
                   <input
                     type="email"
                     name="email"
-                    className="input input-ghost border-base-100 outline-0"
+                    className="input input-ghost border-base-100 outline-0 w-full"
                     placeholder="email@example.com or +1 (555) 000-0000"
                   />
                 </div>
@@ -150,14 +152,6 @@ export default function Register() {
                 </button>
               </fieldset>
             </form>
-          </div>
-
-          <div className="flex items-center my-6">
-            <div className="border-y h-0 border-black-400 w-full"></div>
-            <h1 className="text-[#3C4A42] font-medium text-lg font-inter shrink-0 px-4">
-              Or Continue With{" "}
-            </h1>
-            <div className="border-y h-0 border-black-400 w-full"></div>
           </div>
 
           <div className="flex gap-x-2 justify-around">
