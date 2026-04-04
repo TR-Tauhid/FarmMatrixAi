@@ -40,48 +40,61 @@ export default function Login() {
         console.log(res.user);
         navigate(location?.state ? location?.state : "/");
         notify(
-          `Welcome ${(res?.user?.displayName ? res?.user?.displayName : "User", "success")}`,
+          `Welcome ${res?.user?.displayName ? res?.user?.displayName : "User"}`,
+          "success",
         );
       })
       .catch((error) => console.log(error.message));
   };
 
   const handleGoogeBtn = () => {
-    signInWithGoogle().then((res) => {
-      console.log(res?.user?.displayName);
-      navigate(location?.state ? location?.state : "./");
-      notify(
-        `Welcome ${(res?.user?.displayName ? res?.user?.displayName : "User", "success")}`,
-      );
-    });
+    signInWithGoogle()
+      .then((res) => {
+        console.log(res?.user?.displayName);
+        navigate(location?.state ? location?.state : "./");
+        notify(
+          `Welcome ${res?.user?.displayName ? res?.user?.displayName : "User"}`,
+          "success",
+        );
+      })
+      .catch((error) => console.log(error.message));
   };
   const handleFacebookBtn = () => {
-    signInWithFacebook().then((res) => {
-      console.log(res?.user?.displayName);
-      navigate(location?.state ? location?.state : "./");
-      notify(
-        `Welcome ${(res?.user?.displayName ? res?.user?.displayName : "User", "success")}`,
-      );
-    });
+    signInWithFacebook()
+      .then((res) => {
+        console.log(res?.user?.displayName);
+        navigate(location?.state ? location?.state : "./");
+        notify(
+          `Welcome ${res?.user?.displayName ? res?.user?.displayName : "User"}`,
+          "success",
+        );
+      })
+      .catch((error) => console.log(error.message));
   };
   const handleGithubBtn = () => {
-    signInWithGithub().then((res) => {
-      console.log(res?.user?.displayName);
-      navigate(location?.state ? location?.state : "./");
-      notify(
-        `Welcome ${(res?.user?.displayName ? res?.user?.displayName : "User", "success")}`,
-      );
-    });
+    signInWithGithub()
+      .then((res) => {
+        console.log(res?.user?.displayName);
+        navigate(location?.state ? location?.state : "./");
+        notify(
+          `Welcome ${res?.user?.displayName ? res?.user?.displayName : "User"}`,
+          "success",
+        );
+      })
+      .catch((error) => console.log(error.message));
   };
 
   const handleTwitterBtn = () => {
-    signInWithTwitter().then((res) => {
-      console.log(res?.user?.displayName);
-      navigate(location?.state ? location?.state : "./");
-      notify(
-        `Welcome ${(res?.user?.displayName ? res?.user?.displayName : "User", "success")}`,
-      );
-    });
+    signInWithTwitter()
+      .then((res) => {
+        console.log(res?.user?.displayName, location?.state);
+        navigate("./");
+        notify(
+          `Welcome ${res?.user?.displayName ? res?.user?.displayName : "User"}`,
+          "success",
+        );
+      })
+      .catch((error) => console.log(error.message));
   };
 
   return (

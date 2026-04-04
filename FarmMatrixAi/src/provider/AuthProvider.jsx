@@ -25,16 +25,16 @@ export default function AuthProvider({ children }) {
   });
 
   const notify = useCallback(
-    (message, type) => {
-      toast[type](message, {
-        position: "top-right",
+    (msg, type) => {
+      toast[type](msg, {
+        position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
-        closeOnClick: false,
+        closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: { theme },
+        theme: `${theme}`,
         transition: Bounce,
       });
     },
