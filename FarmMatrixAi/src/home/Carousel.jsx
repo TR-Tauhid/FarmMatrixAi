@@ -38,7 +38,7 @@ const Carousel = () => {
 
   return (
     <div
-      className="bg-base-100 py-20 px-6 transition-colors duration-500 overflow-hidden"
+      className="bg-base-100 py-10 px-2 md:px-6 transition-colors duration-500 overflow-hidden rounded-2xl"
       id="clients"
     >
       <div className="max-w-7xl mx-auto">

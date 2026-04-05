@@ -28,7 +28,6 @@ export default function Home() {
         <DiseaseDetection/>
         <DiseaseDiagnosisOutput/>
         <VirtualSensorModule/>
-        <AboutSection/>
         <FeaturesSection/>
         <HowItWorksSection/>
         <AIModelsSection/>
@@ -36,6 +35,7 @@ export default function Home() {
         <ScreenshotsSection/>
         <CropRecCard/>
         <HistorySection/>
+        <AboutSection/>
       </div>
       <Carousel/>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import { useTranslation } from "react-i18next";
@@ -7,9 +7,9 @@ import {
   FaMapMarkerAlt,
   FaSyncAlt,
   FaExclamationTriangle,
+  FaCompass,
 } from "react-icons/fa";
 
-// Helper to handle map centering when coordinates change
 function ChangeView({ center }) {
   const map = useMap();
   map.setView(center, map.getZoom());
@@ -39,7 +39,7 @@ const CropRecommendationInput = () => {
           setLongitude(position.coords.longitude.toFixed(6));
           setLoading(false);
         },
-        (err) => {
+        () => {
           setLoading(false);
           setError(t("cropRecommendationInput.unknownError"));
         },
@@ -53,56 +53,62 @@ const CropRecommendationInput = () => {
 
   return (
     <section
-      className="py-20 px-4 md:px-10 transition-colors duration-500 bg-base-100"
-      id="crop-recommendation-input"
+      className="py-8 md:py-16 px-4 bg-base-100 transition-colors duration-500"
+      id="input-node"
     >
       <div className="max-w-7xl mx-auto">
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="text-4xl font-black text-emerald-700 dark:text-emerald-500 text-center"
-        >
-          {t("cropRecommendationInput.title")}
-        </motion.h2>
+        {/* Horizontal Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-2 mb-8 text-center md:text-left">
+          <motion.h2
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="text-2xl md:text-4xl font-black text-emerald-700 dark:text-emerald-500 tracking-tighter"
+          >
+            {t("cropRecommendationInput.title")}
+          </motion.h2>
+          <motion.p className="text-[10px] md:text-sm text-base-content opacity-60 font-medium md:max-w-md md:text-right leading-tight">
+            {t("cropRecommendationInput.description")}
+          </motion.p>
+        </div>
 
-        <motion.p className="mt-4 text-center max-w-2xl mx-auto opacity-70">
-          {t("cropRecommendationInput.description")}
-        </motion.p>
+        {/* Dashboard Layout: Side-by-Side */}
+        <div className="grid lg:grid-cols-3 gap-4 md:gap-6">
+          {/* Input Control Node */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            className="bg-base-200 dark:bg-slate-900 p-5 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] border border-base-300 dark:border-slate-800 flex flex-col justify-center gap-4"
+          >
+            <div className="flex items-center gap-2 mb-2">
+              <FaCompass className="text-emerald-600 dark:text-emerald-400" />
+              <h3 className="text-xs md:text-lg font-black uppercase tracking-widest opacity-80">
+                {t("cropRecommendationInput.locationInputLabel")}
+              </h3>
+            </div>
 
-        {/* Input Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="mt-12 bg-base-200 dark:bg-slate-800 p-8 rounded-3xl shadow-2xl border border-base-300 dark:border-slate-700 max-w-lg mx-auto"
-        >
-          <h3 className="text-xl font-bold mb-6 text-center">
-            {t("cropRecommendationInput.locationInputLabel")}
-          </h3>
-
-          <div className="space-y-5">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
-                <label className="text-xs font-bold uppercase opacity-60 ml-1">
-                  {t("cropRecommendationInput.latitude")}
+                <label className="text-[9px] font-black uppercase opacity-40 ml-1 tracking-tighter">
+                  Lat
                 </label>
                 <input
                   type="text"
-                  className="input input-bordered w-full bg-base-100 dark:bg-slate-900 border-base-300 dark:border-slate-600 focus:border-emerald-500"
+                  className="w-full bg-base-100 dark:bg-slate-800 p-2 rounded-lg text-xs font-mono font-bold border border-emerald-500/20 focus:outline-emerald-500 transition-all"
                   value={latitude}
                   onChange={(e) => setLatitude(e.target.value)}
-                  placeholder="0.000000"
+                  placeholder="0.0000"
                 />
               </div>
               <div className="space-y-1">
-                <label className="text-xs font-bold uppercase opacity-60 ml-1">
-                  {t("cropRecommendationInput.longitude")}
+                <label className="text-[9px] font-black uppercase opacity-40 ml-1 tracking-tighter">
+                  Lng
                 </label>
                 <input
                   type="text"
-                  className="input input-bordered w-full bg-base-100 dark:bg-slate-900 border-base-300 dark:border-slate-600 focus:border-emerald-500"
+                  className="w-full bg-base-100 dark:bg-slate-800 p-2 rounded-lg text-xs font-mono font-bold border border-emerald-500/20 focus:outline-emerald-500 transition-all"
                   value={longitude}
                   onChange={(e) => setLongitude(e.target.value)}
-                  placeholder="0.000000"
+                  placeholder="0.0000"
                 />
               </div>
             </div>
@@ -110,7 +116,7 @@ const CropRecommendationInput = () => {
             <button
               onClick={handleGetLocation}
               disabled={loading}
-              className="btn btn-block bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-500 dark:hover:bg-emerald-400 text-white border-none shadow-lg shadow-emerald-200 dark:shadow-none"
+              className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl shadow-lg transition-all active:scale-95 text-[10px] uppercase tracking-widest flex items-center justify-center gap-2"
             >
               {loading ? (
                 <FaSyncAlt className="animate-spin" />
@@ -125,33 +131,29 @@ const CropRecommendationInput = () => {
             </button>
 
             {error && (
-              <div className="alert alert-error rounded-xl py-2 text-sm">
-                <FaExclamationTriangle />
-                <span>{error}</span>
+              <div className="text-[9px] text-rose-500 font-bold bg-rose-500/10 p-2 rounded-lg flex items-center gap-2 border border-rose-500/20">
+                <FaExclamationTriangle className="shrink-0" /> {error}
               </div>
             )}
-          </div>
-        </motion.div>
+          </motion.div>
 
-        {/* Map Section */}
-        <div className="mt-16 rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-base-200 dark:border-slate-800 relative">
-          <MapContainer
-            center={currentPos}
-            zoom={13}
-            scrollWheelZoom={false}
-            className="h-[450px] w-full z-0 leaflet-dark-mode" // Added custom class for CSS filter
-          >
-            <ChangeView center={currentPos} />
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <Marker position={currentPos}>
-              <Popup className="dark:text-slate-900">
-                {latitude}, {longitude}
-              </Popup>
-            </Marker>
-          </MapContainer>
+          {/* Squeezed Map Node */}
+          <div className="lg:col-span-2 h-64 md:h-full min-h-[250px] md:min-h-[400px] rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden shadow-2xl border-4 md:border-8 border-base-200 dark:border-slate-800 z-0">
+            <MapContainer
+              center={currentPos}
+              zoom={13}
+              scrollWheelZoom={false}
+              className="h-full w-full"
+            >
+              <ChangeView center={currentPos} />
+              <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+              <Marker position={currentPos}>
+                <Popup className="text-[10px] font-bold">
+                  {latitude || "0"}, {longitude || "0"}
+                </Popup>
+              </Marker>
+            </MapContainer>
+          </div>
         </div>
       </div>
     </section>

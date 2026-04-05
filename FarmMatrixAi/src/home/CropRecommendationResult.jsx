@@ -3,27 +3,10 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { FaSeedling, FaFlask, FaSun, FaChartLine } from "react-icons/fa";
 
-// Sample data structure remains the same...
 const mockRecommendationData = {
   optimalCrop: "Rice",
-  modelUsed: "Random Forest Classifier",
-  metrics: {
-    N_Ratio: 90,
-    P_Ratio: 42,
-    K_Ratio: 43,
-    pH: 6.5,
-    temperature: 26.5,
-    humidity: 82,
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (i) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.1, duration: 0.5 },
-  }),
+  modelUsed: "Random Forest",
+  metrics: { N: 90, P: 42, K: 43, pH: 6.5, temp: 26.5, hum: 82 },
 };
 
 const CropRecommendationResult = () => {
@@ -33,37 +16,37 @@ const CropRecommendationResult = () => {
   const metricItems = [
     {
       label: t("cropRecommendationResult.nitrogen"),
-      value: metrics.N_Ratio,
+      value: metrics.N,
       unit: "mg/kg",
       icon: <FaFlask />,
     },
     {
       label: t("cropRecommendationResult.phosphorus"),
-      value: metrics.P_Ratio,
+      value: metrics.P,
       unit: "mg/kg",
       icon: <FaFlask />,
     },
     {
       label: t("cropRecommendationResult.potassium"),
-      value: metrics.K_Ratio,
+      value: metrics.K,
       unit: "mg/kg",
       icon: <FaFlask />,
     },
     {
       label: t("cropRecommendationResult.soilPH"),
       value: metrics.pH,
-      unit: "",
+      unit: "pH",
       icon: <FaChartLine />,
     },
     {
       label: t("cropRecommendationResult.temperature"),
-      value: metrics.temperature,
+      value: metrics.temp,
       unit: "°C",
       icon: <FaSun />,
     },
     {
       label: t("cropRecommendationResult.humidity"),
-      value: metrics.humidity,
+      value: metrics.hum,
       unit: "%",
       icon: <FaChartLine />,
     },
@@ -71,83 +54,76 @@ const CropRecommendationResult = () => {
 
   return (
     <section
-      className="py-20 px-6 bg-base-100 transition-colors duration-500"
+      className="py-12 md:py-20 px-4 bg-base-100 transition-colors duration-500"
       id="crop-result"
     >
-      <div className="max-w-7xl mx-auto">
-        {/* Section Title */}
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="text-4xl font-black text-emerald-700 dark:text-emerald-500 text-center"
-        >
-          {t("cropRecommendationResult.title")}
-        </motion.h2>
+      <div className="max-w-5xl mx-auto">
+        {/* Compact Header Row */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-2 mb-8 text-center md:text-left">
+          <motion.h2
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="text-2xl md:text-4xl font-black text-emerald-700 dark:text-emerald-500"
+          >
+            {t("cropRecommendationResult.title")}
+          </motion.h2>
+          <motion.p className="text-[10px] md:text-sm text-base-content opacity-60 font-medium md:max-w-md md:text-right">
+            {t("cropRecommendationResult.description")}
+          </motion.p>
+        </div>
 
-        <motion.p className="mt-3 text-center max-w-3xl mx-auto opacity-70">
-          {t("cropRecommendationResult.description")}
-        </motion.p>
-
-        {/* Main Result Card */}
+        {/* Hero Result Card (Short & Wide) */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          className="mt-14 bg-white dark:bg-slate-800 p-10 rounded-[2rem] shadow-2xl border-2 border-emerald-300 dark:border-emerald-900/50 max-w-3xl mx-auto text-center relative overflow-hidden"
+          className="bg-base-200 dark:bg-slate-900 p-6 md:p-10 rounded-[2rem] shadow-xl border border-emerald-100 dark:border-slate-800 relative overflow-hidden"
         >
-          {/* Subtle background glow for dark mode */}
-          <div className="absolute -top-24 -left-24 w-48 h-48 bg-emerald-500/10 blur-3xl rounded-full" />
-
-          <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-6 mb-6">
-            <div className="p-4 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl">
-              <FaSeedling className="text-6xl text-emerald-600 dark:text-emerald-400" />
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 relative z-10">
+            <div className="p-4 bg-emerald-500/10 rounded-2xl border border-emerald-500/20">
+              <FaSeedling className="text-4xl md:text-6xl text-emerald-600 dark:text-emerald-400" />
             </div>
-            <h3 className="text-6xl font-black text-slate-900 dark:text-white tracking-tight">
-              {optimalCrop}
-            </h3>
-          </div>
-
-          <div className="space-y-1">
-            <p className="text-lg font-bold text-slate-600 dark:text-slate-300">
-              {t("cropRecommendationResult.recommendedBy")}{" "}
-              <span className="text-emerald-600 dark:text-emerald-400">
-                {modelUsed}
-              </span>
-            </p>
-            <p className="text-sm opacity-50 italic">
-              {t("cropRecommendationResult.analysisNote")}
-            </p>
+            <div className="text-center md:text-left">
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] opacity-40 mb-1 leading-none">
+                Optimal Recommendation
+              </p>
+              <h3 className="text-4xl md:text-7xl font-black text-slate-900 dark:text-white tracking-tighter leading-none">
+                {optimalCrop}
+              </h3>
+              <p className="mt-2 text-[10px] md:text-sm font-bold opacity-60">
+                {t("cropRecommendationResult.recommendedBy")}{" "}
+                <span className="text-emerald-600 dark:text-emerald-400">
+                  {modelUsed}
+                </span>
+              </p>
+            </div>
           </div>
         </motion.div>
 
-        {/* Detailed Metrics Grid */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto"
-        >
+        {/* Metrics Grid - 3 Columns on Mobile for maximum density */}
+        <div className="mt-4 grid grid-cols-3 lg:grid-cols-6 gap-2 md:gap-4">
           {metricItems.map((item, index) => (
             <motion.div
               key={index}
-              custom={index}
-              variants={itemVariants}
-              className="bg-white dark:bg-slate-800/50 p-6 rounded-2xl shadow-lg border border-emerald-100 dark:border-slate-700 flex flex-col items-center text-center transition-all hover:border-emerald-400 dark:hover:bg-slate-800"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.05 }}
+              className="bg-base-100 dark:bg-slate-800/40 p-3 md:p-5 rounded-xl md:rounded-2xl border border-base-200 dark:border-slate-700 flex flex-col items-center text-center group"
             >
-              <div className="text-3xl text-emerald-500 dark:text-emerald-400 mb-3">
+              <div className="text-emerald-500 text-xs md:text-xl mb-1 opacity-70">
                 {item.icon}
               </div>
-              <p className="text-[10px] font-black uppercase tracking-widest opacity-60 mb-2">
+              <p className="text-[8px] md:text-[10px] font-black uppercase tracking-tighter opacity-40 leading-none mb-1">
                 {item.label}
               </p>
-              <p className="text-3xl font-black text-slate-900 dark:text-white mt-1">
+              <p className="text-xs md:text-xl font-black text-slate-900 dark:text-white">
                 {item.value}
-                <span className="text-sm font-bold opacity-40 ml-1 uppercase">
+                <span className="text-[7px] md:text-[10px] font-bold opacity-30 ml-0.5">
                   {item.unit}
                 </span>
               </p>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

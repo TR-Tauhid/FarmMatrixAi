@@ -1,131 +1,107 @@
-import React, { useState, useEffect, useContext } from "react";
-import { motion } from "framer-motion";
-import L from "leaflet";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import { useTranslation } from "react-i18next";
-import { ThemeContext } from "../context/ThemeContext"; // Path to your actual context
+import React, { useState, useEffect } from "react";
 import {
-  FaSeedling,
-  FaCloud,
-  FaSearch,
-  FaMapMarkerAlt,
-  FaSyncAlt,
-  FaExclamationTriangle,
-  FaFlask,
-  FaSun,
-  FaChartLine,
-} from "react-icons/fa";
+  MapContainer,
+  TileLayer,
+  Marker,
+  useMapEvents,
+  useMap,
+} from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import { FaSeedling, FaMapMarkerAlt, FaCrosshairs } from "react-icons/fa";
 
-// --- Map View Change Component ---
-const ChangeView = ({ center, zoom }) => {
+// --- 1. The "Click to Select" Logic ---
+const LocationMarker = ({ setLat, setLng }) => {
+  useMapEvents({
+    click(e) {
+      setLat(e.latlng.lat.toFixed(6));
+      setLng(e.latlng.lng.toFixed(6));
+    },
+  });
+  return null;
+};
+
+// --- 2. The "Fly To" Logic ---
+const ChangeView = ({ center }) => {
   const map = useMap();
   useEffect(() => {
-    map.flyTo(center, zoom, { duration: 1.5 });
-  }, [center, zoom, map]);
+    if (center) map.flyTo(center, 14, { duration: 1.5 });
+  }, [center, map]);
   return null;
 };
 
 const VirtualSensorModule = () => {
-  const { t } = useTranslation();
-  const { theme } = useContext(ThemeContext); // Consuming your specific Context
-
   const LPU_COORDS = [31.2559, 75.7027];
-  const [latitude, setLatitude] = useState(LPU_COORDS[0].toFixed(6));
-  const [longitude, setLongitude] = useState(LPU_COORDS[1].toFixed(6));
+  const [lat, setLat] = useState(LPU_COORDS[0]);
+  const [lng, setLng] = useState(LPU_COORDS[1]);
   const [mapCenter, setMapCenter] = useState(LPU_COORDS);
-  const [userLocation, setUserLocation] = useState(LPU_COORDS);
-  const [loadingAI, setLoadingAI] = useState(false);
-  const [resultData, setResultData] = useState(null);
 
-  // We use standard OpenStreetMap for both modes for maximum clarity
-  const mapTileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+  // Browser GPS Locate Function
+  const handleLocate = () => {
+    if (!navigator.geolocation) return alert("Geolocation not supported");
+    navigator.geolocation.getCurrentPosition((pos) => {
+      const { latitude, longitude } = pos.coords;
+      setLat(latitude.toFixed(6));
+      setLng(longitude.toFixed(6));
+      setMapCenter([latitude, longitude]);
+    });
+  };
 
   return (
-    <section className="py-20 px-6 bg-base-100 transition-colors duration-500">
-      <div className="max-w-7xl mx-auto">
-        {/* Module Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-black text-emerald-700 dark:text-emerald-500 flex items-center justify-center gap-4">
-            <FaSeedling /> <span>{t("virtualSensor.title")}</span>
-          </h2>
+    <section className="py-12 px-4 bg-base-100 transition-colors duration-500">
+      <div className="max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-3 gap-6">
+          {/* Telemetry Control Panel */}
+          <div className="bg-base-200 dark:bg-slate-900 p-6 rounded-[2rem] border border-base-300 dark:border-slate-800 flex flex-col gap-4">
+            <h3 className="text-xl font-black text-emerald-700 dark:text-emerald-500 flex items-center gap-2">
+              <FaSeedling /> Sensor Node
+            </h3>
 
-          {/* Workflow Steps */}
-          <div className="mt-12 flex justify-center items-center flex-wrap gap-6">
-            <div className="flex flex-col items-center p-6 bg-emerald-50 dark:bg-slate-800 rounded-2xl shadow-lg w-44 border-b-4 border-emerald-500">
-              <FaCloud className="text-3xl text-emerald-600 dark:text-emerald-400 mb-2" />
-              <p className="font-bold text-sm text-base-content uppercase tracking-tighter">
-                Data Fusion
-              </p>
-            </div>
-            <div className="hidden md:block text-3xl text-emerald-300">→</div>
-            <div className="flex flex-col items-center p-6 bg-base-200 dark:bg-slate-800 rounded-2xl shadow-xl w-44 border-b-4 border-blue-500">
-              <FaSearch className="text-3xl text-blue-600 mb-2" />
-              <p className="font-bold text-sm text-base-content uppercase tracking-tighter">
-                AI Analysis
-              </p>
-            </div>
-            <div className="hidden md:block text-3xl text-emerald-300">→</div>
-            <div className="flex flex-col items-center p-6 bg-emerald-100 dark:bg-slate-800 rounded-2xl shadow-lg w-44 border-b-4 border-emerald-800">
-              <FaSeedling className="text-3xl text-emerald-800 dark:text-emerald-300 mb-2" />
-              <p className="font-bold text-sm text-base-content uppercase tracking-tighter">
-                Output
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Action Card */}
-        {!resultData && (
-          <div className="max-w-lg mx-auto bg-base-200 dark:bg-slate-800 p-8 rounded-[2rem] shadow-2xl border border-base-300 dark:border-slate-700">
-            <div className="grid grid-cols-2 gap-4 mb-6">
-              <div className="space-y-1">
-                <p className="text-[10px] font-black uppercase opacity-50">
-                  Lat
+            <div className="grid grid-cols-2 gap-3">
+              <div className="p-3 bg-base-100 dark:bg-slate-800 rounded-xl border border-emerald-500/20">
+                <p className="text-[9px] font-black uppercase opacity-40">
+                  Latitude
                 </p>
-                <input
-                  type="text"
-                  value={latitude}
-                  readOnly
-                  className="input input-bordered w-full bg-base-100 dark:bg-slate-900 border-none"
-                />
+                <p className="font-mono font-bold text-xs">{lat}</p>
               </div>
-              <div className="space-y-1">
-                <p className="text-[10px] font-black uppercase opacity-50">
-                  Lng
+              <div className="p-3 bg-base-100 dark:bg-slate-800 rounded-xl border border-emerald-500/20">
+                <p className="text-[9px] font-black uppercase opacity-40">
+                  Longitude
                 </p>
-                <input
-                  type="text"
-                  value={longitude}
-                  readOnly
-                  className="input input-bordered w-full bg-base-100 dark:bg-slate-900 border-none"
-                />
+                <p className="font-mono font-bold text-xs">{lng}</p>
               </div>
             </div>
-            <button className="btn btn-block bg-emerald-600 hover:bg-emerald-700 text-white border-none shadow-lg">
-              <FaMapMarkerAlt /> Fetch & Analyze
-            </button>
-          </div>
-        )}
 
-        {/* Map Window */}
-        <div className="mt-12 rounded-[2.5rem] overflow-hidden shadow-2xl border-[12px] border-base-200 dark:border-slate-800">
-          <MapContainer
-            center={LPU_COORDS}
-            zoom={14}
-            className="h-96 w-full z-0"
-          >
-            <ChangeView center={mapCenter} zoom={14} />
-            <TileLayer url={mapTileUrl} attribution="&copy; OpenStreetMap" />
-            <Marker position={userLocation}>
-              {/* Note: Popup class handled in CSS below */}
-              <Popup>
-                <div className="font-bold">
-                  {latitude}, {longitude}
-                </div>
-              </Popup>
-            </Marker>
-          </MapContainer>
+            <div className="flex flex-col gap-2">
+              <button
+                onClick={handleLocate}
+                className="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-black rounded-lg text-[10px] uppercase flex items-center justify-center gap-2 transition-all active:scale-95"
+              >
+                <FaCrosshairs /> My Location
+              </button>
+
+              <button className="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl shadow-lg text-[11px] uppercase tracking-widest flex items-center justify-center gap-2 transition-all active:scale-95">
+                <FaMapMarkerAlt /> Run AI Diagnostics
+              </button>
+            </div>
+
+            <p className="text-[9px] text-center opacity-50 italic">
+              *Click anywhere on the map to manually set coordinates.
+            </p>
+          </div>
+
+          {/* Interactive Map */}
+          <div className="lg:col-span-2 h-80 rounded-[2rem] overflow-hidden shadow-2xl border-4 border-base-200 dark:border-slate-800 z-0 relative">
+            <MapContainer
+              center={mapCenter}
+              zoom={13}
+              className="h-full w-full"
+            >
+              <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+              <ChangeView center={mapCenter} />
+              <LocationMarker setLat={setLat} setLng={setLng} />
+              <Marker position={[lat, lng]} />
+            </MapContainer>
+          </div>
         </div>
       </div>
     </section>
