@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
-// Import all images for correct bundling (Assuming they are in '../assets/')
+// Assume assets are imported as before...
 import snap1 from "../assets/snap-1.png";
 import snap2 from "../assets/snap-2.png";
 import snap3 from "../assets/snap-3.png";
@@ -16,130 +15,116 @@ const getScreenshots = (t) => [
   { src: snap4, title: t("screenshots.items.3") },
 ];
 
-// Modal Animation Variants
 const modalVariants = {
-  hidden: { opacity: 0, scale: 0.9 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.3 } },
-  exit: { opacity: 0, scale: 0.9, transition: { duration: 0.2 } },
+  hidden: { opacity: 0, scale: 0.9, y: 20 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { type: "spring", damping: 25, stiffness: 300 },
+  },
+  exit: { opacity: 0, scale: 0.9, y: 20 },
 };
 
-const backdropVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
-  exit: { opacity: 0 },
-};
-
-// --- MODAL COMPONENT (placed outside the main component for clarity) ---
+// --- MODAL COMPONENT ---
 const ScreenshotModal = ({ shot, onClose }) => {
   if (!shot) return null;
 
   return (
-    <AnimatePresence>
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10">
+      {/* Backdrop */}
       <motion.div
-        className="fixed inset-0 z-40 flex items-center justify-center p-4"
-        variants={backdropVariants}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+        className="absolute inset-0 bg-slate-900/90 backdrop-blur-sm"
+      />
+
+      {/* Modal Content */}
+      <motion.div
+        variants={modalVariants}
         initial="hidden"
         animate="visible"
         exit="exit"
-        onClick={onClose} // Close on backdrop click
+        onClick={(e) => e.stopPropagation()}
+        className="relative bg-base-100 dark:bg-slate-900 rounded-[2rem] shadow-2xl max-w-5xl w-full p-4 md:p-8 border border-base-300 dark:border-slate-700 overflow-hidden"
       >
-        {/* Backdrop overlay */}
-        <div className="absolute inset-0 bg-black bg-opacity-70" />
-
-        {/* Modal Container */}
-        <motion.div
-          className="relative bg-white rounded-xl shadow-2xl max-w-4xl w-full p-6"
-          variants={modalVariants}
-          // Prevent closing the modal when clicking inside the content area
-          onClick={(e) => e.stopPropagation()}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-6 text-base-content opacity-50 hover:opacity-100 text-4xl font-light z-50"
         >
-          <button
-            onClick={onClose}
-            className="absolute top-3 right-3 text-gray-500 hover:text-red-500 text-3xl font-light"
-            aria-label="Close modal"
-          >
-            &times;
-          </button>
+          &times;
+        </button>
 
-          <h3 className="text-2xl font-bold text-green-700 mb-4 border-b pb-2">
-            {shot.title}
-          </h3>
+        <h3 className="text-2xl font-black text-emerald-700 dark:text-emerald-400 mb-6 px-2">
+          {shot.title}
+        </h3>
 
+        <div className="rounded-xl overflow-hidden bg-base-200 dark:bg-slate-800">
           <img
             src={shot.src}
             alt={shot.title}
-            className="w-full h-auto object-contain rounded-lg shadow-xl max-h-[80vh]"
+            className="w-full h-auto object-contain max-h-[70vh] mx-auto"
           />
-        </motion.div>
+        </div>
       </motion.div>
-    </AnimatePresence>
+    </div>
   );
 };
-// --- END MODAL COMPONENT ---
 
 const ScreenshotsSection = () => {
   const { t } = useTranslation();
   const screenshots = getScreenshots(t);
-  // State to hold the data of the currently selected screenshot
   const [selectedShot, setSelectedShot] = useState(null);
-
-  const handleShotClick = (shot) => {
-    setSelectedShot(shot);
-  };
-
-  const handleClose = () => {
-    setSelectedShot(null);
-  };
 
   return (
     <>
-      <section className="py-20 px-6 bg-green-50" id="screenshots">
+      <section
+        className="py-24 px-6 bg-base-100 transition-colors duration-500"
+        id="screenshots"
+      >
         <div className="max-w-7xl mx-auto">
-          {/* Section Title */}
           <motion.h2
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-4xl font-bold text-green-700 text-center"
+            className="text-4xl md:text-5xl font-black text-emerald-700 dark:text-emerald-500 text-center"
           >
             {t("screenshots.heading")}
           </motion.h2>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-            viewport={{ once: true }}
-            className="mt-3 text-gray-700 text-center max-w-2xl mx-auto"
-          >
+          <motion.p className="mt-4 text-base-content opacity-70 text-center max-w-2xl mx-auto font-medium">
             {t("screenshots.description")}
           </motion.p>
 
           {/* Screenshot Grid */}
-          <div className="mt-14 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <div className="mt-16 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {screenshots.map((shot, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.9, delay: index * 0.15 }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white shadow-lg rounded-xl overflow-hidden hover:shadow-2xl transition border border-green-100 cursor-pointer"
-                onClick={() => handleShotClick(shot)} // Attach click handler here
+                onClick={() => setSelectedShot(shot)}
+                className="group bg-base-200 dark:bg-slate-800 rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-base-300 dark:border-slate-700 cursor-pointer"
               >
-                {/* Image */}
-                <div className="overflow-hidden">
+                <div className="overflow-hidden aspect-video relative">
+                  <div className="absolute inset-0 bg-emerald-600/20 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center">
+                    <span className="bg-white text-emerald-700 px-4 py-2 rounded-full font-black text-sm shadow-xl">
+                      View Large
+                    </span>
+                  </div>
                   <img
                     src={shot.src}
                     alt={shot.title}
-                    className="w-full h-48 object-cover transform hover:scale-110 transition duration-500"
+                    className="w-full h-full object-cover transform group-hover:scale-110 transition duration-700"
                   />
                 </div>
 
-                {/* Caption */}
-                <div className="p-4 text-center">
-                  <h3 className="text-lg font-semibold text-green-800">
+                <div className="p-6 text-center">
+                  <h3 className="text-lg font-black text-emerald-800 dark:text-emerald-400 group-hover:text-emerald-600 transition-colors">
                     {shot.title}
                   </h3>
                 </div>
@@ -149,10 +134,12 @@ const ScreenshotsSection = () => {
         </div>
       </section>
 
-      {/* 5. Render the Modal if a shot is selected */}
       <AnimatePresence>
         {selectedShot && (
-          <ScreenshotModal shot={selectedShot} onClose={handleClose} />
+          <ScreenshotModal
+            shot={selectedShot}
+            onClose={() => setSelectedShot(null)}
+          />
         )}
       </AnimatePresence>
     </>

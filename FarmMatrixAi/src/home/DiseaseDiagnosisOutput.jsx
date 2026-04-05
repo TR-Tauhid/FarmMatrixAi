@@ -1,15 +1,13 @@
 import React from "react";
-// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { FaMicroscope, FaCheckCircle, FaChartPie, FaLeaf } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
-// Sample diagnosis data based on the provided image
 const mockDiagnosisResult = {
   plant: "Soybean (Glycine max)",
   disease: "Frogeye Leaf Spot",
   causalAgent: "Cercospora sojina (Fungus)",
-  confidence: 94.5, // AI confidence score
+  confidence: 94.5,
   symptoms: [
     "Small, scattered chlorotic (yellow) spots on young leaves.",
     "Spots typically develop a gray/tan center with a dark purple border as they mature.",
@@ -23,7 +21,6 @@ const mockDiagnosisResult = {
   ]
 };
 
-// Animation variants for symptom/management list items
 const listItemVariants = {
   hidden: { opacity: 0, x: -20 },
   visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
@@ -33,69 +30,67 @@ const DiseaseDiagnosisOutput = () => {
   const { t } = useTranslation();
   const { disease, confidence, symptoms, management, plant, causalAgent } = mockDiagnosisResult;
 
+  // Handling translations with fallbacks
   const translatedSymptoms = t("diseaseDiagnosisOutput.symptoms", { returnObjects: true });
   const translatedManagement = t("diseaseDiagnosisOutput.management", { returnObjects: true });
   const symptomsList = Array.isArray(translatedSymptoms) && translatedSymptoms.length ? translatedSymptoms : symptoms;
   const managementList = Array.isArray(translatedManagement) && translatedManagement.length ? translatedManagement : management;
 
   return (
-    <section className="py-20 px-6 bg-white" id="disease-diagnosis-output">
+    <section className="py-20 px-6 bg-base-100 transition-colors duration-500" id="disease-diagnosis-output">
       <div className="max-w-7xl mx-auto">
 
         {/* Section Title */}
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-4xl font-bold text-green-700 text-center"
+          className="text-4xl font-black text-emerald-700 dark:text-emerald-500 text-center"
         >
           {t("diseaseDiagnosisOutput.title")}
         </motion.h2>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-          className="mt-3 text-gray-700 text-center max-w-3xl mx-auto"
-        >
+        <motion.p className="mt-3 text-center max-w-3xl mx-auto opacity-70">
           {t("diseaseDiagnosisOutput.description")}
         </motion.p>
 
         {/* Main Diagnosis Card */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="mt-14 bg-green-50 p-8 rounded-xl shadow-2xl border-2 border-green-300 max-w-4xl mx-auto"
+          className="mt-14 bg-base-200 dark:bg-slate-800 p-8 rounded-[2rem] shadow-2xl border-2 border-emerald-300 dark:border-emerald-900/40 max-w-4xl mx-auto overflow-hidden relative"
         >
-          <div className="flex items-center justify-center space-x-4 mb-4 border-b pb-4">
-            <FaMicroscope className="text-6xl text-green-600" />
-            <div className="text-left">
-              <p className="md:text-xl text-gray-600">{t("diseaseDiagnosisOutput.diagnosisLabel")}</p>
-              <h3 className="text-xl md:text-4xl font-extrabold text-red-700">
+          {/* Subtle tech-glow for dark mode */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/5 blur-[80px] -z-10" />
+
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-8 border-b border-emerald-100 dark:border-slate-700 pb-8">
+            <div className="p-5 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl">
+                <FaMicroscope className="text-6xl text-emerald-600 dark:text-emerald-400" />
+            </div>
+            <div className="text-center md:text-left space-y-1">
+              <p className="text-xs font-black uppercase tracking-widest opacity-60">
+                {t("diseaseDiagnosisOutput.diagnosisLabel")}
+              </p>
+              <h3 className="text-3xl md:text-5xl font-black text-rose-700 dark:text-rose-400">
                 {disease}
               </h3>
             </div>
           </div>
           
-          <div className="flex max-sm:flex-col gap-y-8 justify-between items-center text-center mt-4">
-             <div className="flex-1">
-                 <p className="text-sm text-gray-500 uppercase font-semibold">{t("diseaseDiagnosisOutput.plantLabel")}</p>
-                <p className="text-xl font-bold text-green-800">{plant}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center relative z-10">
+             <div className="space-y-1">
+                <p className="text-[10px] font-black uppercase tracking-widest opacity-50">{t("diseaseDiagnosisOutput.plantLabel")}</p>
+                <p className="text-xl font-bold text-emerald-800 dark:text-emerald-200">{plant}</p>
              </div>
-             <div className="flex-1 border-x border-green-200">
-                 <p className="text-sm text-gray-500 uppercase font-semibold">{t("diseaseDiagnosisOutput.causalAgentLabel")}</p>
-                <p className="text-xl font-bold text-gray-800 italic">{causalAgent}</p>
+             <div className="space-y-1 sm:border-x border-emerald-100 dark:border-slate-700 px-4">
+                <p className="text-[10px] font-black uppercase tracking-widest opacity-50">{t("diseaseDiagnosisOutput.causalAgentLabel")}</p>
+                <p className="text-xl font-bold text-slate-800 dark:text-slate-100 italic">{causalAgent}</p>
              </div>
-             <div className="flex-1">
-                 <p className="text-sm text-gray-500 uppercase font-semibold">{t("diseaseDiagnosisOutput.confidenceLabel")}</p>
-                <p className="text-3xl font-bold text-green-600 flex items-center justify-center space-x-2">
-                    <FaChartPie className="text-2xl" />
+             <div className="space-y-1">
+                <p className="text-[10px] font-black uppercase tracking-widest opacity-50">{t("diseaseDiagnosisOutput.confidenceLabel")}</p>
+                <div className="text-3xl font-black text-emerald-600 dark:text-emerald-400 flex items-center justify-center gap-2">
+                    <FaChartPie className="text-2xl opacity-50" />
                     <span>{confidence}%</span>
-                </p>
+                </div>
              </div>
           </div>
         </motion.div>
@@ -103,56 +98,50 @@ const DiseaseDiagnosisOutput = () => {
         {/* Symptoms and Management Sections */}
         <div className="mt-12 grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           
-          {/* Symptoms */}
+          {/* Symptoms - Red Tinted */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            viewport={{ once: true }}
-            className="bg-red-50 p-6 rounded-xl shadow-lg border border-red-200"
+            className="bg-rose-50 dark:bg-rose-950/20 p-8 rounded-3xl shadow-lg border border-rose-100 dark:border-rose-900/30"
           >
-              <h4 className="text-2xl font-semibold text-red-700 mb-4 flex items-center space-x-2">
-              <FaLeaf />
+            <h4 className="text-2xl font-black text-rose-700 dark:text-rose-400 mb-6 flex items-center gap-3">
+              <FaLeaf className="opacity-50" />
               <span>{t("diseaseDiagnosisOutput.symptomsLabel")}</span>
             </h4>
             <motion.ul 
-              className="space-y-3"
+              className="space-y-4"
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.5 }}
-              transition={{ staggerChildren: 0.15 }}
+              transition={{ staggerChildren: 0.1 }}
             >
               {symptomsList.map((symptom, index) => (
-                <motion.li key={index} variants={listItemVariants} className="text-sm text-gray-700 flex items-start space-x-2">
-                  <span className="text-red-500 mt-1">•</span>
+                <motion.li key={index} variants={listItemVariants} className="text-sm text-slate-700 dark:text-slate-300 flex items-start gap-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-1.5 shrink-0" />
                   <span>{symptom}</span>
                 </motion.li>
               ))}
             </motion.ul>
           </motion.div>
 
-          {/* Management */}
+          {/* Management - Green Tinted */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            viewport={{ once: true }}
-            className="bg-green-100 p-6 rounded-xl shadow-lg border border-green-200"
+            className="bg-emerald-50 dark:bg-emerald-950/20 p-8 rounded-3xl shadow-lg border border-emerald-100 dark:border-emerald-900/30"
           >
-              <h4 className="text-2xl font-semibold text-green-700 mb-4 flex items-center space-x-2">
-              <FaCheckCircle />
+            <h4 className="text-2xl font-black text-emerald-700 dark:text-emerald-400 mb-6 flex items-center gap-3">
+              <FaCheckCircle className="opacity-50" />
               <span>{t("diseaseDiagnosisOutput.managementLabel")}</span>
             </h4>
             <motion.ul 
-              className="space-y-3"
+              className="space-y-4"
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.5 }}
-              transition={{ staggerChildren: 0.15 }}
+              transition={{ staggerChildren: 0.1 }}
             >
               {managementList.map((action, index) => (
-                <motion.li key={index} variants={listItemVariants} className="text-sm text-gray-700 flex items-start space-x-2">
-                  <span className="text-green-500 mt-1">•</span>
+                <motion.li key={index} variants={listItemVariants} className="text-sm text-slate-700 dark:text-slate-300 flex items-start gap-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 shrink-0" />
                   <span>{action}</span>
                 </motion.li>
               ))}

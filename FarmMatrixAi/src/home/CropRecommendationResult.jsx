@@ -1,34 +1,28 @@
 import React from "react";
-// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { FaSeedling, FaFlask, FaSun, FaChartLine } from "react-icons/fa";
 
-// Sample data structure for the result (replace with actual API data in a real app)
+// Sample data structure remains the same...
 const mockRecommendationData = {
   optimalCrop: "Rice",
   modelUsed: "Random Forest Classifier",
-  reasoning: "Based on high humidity and rainfall, acidic soil pH, and balanced NPK ratio.",
   metrics: {
-    N_Ratio: 90, // Nitrogen
-    P_Ratio: 42, // Phosphorus
-    K_Ratio: 43, // Potassium
+    N_Ratio: 90,
+    P_Ratio: 42,
+    K_Ratio: 43,
     pH: 6.5,
-    temperature: 26.5, // °C
-    humidity: 82, // %
+    temperature: 26.5,
+    humidity: 82,
   },
 };
 
-// Animation variants for the result metrics grid items
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: (i) => ({
     opacity: 1,
     y: 0,
-    transition: {
-      delay: i * 0.1,
-      duration: 0.5,
-    },
+    transition: { delay: i * 0.1, duration: 0.5 },
   }),
 };
 
@@ -37,36 +31,60 @@ const CropRecommendationResult = () => {
   const { optimalCrop, modelUsed, metrics } = mockRecommendationData;
 
   const metricItems = [
-    { label: t("cropRecommendationResult.nitrogen"), value: metrics.N_Ratio, unit: "mg/kg", icon: <FaFlask /> },
-    { label: t("cropRecommendationResult.phosphorus"), value: metrics.P_Ratio, unit: "mg/kg", icon: <FaFlask /> },
-    { label: t("cropRecommendationResult.potassium"), value: metrics.K_Ratio, unit: "mg/kg", icon: <FaFlask /> },
-    { label: t("cropRecommendationResult.soilPH"), value: metrics.pH, unit: "", icon: <FaChartLine /> },
-    { label: t("cropRecommendationResult.temperature"), value: metrics.temperature, unit: "°C", icon: <FaSun /> },
-    { label: t("cropRecommendationResult.humidity"), value: metrics.humidity, unit: "%", icon: <FaChartLine /> },
+    {
+      label: t("cropRecommendationResult.nitrogen"),
+      value: metrics.N_Ratio,
+      unit: "mg/kg",
+      icon: <FaFlask />,
+    },
+    {
+      label: t("cropRecommendationResult.phosphorus"),
+      value: metrics.P_Ratio,
+      unit: "mg/kg",
+      icon: <FaFlask />,
+    },
+    {
+      label: t("cropRecommendationResult.potassium"),
+      value: metrics.K_Ratio,
+      unit: "mg/kg",
+      icon: <FaFlask />,
+    },
+    {
+      label: t("cropRecommendationResult.soilPH"),
+      value: metrics.pH,
+      unit: "",
+      icon: <FaChartLine />,
+    },
+    {
+      label: t("cropRecommendationResult.temperature"),
+      value: metrics.temperature,
+      unit: "°C",
+      icon: <FaSun />,
+    },
+    {
+      label: t("cropRecommendationResult.humidity"),
+      value: metrics.humidity,
+      unit: "%",
+      icon: <FaChartLine />,
+    },
   ];
 
   return (
-    <section className="py-20 px-6 bg-green-50" id="crop-result">
+    <section
+      className="py-20 px-6 bg-base-100 transition-colors duration-500"
+      id="crop-result"
+    >
       <div className="max-w-7xl mx-auto">
-
         {/* Section Title */}
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-4xl font-bold text-green-700 text-center"
+          className="text-4xl font-black text-emerald-700 dark:text-emerald-500 text-center"
         >
           {t("cropRecommendationResult.title")}
         </motion.h2>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-          className="mt-3 text-gray-700 text-center max-w-3xl mx-auto"
-        >
+        <motion.p className="mt-3 text-center max-w-3xl mx-auto opacity-70">
           {t("cropRecommendationResult.description")}
         </motion.p>
 
@@ -74,24 +92,31 @@ const CropRecommendationResult = () => {
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="mt-14 bg-white p-8 rounded-xl shadow-2xl border-2 border-green-300 max-w-3xl mx-auto text-center"
+          className="mt-14 bg-white dark:bg-slate-800 p-10 rounded-[2rem] shadow-2xl border-2 border-emerald-300 dark:border-emerald-900/50 max-w-3xl mx-auto text-center relative overflow-hidden"
         >
-          <div className="flex items-center justify-center space-x-4 mb-4">
-            <FaSeedling className="text-6xl text-green-600" />
-            <h3 className="text-5xl font-extrabold text-green-800">
+          {/* Subtle background glow for dark mode */}
+          <div className="absolute -top-24 -left-24 w-48 h-48 bg-emerald-500/10 blur-3xl rounded-full" />
+
+          <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-6 mb-6">
+            <div className="p-4 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl">
+              <FaSeedling className="text-6xl text-emerald-600 dark:text-emerald-400" />
+            </div>
+            <h3 className="text-6xl font-black text-slate-900 dark:text-white tracking-tight">
               {optimalCrop}
             </h3>
           </div>
-          
-          <p className="text-lg text-gray-600 mt-2">
-            {t("cropRecommendationResult.recommendedBy")} {modelUsed} model
-          </p>
-          <p className="text-sm text-gray-500 mt-1">
-            {t("cropRecommendationResult.analysisNote")}
-          </p>
 
+          <div className="space-y-1">
+            <p className="text-lg font-bold text-slate-600 dark:text-slate-300">
+              {t("cropRecommendationResult.recommendedBy")}{" "}
+              <span className="text-emerald-600 dark:text-emerald-400">
+                {modelUsed}
+              </span>
+            </p>
+            <p className="text-sm opacity-50 italic">
+              {t("cropRecommendationResult.analysisNote")}
+            </p>
+          </div>
         </motion.div>
 
         {/* Detailed Metrics Grid */}
@@ -99,7 +124,6 @@ const CropRecommendationResult = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          transition={{ staggerChildren: 0.1 }}
           className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto"
         >
           {metricItems.map((item, index) => (
@@ -107,20 +131,23 @@ const CropRecommendationResult = () => {
               key={index}
               custom={index}
               variants={itemVariants}
-              className="bg-white p-4 rounded-lg shadow-md border border-green-100 flex flex-col items-center text-center transition hover:bg-green-50"
+              className="bg-white dark:bg-slate-800/50 p-6 rounded-2xl shadow-lg border border-emerald-100 dark:border-slate-700 flex flex-col items-center text-center transition-all hover:border-emerald-400 dark:hover:bg-slate-800"
             >
-              <div className="text-3xl text-green-500 mb-2">{item.icon}</div>
-              <p className="text-sm text-gray-500 uppercase font-semibold">
+              <div className="text-3xl text-emerald-500 dark:text-emerald-400 mb-3">
+                {item.icon}
+              </div>
+              <p className="text-[10px] font-black uppercase tracking-widest opacity-60 mb-2">
                 {item.label}
               </p>
-              <p className="text-3xl font-bold text-green-700 mt-1">
+              <p className="text-3xl font-black text-slate-900 dark:text-white mt-1">
                 {item.value}
-                <span className="text-base font-normal ml-1">{item.unit}</span>
+                <span className="text-sm font-bold opacity-40 ml-1 uppercase">
+                  {item.unit}
+                </span>
               </p>
             </motion.div>
           ))}
         </motion.div>
-
       </div>
     </section>
   );

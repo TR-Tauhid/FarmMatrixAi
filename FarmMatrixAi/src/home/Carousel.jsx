@@ -1,12 +1,13 @@
 import { useKeenSlider } from "keen-slider/react";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
 import "keen-slider/keen-slider.min.css";
-import "../index.css";
 
 const animation = { duration: 85000, easing: (t) => t };
 
 const Carousel = () => {
   const { t } = useTranslation();
+
   const [sliderRef] = useKeenSlider({
     loop: true,
     mode: "free",
@@ -21,36 +22,53 @@ const Carousel = () => {
     animationEnded(s) {
       s.moveToIdx(s.track.details.abs + 5, true, animation);
     },
-
     slides: {
-      perView: 2,
-      spacing: 0,
+      perView: 1.5,
+      spacing: 12,
+    },
+    breakpoints: {
+      "(min-width: 768px)": {
+        slides: { perView: 3, spacing: 16 },
+      },
+      "(min-width: 1024px)": {
+        slides: { perView: 4, spacing: 20 },
+      },
     },
   });
 
   return (
-    <div className="shadow-2xl rounded-2xl p-3 pb-10">
-      <h1 className="text-4xl font-bold text-green-700 text-center mb-4">
-        {t("carousel.heading")}
-      </h1>
-      <div ref={sliderRef} className="keen-slider rounded-2xl shadow-2xl">
-        <div className="keen-slider__slide number-slide1">
-          <img src="/happyClient(1).jpg" alt="Happy client 1" />
-        </div>
-        <div className="keen-slider__slide number-slide2">
-          <img src="/happyClient(2).jpg" alt="Happy client 2" />
-        </div>
-        <div className="keen-slider__slide number-slide3">
-          <img src="/happyClient(3).jpg" alt="Happy client 3" />
-        </div>
-        <div className="keen-slider__slide number-slide4">
-          <img src="/happyClient(4).jpg" alt="Happy client 4" />
-        </div>
-        <div className="keen-slider__slide number-slide5">
-          <img src="/happyClient(5).jpg" alt="Happy client 5" />
-        </div>
-        <div className="keen-slider__slide number-slide6">
-          <img src="/happyClient(6).jpg" alt="Happy client 6" />
+    <div
+      className="bg-base-100 py-20 px-6 transition-colors duration-500 overflow-hidden"
+      id="clients"
+    >
+      <div className="max-w-7xl mx-auto">
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-4xl md:text-5xl font-black text-emerald-700 dark:text-emerald-500 text-center mb-16"
+        >
+          {t("carousel.heading")}
+        </motion.h2>
+
+        <div className="relative group">
+          {/* Edge Fades */}
+          <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-linear-to-r from-base-100 to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-linear-to-l from-base-100 to-transparent z-10 pointer-events-none" />
+
+          <div ref={sliderRef} className="keen-slider">
+            {[1, 2, 3, 4, 5, 6].map((num) => (
+              <div key={num} className="keen-slider__slide">
+                <div className="overflow-hidden rounded-[2.5rem] border-4 border-base-200 dark:border-slate-800 shadow-xl m-2 bg-base-200">
+                  <img
+                    src={`/happyClient(${num}).jpg`}
+                    alt={`Happy client ${num}`}
+                    className="w-full h-64 md:h-80 object-cover md:grayscale hover:md:grayscale-0 transition-all duration-700 hover:scale-110"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

@@ -3,9 +3,9 @@ Backlogs .........
 1. Change Carousal into a simple and cool one.      ===  DONE  ===
 2. Language Mode Intregration                       ===  DONE  ===
 3. Frontend finishing                               ===  DONE  === 
-4. Dark Mode                                        
+4. Dark Mode                                                                   
 5. Menu Bar                                         
-6. 
+6. Login log out                                    ===  DONE  ===
 
 
 ====  Backend MongoDB ====

@@ -9,7 +9,7 @@ import SidebarLayout from "./components/SidebarLayout";
 export default function Root() {
   return (
     <LanguageProvider>
-      <div className="min-h-screen flex flex-col overflow-scroll scroll-smooth">
+      <div className="min-h-screen overflow-clip">
         <Navbar />
         <SidebarLayout>
           <Outlet />

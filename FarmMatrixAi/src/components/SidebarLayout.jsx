@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import {
   MdDashboard,
@@ -10,8 +10,12 @@ import {
   MdInfo,
   MdChevronRight,
 } from "react-icons/md";
+import AuthContext from "../context/AuthContext";
 
 const SidebarLayout = ({ children }) => {
+  const AuthValue = useContext(AuthContext);
+  const { user } = AuthValue;
+
   const menuItems = [
     { name: "Dashboard", icon: <MdDashboard />, path: "/dashboard" },
     {
@@ -27,11 +31,11 @@ const SidebarLayout = ({ children }) => {
   ];
 
   return (
-    <div className="drawer min-h-screen overflow-x-hidden ">
+    <div className="drawer min-h-screen overflow-x-hidden z-9999">
       <input id="my-sidebar" type="checkbox" className="drawer-toggle peer" />
 
       {/* Toggle Button */}
-      <div className="drawer-toggle-btn fixed top-40 left-0 z-30">
+      <div className="drawer-toggle-btn fixed top-40 left-0 z-30 ml-1">
         <label
           htmlFor="my-sidebar"
           className="btn btn-circle btn-sm text-white bg-emerald-600 hover:bg-emerald-700  border-none shadow-xl cursor-pointer flex items-center justify-center transition-all active:scale-90"
@@ -46,15 +50,15 @@ const SidebarLayout = ({ children }) => {
       </div>
 
       {/* Sidebar Side */}
-      <div className="drawer-side z-50 overflow-visible fixed">
+      <div className="drawer-side z-10 overflow-visible fixed">
         <label
           htmlFor="my-sidebar"
           aria-label="close sidebar"
-          className="drawer-overlay"
+          className="drawer-overlay backdrop-blur-[2px]"
         ></label>
 
         {/* The Sidebar Container */}
-        <div className="relative w-72 min-h-full backdrop-blur-sm bg-[#66e9982d] border-r border-slate-200 flex flex-col pt-10 overflow-visible transition-all duration-300">
+        <div className="relative w-72 min-h-full bg-transparent backdrop-blur-xl bg-top-right from-500% from-white to-50% to-black border-r border-slate-200 flex flex-col pt-10 overflow-visible transition-all duration-300">
           {/* Navigation Links */}
           <nav className="flex-1 px-4 space-y-1">
             {menuItems.map((item) => (
@@ -66,18 +70,18 @@ const SidebarLayout = ({ children }) => {
                   if (drawer) drawer.checked = false;
                 }}
                 className={({ isActive }) => `
-                  flex items-center gap-4 px-4 py-3.5 rounded-lg font-semibold transition-all group
+                  flex items-center gap-4 px-4 py-3.5 rounded-lg font-semibold transition-all duration-500 ease-linear group 
                   ${
                     isActive
-                      ? "bg-emerald-50  border-r-4 border-emerald-600 rounded-r-none"
-                      : "hover:backdrop-blur-3xl"
+                      ? "bg-emerald-50  border-r-4 border-emerald-600 rounded-r-none "
+                      : "hover:backdrop-blur-3xl relative after:absolute after:bg-black dark:after:bg-gray-200 after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-300"
                   }
                 `}
               >
                 <span className="text-2xl group-hover:scale-110 transition-transform">
                   {item.icon}
                 </span>
-                <span className="text-[15px] menu-style-unerline menu-style-unerline">
+                <span className="text-[15px] menu-style-unerline menu-style-unerline ">
                   {item.name}
                 </span>
               </NavLink>
@@ -96,9 +100,9 @@ const SidebarLayout = ({ children }) => {
                 </div>
               </div>
               <div className="overflow-hidden">
-                <p className="text-sm font-bold  truncate">Elena Vance</p>
+                <p className="text-sm font-bold  truncate">{user?.displayName}</p>
                 <p className="text-[10px]  font-bold uppercase tracking-widest">
-                  Agronomist
+                  {user?.isActive}
                 </p>
               </div>
             </div>

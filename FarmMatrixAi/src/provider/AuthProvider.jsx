@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Authcontext from "../context/AuthContext";
 import {
   createUserWithEmailAndPassword,

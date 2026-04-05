@@ -25,7 +25,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="relative z-50 mt-4 md:mt-10 px-4 md:px-6 lg:px-10">
+    <div className="relative z-50 pt-4 md:pt-10 px-4 md:px-6 lg:px-10">
       <div className="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-4 max-w-[1440px] mx-auto">
         {/* Title Section*/}
         <div className="w-full md:w-auto flex justify-center md:justify-start">
@@ -39,7 +39,7 @@ export default function Navbar() {
             </div>
 
             <div className="flex flex-col">
-              <p className="text-xl md:text-2xl lg:text-4xl text-[#047857] dark:text-[#03b403] font-lato font-black leading-tight">
+              <p className="text-xl md:text-2xl lg:text-4xl text-[#047857] dark:text-emerald-400 font-lato font-black leading-tight">
                 {t("navbar.title")}
               </p>
               <p className="text-xs md:text-sm lg:text-lg  font-medium leading-tight">
