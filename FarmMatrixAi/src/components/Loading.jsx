@@ -7,7 +7,6 @@ const Loading = ({ theme = "light" }) => {
     <div
       className={`relative w-full h-screen overflow-hidden font-sans transition-colors duration-300 ${isDark ? "bg-slate-950" : "bg-slate-50"}`}
     >
-      {/* Blurred Background Mockup mimicking the AgriPulse dashboard layout */}
       <div
         className={`absolute inset-0 flex flex-col filter blur-xl opacity-30 pointer-events-none scale-105 transition-opacity ${isDark ? "opacity-20" : "opacity-40"}`}
       >
@@ -67,7 +66,7 @@ const Loading = ({ theme = "light" }) => {
             <h2
               className={`text-2xl font-bold tracking-tight transition-colors ${isDark ? "" : ""}`}
             >
-              AgriPulse Pro
+              Farm Matrix AI
             </h2>
             <p
               className={`text-sm mt-2 font-medium uppercase tracking-widest animate-pulse ${isDark ? "/70" : ""}`}

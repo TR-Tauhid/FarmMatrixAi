@@ -30,7 +30,7 @@ const LanguageSwitcher = () => {
 
       <ul
         tabIndex={0}
-        className="dropdown-content  font-semibold z-50 menu p-0 shadow rounded-xl overflow-visible md:w-40 backdrop-blur-2xl border block"
+        className="dropdown-content font-semibold z-50 menu p-0 shadow rounded-xl overflow-visible md:w-40 bg-white/40 dark:bg-black/60 backdrop-blur-[80px] border block"
       >
         {languages.map((lang) => (
           <li

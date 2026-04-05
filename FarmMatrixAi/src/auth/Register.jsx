@@ -16,47 +16,68 @@ export default function Register() {
   const handleSummitBtn = (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
-    const email = form.get("email");
-    const password = form.get("password");
-    const confomrPass = form.get("conformPass");
-    const name = form.get("name");
 
-    
+    // --- Sanitization & Extraction ---
+    const name = form.get("name")?.trim();
+    const email = form.get("email")?.trim().toLowerCase();
+    const password = form.get("password");
+    const confirmPass = form.get("confirmPass");
+
+    // --- Validation Logic ---
+    if (!name || !email || !password) {
+      return notify("All fields are required", "error");
+    }
+
+    if (password.length < 6) {
+      return notify("Password should be at least 6 characters", "error");
+    }
+
+    if (password !== confirmPass) {
+      return notify("Passwords do not match", "error");
+    }
+
+    setLoading(true);
+
     createUserWithEmail(email, password, name)
       .then((res) => {
-        notify(`Welcome...${res?.user?.displayName}...!!!`, "success");
+        notify(`Welcome...${name}...!!!`, "success");
+        updateName(name); // Updating profile name after creation
         setLoading(false);
       })
-      .catch((err) => notify(err?.message, "error"));
-    updateName(name);
+      .catch((err) => {
+        setLoading(false);
+        notify(err?.message, "error");
+      });
   };
 
   return (
     <div
-      className="bg-cover bg-center bg-fixed min-h-screen w-full flex items-stretch"
-      style={{
-        backgroundImage: `url(${greenFarmland})`,
-      }}
+      className="bg-cover bg-center bg-fixed min-h-screen w-full flex items-stretch transition-colors duration-500"
+      style={{ backgroundImage: `url(${greenFarmland})` }}
     >
-      <div className="bg-linear-to-r/srgb from-[#ffffffd8] via-[#e0d5fd9c] to-[#ffffff60] lg:to-[#00000000] w-full flex flex-col overflow-y-auto">
-
+      {/* Dynamic Overlay & Content Container */}
+      <div
+        className="w-full flex flex-col overflow-y-auto transition-all duration-500 
+        bg-linear-to-r from-white/75 via-[#92b99299] to-[#ffffff60] lg:to-white/10
+        dark:from-slate-950/95 dark:via-slate-900/80 dark:to-transparent lg:dark:to-slate-950"
+      >
         <div className="w-full max-w-xl mx-auto lg:mx-0 lg:ml-20 xl:ml-32 p-6 md:p-12 lg:py-20 flex flex-col justify-center">
           {/* Brand Logo & Title */}
           <div className="mb-8 md:mb-10">
             <NavLink to="/" className="flex items-center gap-4 md:gap-6 group">
               <div className="shrink-0">
                 <img
-                  className="w-14 h-14 md:w-18 md:h-18 rounded-xl border-2 border-emerald-700 object-cover shadow-sm"
+                  className="w-14 h-14 md:w-18 md:h-18 rounded-xl border-2 border-emerald-700 object-cover shadow-sm transition-transform group-hover:scale-105"
                   src={logo}
                   alt="logo"
                 />
               </div>
 
               <div className="flex flex-col gap-1">
-                <p className="text-2xl md:text-4xl text-[#047857] font-lato font-black leading-tight">
+                <p className="text-2xl md:text-4xl font-lato font-black leading-tight text-[#047857] dark:text-emerald-400">
                   {t("navbar.title")}
                 </p>
-                <p className="text-sm md:text-lg  leading-tight">
+                <p className="text-sm md:text-lg font-medium leading-tight text-slate-600 dark:text-slate-400">
                   {t("navbar.subTitle")}
                 </p>
               </div>
@@ -64,12 +85,12 @@ export default function Register() {
           </div>
 
           {/* Welcome Section */}
-          <div className="space-y-2 mb-8">
-            <h1 className=" text-3xl md:text-4xl font-bold font-inter">
-              Welcome
+          <div className="space-y-2 mb-8 text-slate-900 dark:text-white">
+            <h1 className="text-3xl md:text-4xl font-black tracking-tighter">
+              Create Account
             </h1>
-            <h4 className="font-inter text-base md:text-lg text-[#3C4A42]">
-              Enter your credentials to access your field insights.
+            <h4 className="text-base md:text-lg font-medium opacity-70">
+              Join Farm Matrix AI to start monitoring your land.
             </h4>
           </div>
 
@@ -79,16 +100,20 @@ export default function Register() {
               <fieldset className="grid grid-cols-1 gap-4">
                 {/* Name Input */}
                 <div>
-                  <label className="block font-inter font-semibold text-sm text-[#3C4A42] mb-1.5 ml-1">
-                    Name *
+                  <label className="block font-bold text-[10px] uppercase tracking-widest mb-2 ml-1 text-slate-500 dark:text-emerald-500/60">
+                    Full Name *
                   </label>
-                  <div className="flex items-center shadow-sm bg-white/80 backdrop-blur-sm p-3 rounded-2xl border border-slate-200 focus-within:border-emerald-500 transition-all">
-                    <MdDriveFileRenameOutline className="text-xl text-[#6C7A71] shrink-0" />
+                  <div
+                    className="flex items-center shadow-sm p-3.5 rounded-2xl border transition-all focus-within:ring-2 focus-within:ring-emerald-500/20 
+                    bg-white/80 border-slate-200 focus-within:border-emerald-600 text-black
+                    dark:bg-slate-800/50 dark:border-slate-700 dark:focus-within:border-emerald-500 dark:text-white"
+                  >
+                    <MdDriveFileRenameOutline className="text-xl shrink-0 opacity-50" />
                     <input
                       type="text"
                       name="name"
                       required
-                      className="bg-transparent border-none outline-none w-full px-3 font-semibold "
+                      className="bg-transparent border-none outline-none w-full px-3 text-sm md:text-base font-medium placeholder:opacity-30"
                       placeholder="Your Name"
                     />
                   </div>
@@ -96,47 +121,62 @@ export default function Register() {
 
                 {/* Email Input */}
                 <div>
-                  <label className="block font-inter font-semibold text-sm text-[#3C4A42] mb-1.5 ml-1">
-                    Email or Phone Number
+                  <label className="block font-bold text-[10px] uppercase tracking-widest mb-2 ml-1 text-slate-500 dark:text-emerald-500/60">
+                    Email Address *
                   </label>
-                  <div className="flex items-center shadow-sm bg-white/80 backdrop-blur-sm p-3 rounded-2xl border border-slate-200 focus-within:border-emerald-500 transition-all">
-                    <MdOutlineEmail className="text-xl text-[#6C7A71] shrink-0" />
+                  <div
+                    className="flex items-center shadow-sm p-3.5 rounded-2xl border transition-all focus-within:ring-2 focus-within:ring-emerald-500/20 
+                    bg-white/80 border-slate-200 focus-within:border-emerald-600 text-black
+                    dark:bg-slate-800/50 dark:border-slate-700 dark:focus-within:border-emerald-500 dark:text-white"
+                  >
+                    <MdOutlineEmail className="text-xl shrink-0 opacity-50" />
                     <input
                       type="email"
                       name="email"
-                      className="bg-transparent border-none outline-none w-full px-3 "
+                      required
+                      className="bg-transparent border-none outline-none w-full px-3 text-sm md:text-base font-medium placeholder:opacity-30"
                       placeholder="email@example.com"
                     />
                   </div>
                 </div>
 
-                {/* Password Logic (Responsive Grid for Tablet+) */}
+                {/* Password Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block font-inter font-semibold text-sm text-[#3C4A42] mb-1.5 ml-1">
+                    <label className="block font-bold text-[10px] uppercase tracking-widest mb-2 ml-1 text-slate-500 dark:text-emerald-500/60">
                       Password
                     </label>
-                    <div className="flex items-center shadow-sm bg-white/80 backdrop-blur-sm p-3 rounded-2xl border border-slate-200 focus-within:border-emerald-500 transition-all">
-                      <CiLock className="text-xl text-[#6C7A71] shrink-0" />
+                    <div
+                      className="flex items-center shadow-sm p-3.5 rounded-2xl border transition-all focus-within:ring-2 focus-within:ring-emerald-500/20 
+                      bg-white/80 border-slate-200 focus-within:border-emerald-600 text-black
+                      dark:bg-slate-800/50 dark:border-slate-700 dark:focus-within:border-emerald-500 dark:text-white"
+                    >
+                      <CiLock className="text-xl shrink-0 opacity-50" />
                       <input
                         type="password"
                         name="password"
-                        className="bg-transparent border-none outline-none w-full px-3 "
+                        required
+                        className="bg-transparent border-none outline-none w-full px-3 text-sm md:text-base font-medium placeholder:opacity-30"
                         placeholder="••••••••"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block font-inter font-semibold text-sm text-[#3C4A42] mb-1.5 ml-1">
-                      Confirm Password
+                    <label className="block font-bold text-[10px] uppercase tracking-widest mb-2 ml-1 text-slate-500 dark:text-emerald-500/60">
+                      Confirm Pass
                     </label>
-                    <div className="flex items-center shadow-sm bg-white/80 backdrop-blur-sm p-3 rounded-2xl border border-slate-200 focus-within:border-emerald-500 transition-all">
-                      <CiLock className="text-xl text-[#6C7A71] shrink-0" />
+                    <div
+                      className="flex items-center shadow-sm p-3.5 rounded-2xl border transition-all focus-within:ring-2 focus-within:ring-emerald-500/20 
+                      bg-white/80 border-slate-200 focus-within:border-emerald-600 text-black
+                      dark:bg-slate-800/50 dark:border-slate-700 dark:focus-within:border-emerald-500 dark:text-white"
+                    >
+                      <CiLock className="text-xl shrink-0 opacity-50" />
                       <input
                         type="password"
-                        name="confomrPass"
-                        className="bg-transparent border-none outline-none w-full px-3 "
+                        name="confirmPass"
+                        required
+                        className="bg-transparent border-none outline-none w-full px-3 text-sm md:text-base font-medium placeholder:opacity-30"
                         placeholder="••••••••"
                       />
                     </div>
@@ -144,8 +184,12 @@ export default function Register() {
                 </div>
 
                 {/* Submit Button */}
-                <button className="w-full py-4 bg-slate-900 hover:bg-black  font-bold rounded-xl transition-all mt-6 text-lg md:text-xl shadow-lg active:scale-[0.98]">
-                  Register
+                <button
+                  className="w-full py-4 font-black cursor-pointer rounded-2xl mt-6 shadow-xl transition-all active:scale-95 uppercase tracking-[0.2em] text-xs md:text-sm 
+                  bg-slate-900 text-white hover:bg-black
+                  dark:bg-emerald-500 dark:text-slate-950 dark:hover:bg-emerald-400"
+                >
+                  Register Now
                 </button>
               </fieldset>
             </form>
@@ -153,12 +197,12 @@ export default function Register() {
 
           {/* Redirect Section */}
           <div className="mt-8 flex flex-col md:flex-row gap-2 items-center justify-center text-center">
-            <p className="text-[#3C4A42] font-medium text-base md:text-lg font-inter">
+            <p className="font-medium text-sm md:text-lg text-slate-600 dark:text-slate-400">
               Already have an account?
             </p>
             <NavLink
               to="/login"
-              className="font-inter hover:underline underline-offset-2 font-bold text-base md:text-lg text-[#006C49]"
+              className="font-black hover:underline underline-offset-2 text-sm md:text-base uppercase tracking-widest text-emerald-700 dark:text-emerald-400"
             >
               Log In
             </NavLink>

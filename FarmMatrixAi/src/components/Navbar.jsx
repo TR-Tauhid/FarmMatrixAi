@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import logo from "../assets/farmMatrixAI.png";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { NavLink } from "react-router-dom";
@@ -12,8 +12,18 @@ export default function Navbar() {
   const { t } = useTranslation();
   const AuthValue = useContext(AuthContext);
   const { theme, toggleTheme } = useTheme();
-
   const { user, logOut, notify } = AuthValue;
+  const [scrolling, setScrolling] = useState(false);
+
+  const miniNavBar = () => {
+    if (window.scrollY >= 110) {
+      setScrolling(true);
+    } else {
+      setScrolling(false);
+    }
+  };
+
+  window.addEventListener("scroll", miniNavBar);
 
   const handleLogOutBtn = () => {
     logOut()
@@ -25,7 +35,9 @@ export default function Navbar() {
   };
 
   return (
-    <div className="relative z-50 pt-4 md:pt-10 px-4 md:px-6 lg:px-10">
+    <div
+      className={`w-full fixed top-0 left-0 z-100 rounded-2xl backdrop-blur-2xl bg-base-100/30 transition-all duration-500 ease-in-out md:p-10 ${scrolling ? "md:px-3 md:scale-75 p-2 md:p-4" : "p-4 md:px-10"}`}
+    >
       <div className="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-4 max-w-[1440px] mx-auto">
         {/* Title Section*/}
         <div className="w-full md:w-auto flex justify-center md:justify-start">
@@ -50,7 +62,9 @@ export default function Navbar() {
         </div>
 
         {/* Utilities Section*/}
-        <div className="flex flex-wrap items-center justify-center md:justify-end gap-2 md:gap-4 w-full md:w-auto">
+        <div
+          className={`flex flex-wrap items-center justify-center md:justify-end gap-2 md:gap-4 w-full md:w-auto duration-500 transition-all ease-in-out ${scrolling ? "hidden md:flex " : ""}`}
+        >
           {/* Language Switcher */}
           <div className="scale-90 md:scale-100">
             <LanguageSwitcher />
@@ -96,7 +110,7 @@ export default function Navbar() {
               </div>
               <ul
                 tabIndex={0}
-                className="dropdown-content menu backdrop-blur-3xl rounded-box z-10 w-52 p-2 shadow-xl border border-slate-100 mt-2"
+                className="dropdown-content menu backdrop-blur-3xl rounded-box z-50 w-52 p-2 shadow-xl border border-slate-100 mt-2 dropdown-content font-semibold rounded-xl overflow-visible md:w-40 bg-white/40 dark:bg-black/60 block"
               >
                 <li>
                   <a className="py-3">Account Settings</a>
@@ -109,7 +123,7 @@ export default function Navbar() {
 
             {/* Profile Dropdown */}
             <div
-              className={`dropdown dropdown-end ${user ? "animate-none" : "animate-bounce"}`}
+              className={`dropdown dropdown-end `}
             >
               <div
                 tabIndex={0}
@@ -147,7 +161,7 @@ export default function Navbar() {
               {user ? (
                 <ul
                   tabIndex={0}
-                  className="dropdown-content menu font-bold border backdrop-blur-3xl p-0 rounded-xl z-10 mt-4 w-48 shadow-2xl overflow-hidden"
+                  className="dropdown-content menu font-bold border backdrop-blur-3xl p-0 z-50 mt-4 w-48 shadow-2xl  border-slate-100 rounded-2xl dropdown-content  overflow-hidden md:w-40 bg-white/40 dark:bg-black/60 block"
                 >
                   <li className="backdrop-blur-2xl transition-colors">
                     <button
@@ -161,15 +175,15 @@ export default function Navbar() {
               ) : (
                 <ul
                   tabIndex={0}
-                  className="dropdown-content menu font-bold backdrop-blur-3xl border border-slate-200 p-0 rounded-xl z-10 mt-4 w-48 shadow-2xl overflow-hidden"
+                  className="dropdown-content menu font-bold backdrop-blur-3xl border border-slate-200 p-0 rounded-xl z-50 mt-4 w-48 shadow-2xl overflow-hidden"
                 >
                   <li className="transition-colors">
-                    <NavLink to="./login" className="py-4 justify-center">
+                    <NavLink to="/login" className="py-4 justify-center">
                       Log In
                     </NavLink>
                   </li>
                   <li className="transition-colors border-t border-slate-100">
-                    <NavLink to="./register" className="py-4 justify-center">
+                    <NavLink to="/register" className="py-4 justify-center">
                       Register
                     </NavLink>
                   </li>

@@ -52,7 +52,7 @@ const AboutPage = () => {
             of Soil.
           </h1>
           <p className="text-sm md:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed opacity-70">
-            Founded in the heart of the central plains, AgriPulse Pro was born
+            Founded in the heart of the central plains, Farm Matrix AI Pro was born
             from a simple observation: the most vital data in farming was the
             hardest to see.
           </p>
@@ -199,7 +199,7 @@ const AboutPage = () => {
               @
             </div>
             <p className="text-[10px] font-bold tracking-tight opacity-80">
-              hello@agripulse.pro
+              hello@farmmatrixai.com
             </p>
           </div>
         </div>

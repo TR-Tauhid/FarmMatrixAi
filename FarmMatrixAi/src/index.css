@@ -27,6 +27,9 @@
 }
 
 :root {
+  --bg-color: #ffffff;
+  --text-primary: #0f172a;
+  --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
   --primary-background-color: #fff;
   --secondary-background-color: #f7f7f7;
   --primary-text-color: #000;
@@ -40,6 +43,9 @@
 }
 
 [data-theme="dark"] {
+  --bg-color: #0f172a;
+  --text-primary: #f8fafc;
+  --card-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.5);
   --primary-background-color: #000000;
   --secondary-background-color: #2d2c35;
   --primary-text-color: #ffffff;
@@ -50,20 +56,6 @@
   --button-solid-text-color: #000000;
   --button-outlined-background-color: transparent;
   --button-outlined-text-color: #ffffff;
-}
-
-/* Default Light Theme */
-:root {
-  --bg-color: #ffffff;
-  --text-primary: #0f172a;
-  --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-}
-
-/* Dark  */
-[data-theme="dark"] {
-  --bg-color: #0f172a;
-  --text-primary: #f8fafc;
-  --card-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.5);
 }
 
 
@@ -100,7 +92,7 @@
 }
 #my-sidebar:not(:checked) ~ .drawer-toggle-btn .btn-circle svg {
   transform: rotate(0deg) scaleX(1) !important;
-} 
+}
 
 /* Custom Fonts */
 @theme {
