@@ -50,7 +50,7 @@ const SidebarLayout = ({ children }) => {
       </div>
 
       {/* Sidebar Side */}
-      <div className="drawer-side z-[100] overflow-visible fixed">
+      <div className="drawer-side z-100 overflow-visible fixed">
         <label
           htmlFor="my-sidebar"
           aria-label="close sidebar"
@@ -60,7 +60,7 @@ const SidebarLayout = ({ children }) => {
         {/* The Sidebar Container */}
         <div className="relative w-72 min-h-full bg-transparent backdrop-blur-xl bg-top-right from-500% from-white to-50% to-black border-r border-slate-200 flex flex-col pt-10 overflow-visible transition-all duration-300">
           {/* Navigation Links */}
-          <nav className="flex-1 px-4 space-y-1">
+          <nav className="flex-1 pl-4 space-y-1">
             {menuItems.map((item) => (
               <NavLink
                 key={item.name}

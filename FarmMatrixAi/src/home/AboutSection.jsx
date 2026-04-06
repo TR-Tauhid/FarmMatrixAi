@@ -2,6 +2,7 @@ import React from "react";
 import { LuLeaf, LuTrendingUp } from "react-icons/lu";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { FaHandshakeSimple } from "react-icons/fa6";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import field from "../assets/field.jpg";
 
@@ -52,9 +53,9 @@ const AboutPage = () => {
             of Soil.
           </h1>
           <p className="text-sm md:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed opacity-70">
-            Founded in the heart of the central plains, Farm Matrix AI Pro was born
-            from a simple observation: the most vital data in farming was the
-            hardest to see.
+            Founded in the heart of the central plains, Farm Matrix AI Pro was
+            born from a simple observation: the most vital data in farming was
+            the hardest to see.
           </p>
           <div className="flex justify-center lg:justify-start gap-8 md:gap-12 pt-4">
             {stats.map((stat, i) => (
@@ -158,7 +159,7 @@ const AboutPage = () => {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8">
           {team.map((member, i) => (
             <div key={i} className="space-y-2 md:space-y-4 group">
-              <div className="aspect-[3/4] overflow-hidden rounded-2xl bg-base-200">
+              <div className="aspect-3/4 overflow-hidden rounded-2xl bg-base-200">
                 <img
                   src={member.img}
                   alt={member.name}
@@ -182,48 +183,49 @@ const AboutPage = () => {
       </section>
 
       {/* Contact Section - Compact */}
-      <section className="bg-slate-900 dark:bg-emerald-950/40 rounded-2xl md:rounded-[2rem] p-4 md:p-8 text-white flex flex-col md:flex-row items-center gap-6 border border-slate-800 dark:border-emerald-900/30 overflow-hidden">
-        {/* Left Side: Info (Short & Wide) */}
-        <div className="flex flex-row md:flex-col items-center md:items-start justify-between md:justify-center gap-4 w-full md:w-1/3 border-b md:border-b-0 md:border-r border-slate-800 pb-4 md:pb-0 md:pr-8">
-          <div className="text-left">
-            <h2 className="text-xl md:text-2xl font-black tracking-tighter">
+      <section className="bg-white dark:bg-slate-900 rounded-2xl md:rounded-4xl p-5 md:p-8 text-slate-800 dark:text-slate-200 flex flex-col md:flex-row items-center gap-6 border border-slate-200 dark:border-slate-800 shadow-sm">
+        {/* Left Side */}
+        <div className="flex flex-col items-center md:items-start justify-between md:justify-around gap-4 w-full md:w-1/3 border-b md:border-b-0 md:border-r border-slate-200 dark:border-slate-800 pb-4 md:pb-0 md:pr-8">
+          <div>
+            <h2 className="text-lg md:text-2xl font-bold tracking-tight">
               Get in Touch
             </h2>
-            <p className="text-[10px] opacity-50 font-medium">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               Partner for a sustainable future.
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 text-[10px]">
+          <div className="flex items-center gap-2 text-sm">
+            <div className="w-7 h-7 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 dark:text-slate-400">
               @
             </div>
-            <p className="text-[10px] font-bold tracking-tight opacity-80">
-              hello@farmmatrixai.com
-            </p>
+            <p className="font-medium">hello@farmmatrixai.com</p>
           </div>
         </div>
 
-        {/* Right Side: Form (Dense Grid) */}
+        {/* Right Side */}
         <div className="flex-1 w-full">
-          <form className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <form className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <input
               type="text"
-              placeholder="NAME"
-              className="bg-slate-800/40 border border-slate-700 rounded-lg p-2.5 text-[9px] font-bold focus:outline-emerald-500 w-full placeholder:opacity-30"
+              placeholder="Name"
+              className="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 placeholder:text-slate-400"
             />
+
             <input
               type="email"
-              placeholder="EMAIL"
-              className="bg-slate-800/40 border border-slate-700 rounded-lg p-2.5 text-[9px] font-bold focus:outline-emerald-500 w-full placeholder:opacity-30"
+              placeholder="Email"
+              className="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 placeholder:text-slate-400"
             />
+
             <textarea
-              placeholder="MESSAGE"
-              rows="1"
-              className="sm:col-span-2 bg-slate-800/40 border border-slate-700 rounded-lg p-2.5 text-[9px] font-bold focus:outline-emerald-500 w-full placeholder:opacity-30 resize-none"
+              placeholder="Message"
+              rows="3"
+              className="sm:col-span-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 placeholder:text-slate-400 resize-none"
             />
-            <button className="sm:col-span-2 w-full py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-black text-[9px] rounded-md uppercase tracking-[0.2em] transition-all active:scale-95">
-              Send Inquiry
+
+            <button className="sm:col-span-2 w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm rounded-lg transition active:scale-95">
+              Send Message
             </button>
           </form>
         </div>

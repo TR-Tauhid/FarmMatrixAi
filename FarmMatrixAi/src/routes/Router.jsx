@@ -19,7 +19,7 @@ const router = createBrowserRouter([
       { path: "croprecommendationinput", element: <CropRecommendationInput /> },
       { path: "diagnostics", element: <DiseaseDetectionUpload /> },
       { path: "about", element: <AboutSection /> },
-      { path: "about", element: <AboutSection /> },
+      { path: "recommendations", element: <CropRecommendationInput /> },
     ],
   },
   { path: "login", element: <Login /> },
