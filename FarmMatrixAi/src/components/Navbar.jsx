@@ -100,7 +100,7 @@ export default function Navbar() {
             </button>
 
             {/* Settings Dropdown */}
-            <div className="dropdown dropdown-end">
+            {/* <div className="dropdown dropdown-end">
               <div
                 tabIndex={0}
                 role="button"
@@ -108,7 +108,7 @@ export default function Navbar() {
               >
                 <FiSettings />
               </div>
-              {/* <ul
+              <ul
                 tabIndex={0}
                 className="dropdown-content menu backdrop-blur-3xl rounded-box z-50 w-52 p-2 shadow-xl border border-slate-100 mt-2 dropdown-content font-semibold rounded-xl overflow-visible md:w-40 bg-white/40 dark:bg-black/60 block"
               >
@@ -118,8 +118,8 @@ export default function Navbar() {
                 <li>
                   <a className="py-3">Preferences</a>
                 </li>
-              </ul> */}
-            </div>
+              </ul>
+            </div> */}
 
             {/* Profile Dropdown */}
             <div
