@@ -6,8 +6,9 @@ Backlogs .........
 4. Dark Mode                                        ===  DONE  ===             
 5. Menu Bar                                         ===  DONE  ===
 6. Login log out                                    ===  DONE  ===
-7. Backend and Function
-8. 
+7. Backend and Function                             ==  PENDING  ==
+8. About page updation
+9. Dashboard Functionality
 
 
 ====  Backend MongoDB ====
