@@ -106,7 +106,7 @@ const SidebarLayout = ({ children }) => {
 
           <div>
             {/* Language Switcher */}
-            <div className="flex justify-end scale-90 md:scale-100">
+            <div className="flex md:hidden justify-end scale-90 md:scale-100 ">
               <LanguageSwitcher />
             </div>
 
@@ -163,7 +163,7 @@ const SidebarLayout = ({ children }) => {
             <div className="w-11/12 mx-auto h-px bg-black dark:bg-white"></div>
 
             {/* Profile Dropdown */}
-            <div className={`dropdown dropdown-top p-3 `}>
+            <div className={`dropdown dropdown-top p-3 w-full flex gap-4`}>
               <div
                 tabIndex={0}
                 role="button"
@@ -196,7 +196,11 @@ const SidebarLayout = ({ children }) => {
                   )}
                 </div>
               </div>
-
+              <div>
+                <h1 className="font-semibold text-lg">
+                  {user?.displayName ? user?.displayName : ""}
+                </h1>
+              </div>
               {user ? (
                 <ul
                   tabIndex={0}
