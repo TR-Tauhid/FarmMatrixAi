@@ -63,7 +63,7 @@ export default function Navbar() {
 
         {/* Utilities Section*/}
         <div
-          className={`flex flex-wrap items-center justify-center md:justify-end gap-2 md:gap-4 w-full md:w-auto duration-500 transition-all ease-in-out ${scrolling ? "hidden md:flex " : ""}`}
+          className={`hidden md:flex flex-wrap items-center justify-center md:justify-end gap-2 md:gap-4 w-full md:w-auto duration-500 transition-all ease-in-out ${scrolling ? "hidden md:flex " : ""}`}
         >
           {/* Language Switcher */}
           <div className="scale-90 md:scale-100">
@@ -100,7 +100,7 @@ export default function Navbar() {
             </button>
 
             {/* Settings Dropdown */}
-            {/* <div className="dropdown dropdown-end">
+            <div className="dropdown dropdown-end">
               <div
                 tabIndex={0}
                 role="button"
@@ -110,7 +110,7 @@ export default function Navbar() {
               </div>
               <ul
                 tabIndex={0}
-                className="dropdown-content menu backdrop-blur-3xl rounded-box z-50 w-52 p-2 shadow-xl border border-slate-100 mt-2 dropdown-content font-semibold rounded-xl overflow-visible md:w-40 bg-white/40 dark:bg-black/60 block"
+                className="dropdown-content menu backdrop-blur-3xl rounded-box z-50 w-52 p-2 shadow-xl border border-slate-100 mt-2 dropdown-content font-semibold rounded-xl overflow-visible md:w-40 bg-white/40 dark:bg-black/60 "
               >
                 <li>
                   <a className="py-3">Account Settings</a>
@@ -119,12 +119,10 @@ export default function Navbar() {
                   <a className="py-3">Preferences</a>
                 </li>
               </ul>
-            </div> */}
+            </div>
 
             {/* Profile Dropdown */}
-            <div
-              className={`dropdown dropdown-end `}
-            >
+            <div className={`dropdown dropdown-end `}>
               <div
                 tabIndex={0}
                 role="button"
@@ -161,7 +159,7 @@ export default function Navbar() {
               {user ? (
                 <ul
                   tabIndex={0}
-                  className="dropdown-content menu font-bold border backdrop-blur-3xl p-0 z-50 mt-4 w-48 shadow-2xl  border-slate-100 rounded-2xl dropdown-content  overflow-hidden md:w-40 bg-white/40 dark:bg-black/60 block"
+                  className="dropdown-content menu font-bold border backdrop-blur-3xl p-0 mt-4 w-48 shadow-2xl border-slate-100 rounded-2xl dropdown-content md:w-40 bg-white/40 dark:bg-black/60 block"
                 >
                   <li className="backdrop-blur-2xl transition-colors">
                     <button

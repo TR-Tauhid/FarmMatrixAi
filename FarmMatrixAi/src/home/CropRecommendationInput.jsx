@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import { useTranslation } from "react-i18next";
@@ -77,7 +78,7 @@ const CropRecommendationInput = () => {
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            className="bg-base-200 dark:bg-slate-900 p-5 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] border border-base-300 dark:border-slate-800 flex flex-col justify-center gap-4"
+            className="bg-base-200 dark:bg-slate-900 p-5 md:p-8 rounded-3xl md:rounded-[2.5rem] border border-base-300 dark:border-slate-800 flex flex-col justify-center gap-4"
           >
             <div className="flex items-center gap-2 mb-2">
               <FaCompass className="text-emerald-600 dark:text-emerald-400" />
@@ -138,7 +139,7 @@ const CropRecommendationInput = () => {
           </motion.div>
 
           {/* Squeezed Map Node */}
-          <div className="lg:col-span-2 h-64 md:h-full min-h-[250px] md:min-h-[400px] rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden shadow-2xl border-4 md:border-8 border-base-200 dark:border-slate-800 z-0">
+          <div className="lg:col-span-2 h-64 md:h-full min-h-[250px] md:min-h-[400px] rounded-3xl md:rounded-[2.5rem] overflow-hidden shadow-2xl border-4 md:border-8 border-base-200 dark:border-slate-800 z-0">
             <MapContainer
               center={currentPos}
               zoom={13}

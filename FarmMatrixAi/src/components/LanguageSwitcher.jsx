@@ -1,10 +1,12 @@
 import { useTranslation } from "react-i18next";
-import { useLanguage } from "../provider/LanguageProvider";
+import LanguageContext from "../context/LanguageContext";
 import { FaLanguage } from "react-icons/fa6";
+import { useContext } from "react";
 
 const LanguageSwitcher = () => {
   const { t } = useTranslation();
-  const { changeLanguage, currentLanguage } = useLanguage();
+  const LanguageValue = useContext(LanguageContext);
+  const { changeLanguage, currentLanguage } = LanguageValue;
 
   const languages = [
     { code: "en", name: "English", label: "🇬🇧 English" },
@@ -18,7 +20,7 @@ const LanguageSwitcher = () => {
   };
 
   return (
-    <div className="dropdown dropdown-end">
+    <div className="dropdown dropdown-top md:dropdown-end">
       <button
         className="btn btn-neutral dark:text-white border-none shadow-none font-bold gap-2 justify-start text-lg"
         tabIndex={0}
@@ -30,7 +32,7 @@ const LanguageSwitcher = () => {
 
       <ul
         tabIndex={0}
-        className="dropdown-content font-semibold z-50 menu p-0 shadow rounded-xl overflow-visible md:w-40 bg-white/40 dark:bg-black/60 backdrop-blur-[80px] border block"
+        className="dropdown-content font-semibold menu mt-2 p-0 shadow rounded-xl md:w-40 bg-white/40 dark:bg-black/60 backdrop-blur-[80px] border"
       >
         {languages.map((lang) => (
           <li

@@ -1,14 +1,11 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-
-const LanguageContext = createContext();
-
+import LanguageContext from "../context/LanguageContext";
 export const LanguageProvider = ({ children }) => {
   const { i18n } = useTranslation();
   const [currentLang, setCurrentLang] = useState(i18n.language);
 
   useEffect(() => {
-    // Listen for language changes
     const handleLanguageChanged = (lng) => {
       setCurrentLang(lng);
     };
@@ -40,13 +37,4 @@ export const LanguageProvider = ({ children }) => {
       {children}
     </LanguageContext.Provider>
   );
-};
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const useLanguage = () => {
-  const context = useContext(LanguageContext);
-  if (!context) {
-    throw new Error("useLanguage must be used within LanguageProvider");
-  }
-  return context;
 };
