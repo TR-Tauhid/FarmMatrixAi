@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
-import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";import { useTranslation } from "react-i18next";
 import { FaCloudUploadAlt, FaCameraRetro } from "react-icons/fa";
 
 const DiseaseDetectionUpload = () => {

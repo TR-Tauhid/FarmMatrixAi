@@ -1,6 +1,6 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { useTranslation } from "react-i18next";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";import { useTranslation } from "react-i18next";
 import {
   FaUserAlt,
   FaLaptopCode,
@@ -91,7 +91,7 @@ const WorkflowPipeline = () => {
             </motion.div>
 
             {/* Title - Micro font for mobile */}
-            <p className="mt-3 text-base-content font-bold text-center text-[9px] md:text-sm uppercase tracking-tight opacity-70 max-w-[80px] md:max-w-[120px]">
+            <p className="mt-3 text-base-content font-bold text-center text-[9px] md:text-sm uppercase tracking-tight opacity-70 max-w-20 md:max-w-[120px]">
               {step.title}
             </p>
 

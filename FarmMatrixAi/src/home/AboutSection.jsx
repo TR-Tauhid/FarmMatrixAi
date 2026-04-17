@@ -3,8 +3,7 @@ import { LuLeaf, LuTrendingUp } from "react-icons/lu";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { FaHandshakeSimple } from "react-icons/fa6";
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
-import field from "../assets/field.jpg";
+import { motion } from "framer-motion";import field from "../assets/field.jpg";
 
 const AboutPage = () => {
   const stats = [

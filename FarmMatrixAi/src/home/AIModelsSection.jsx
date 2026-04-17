@@ -1,6 +1,6 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { FaTree, FaImage } from "react-icons/fa";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";import { FaTree, FaImage } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
 const AIModelsSection = () => {

@@ -1,6 +1,6 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { FaCode, FaSyncAlt, FaHome } from "react-icons/fa";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";import { FaCode, FaSyncAlt, FaHome } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 
 const WebErrorBoundary = ({ error, resetErrorBoundary }) => {

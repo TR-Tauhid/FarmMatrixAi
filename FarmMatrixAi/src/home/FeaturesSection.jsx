@@ -1,6 +1,6 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { FaLeaf, FaCloudSun, FaBrain, FaMicroscope } from "react-icons/fa";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";import { FaLeaf, FaCloudSun, FaBrain, FaMicroscope } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
 const FeaturesSection = () => {
@@ -71,7 +71,7 @@ const FeaturesSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
               viewport={{ once: true }}
-              className="group bg-base-200/60 dark:bg-slate-800/60 p-4 md:p-6 rounded-2xl md:rounded-[2rem] border border-emerald-50/30 dark:border-slate-700 backdrop-blur-sm"
+              className="group bg-base-200/60 dark:bg-slate-800/60 p-4 md:p-6 rounded-2xl md:rounded-4xl border border-emerald-50/30 dark:border-slate-700 backdrop-blur-sm"
             >
               <div className="relative z-10 flex flex-col items-start">
                 {/* Icon beside Title on Desktop */}

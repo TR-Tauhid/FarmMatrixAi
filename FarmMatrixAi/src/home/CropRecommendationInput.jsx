@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { motion } from "framer-motion";import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import { useTranslation } from "react-i18next";
 import "leaflet/dist/leaflet.css";
 import {

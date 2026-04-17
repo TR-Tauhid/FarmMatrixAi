@@ -1,7 +1,7 @@
 import { useKeenSlider } from "keen-slider/react";
 import { useTranslation } from "react-i18next";
-import { motion } from "framer-motion";
-import "keen-slider/keen-slider.min.css";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";import "keen-slider/keen-slider.min.css";
 
 const animation = { duration: 85000, easing: (t) => t };
 

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
@@ -30,7 +31,7 @@ const modalVariants = {
 const ScreenshotModal = ({ shot, onClose }) => {
   if (!shot) return null;
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-2 md:p-10">
+    <div className="fixed inset-0 z-100 flex items-center justify-center p-2 md:p-10">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -44,7 +45,7 @@ const ScreenshotModal = ({ shot, onClose }) => {
         animate="visible"
         exit="exit"
         onClick={(e) => e.stopPropagation()}
-        className="relative bg-base-100 dark:bg-slate-900 rounded-2xl md:rounded-[2rem] shadow-2xl max-w-5xl w-full p-3 md:p-8 border border-base-300 dark:border-slate-700 overflow-hidden"
+        className="relative bg-base-100 dark:bg-slate-900 rounded-2xl md:rounded-4xl shadow-2xl max-w-5xl w-full p-3 md:p-8 border border-base-300 dark:border-slate-700 overflow-hidden"
       >
         <button
           onClick={onClose}
@@ -101,9 +102,9 @@ const ScreenshotsSection = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 onClick={() => setSelectedShot(shot)}
-                className="group bg-base-200 dark:bg-slate-800 rounded-2xl md:rounded-[2rem] overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 border border-base-300 dark:border-slate-700 cursor-pointer"
+                className="group bg-base-200 dark:bg-slate-800 rounded-2xl md:rounded-4xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 border border-base-300 dark:border-slate-700 cursor-pointer"
               >
-                <div className="overflow-hidden aspect-[4/3] md:aspect-video relative">
+                <div className="overflow-hidden aspect-4/3 md:aspect-video relative">
                   <div className="absolute inset-0 bg-emerald-600/20 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center">
                     <span className="bg-white text-emerald-700 px-3 py-1 rounded-full font-black text-[10px] md:text-sm shadow-xl">
                       View

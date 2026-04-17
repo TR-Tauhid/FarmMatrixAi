@@ -1,6 +1,6 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { useTranslation } from "react-i18next";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";import { useTranslation } from "react-i18next";
 import { FaSeedling, FaFlask, FaSun, FaChartLine } from "react-icons/fa";
 
 const mockRecommendationData = {
@@ -76,7 +76,7 @@ const CropRecommendationResult = () => {
         <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          className="bg-base-200 dark:bg-slate-900 p-6 md:p-10 rounded-[2rem] shadow-xl border border-emerald-100 dark:border-slate-800 relative overflow-hidden"
+          className="bg-base-200 dark:bg-slate-900 p-6 md:p-10 rounded-4xl shadow-xl border border-emerald-100 dark:border-slate-800 relative overflow-hidden"
         >
           <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 relative z-10">
             <div className="p-4 bg-emerald-500/10 rounded-2xl border border-emerald-500/20">

@@ -1,6 +1,6 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { useTranslation } from "react-i18next";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";import { useTranslation } from "react-i18next";
 import {
   FaLaptopCode,
   FaServer,
@@ -79,7 +79,7 @@ const SystemArchSec = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-base-200 dark:bg-slate-800/60 border border-emerald-50/50 dark:border-slate-700 shadow-md hover:shadow-xl transition-all p-3 md:p-8 flex flex-col items-center text-center rounded-2xl md:rounded-[1.5rem] group"
+              className="bg-base-200 dark:bg-slate-800/60 border border-emerald-50/50 dark:border-slate-700 shadow-md hover:shadow-xl transition-all p-3 md:p-8 flex flex-col items-center text-center rounded-2xl md:rounded-3xl group"
             >
               <div className="mb-3 md:mb-6 p-2 bg-base-100 dark:bg-slate-900 rounded-xl transform group-hover:scale-110 transition-transform">
                 {layer.icon}

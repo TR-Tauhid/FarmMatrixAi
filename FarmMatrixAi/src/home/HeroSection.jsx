@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
 import heroFarmingAI from "../assets/hero-farming-ai.jpg";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -41,7 +41,7 @@ const HeroSection = () => {
           {/* FANCY BUTTONS: High Saturation Gradients & Glow */}
           <div className="mt-10 flex flex-wrap justify-center lg:justify-start gap-3 md:gap-5">
             <NavLink to="CropRecommendationInput" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-emerald-600 to-green-600 text-white font-black rounded-full shadow-[0_4px_20px_rgba(16,185,129,0.4)] hover:shadow-[0_6px_25px_rgba(16,185,129,0.6)] hover:-translate-y-0.5 transition-all active:scale-95 text-[10px] md:text-xs uppercase tracking-[0.2em]">
+              <button className="w-full sm:w-auto px-8 py-4 bg-linear-to-r from-emerald-600 to-green-600 text-white font-black rounded-full shadow-[0_4px_20px_rgba(16,185,129,0.4)] hover:shadow-[0_6px_25px_rgba(16,185,129,0.6)] hover:-translate-y-0.5 transition-all active:scale-95 text-[10px] md:text-xs uppercase tracking-[0.2em]">
                 {t("cropRecommendation.title")}
               </button>
             </NavLink>
@@ -65,7 +65,7 @@ const HeroSection = () => {
           <img
             src={heroFarmingAI}
             alt="AI Farming"
-            className="relative w-full aspect-square md:aspect-video object-cover rounded-full md:rounded-[3rem] shadow-2xl border-4 md:border-[12px] border-white dark:border-slate-800 transition-all duration-500"
+            className="relative w-full aspect-square md:aspect-video object-cover rounded-full md:rounded-[3rem] shadow-2xl border-4 md:border-12px border-white dark:border-slate-800 transition-all duration-500"
           />
         </motion.div>
       </div>

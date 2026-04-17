@@ -51,7 +51,7 @@ const VirtualSensorModule = () => {
       <div className="max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Telemetry Control Panel */}
-          <div className="bg-base-200 dark:bg-slate-900 p-6 rounded-[2rem] border border-base-300 dark:border-slate-800 flex flex-col gap-4">
+          <div className="bg-base-200 dark:bg-slate-900 p-6 rounded-4xl border border-base-300 dark:border-slate-800 flex flex-col gap-4">
             <h3 className="text-xl font-black text-emerald-700 dark:text-emerald-500 flex items-center gap-2">
               <FaSeedling /> Sensor Node
             </h3>
@@ -90,7 +90,7 @@ const VirtualSensorModule = () => {
           </div>
 
           {/* Interactive Map */}
-          <div className="lg:col-span-2 h-80 rounded-[2rem] overflow-hidden shadow-2xl border-4 border-base-200 dark:border-slate-800 z-0 relative">
+          <div className="lg:col-span-2 h-80 rounded-4xl overflow-hidden shadow-2xl border-4 border-base-200 dark:border-slate-800 z-0 relative">
             <MapContainer
               center={mapCenter}
               zoom={13}
