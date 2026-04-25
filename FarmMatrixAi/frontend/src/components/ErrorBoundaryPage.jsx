@@ -1,9 +1,12 @@
 import React from "react";
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";import { FaCode, FaSyncAlt, FaHome } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { FaCode, FaSyncAlt, FaHome } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 
 const WebErrorBoundary = ({ error, resetErrorBoundary }) => {
+  console.log(error, resetErrorBoundary);
+
   return (
     <div className="min-h-screen bg-white dark:bg-slate-950 flex items-center justify-center p-3 md:p-10 transition-colors duration-500 overflow-hidden relative">
       {/* Background Tech Glow */}

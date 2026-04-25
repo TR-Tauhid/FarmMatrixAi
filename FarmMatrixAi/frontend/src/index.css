@@ -21,6 +21,21 @@
   color: #0ca70c;
 }
 
+/* Custom News Tailwind Config For Grid */
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer base {
+  body {
+    @apply transition-colors duration-300;
+  }
+}
+
 /* Custom Colors */
 .text-primary {
   color: #047857;

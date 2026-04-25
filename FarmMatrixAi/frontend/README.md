@@ -21,7 +21,8 @@ Libreary and Dependencies / Packeges...
 1. react-i18next
 2. react-icons
 3. react-toastify
-4. 
+4. recharts
+5. i18.js
 
 
 # 🌾 FarmMatrixAI
