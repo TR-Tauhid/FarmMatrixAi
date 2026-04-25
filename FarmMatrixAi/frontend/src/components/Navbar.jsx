@@ -36,7 +36,7 @@ export default function Navbar() {
 
   return (
     <div
-      className={`w-full fixed top-0 left-0 z-100 rounded-sm md:rounded-2xl backdrop-blur-2xl bg-base-100/30 transition-all duration-500 ease-in-out md:p-10 ${scrolling ? "md:px-3 md:scale-75 p-2 md:p-4" : "p-4 md:px-10"}`}
+      className={`w-full fixed -top-4 left-0 z-100 rounded-sm md:rounded-2xl backdrop-blur-2xl bg-base-100/30 transition-all duration-500 ease-in-out md:p-10 ${scrolling ? "md:px-3 md:scale-75 p-2 md:p-4" : "p-4 md:px-10"}`}
     >
       <div className="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-4 max-w-[1440px] mx-auto">
         {/* Title Section*/}

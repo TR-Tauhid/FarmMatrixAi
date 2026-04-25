@@ -63,7 +63,7 @@ const Carousel = () => {
                   <img
                     src={`/happyClient(${num}).jpg`}
                     alt={`Happy client ${num}`}
-                    className="w-full h-64 md:h-80 object-cover md:grayscale hover:md:grayscale-0 transition-all duration-700 hover:scale-110"
+                    className="w-full h-64 md:h-80 object-cover transition-all duration-700 hover:scale-110"
                   />
                 </div>
               </div>
