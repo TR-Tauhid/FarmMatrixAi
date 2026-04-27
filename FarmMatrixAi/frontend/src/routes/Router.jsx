@@ -9,7 +9,7 @@ import DiseaseDetectionUpload from "../home/DiseaseDetectionUpload";
 import AboutSection from "../home/AboutSection";
 import ErrorBoundaryPage from "../components/ErrorBoundaryPage";
 import EnvironmentDashboard from "../components/environment/EnvironmentDashboard";
-import MarketTrendDashboard from "../components/markets/MarketTrendDashboard";
+import MarketTrendDashboard from "../components/market/MarketTrendDashboard";
 import MarketNewsDashboard from "../components/news/MarketNewsDashboard";
 
 const router = createBrowserRouter([

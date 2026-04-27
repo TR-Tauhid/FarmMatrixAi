@@ -1,0 +1,20 @@
+Frontend: React.js
+Used for building a dynamic and responsive user interface
+Component-based architecture for reusability
+Backend: Node.js
+Handles server-side logic and API processing
+Framework (Backend): Express.js
+Used to create RESTful APIs and manage routing
+Database: MongoDB
+NoSQL database used for storing application data in JSON-like format
+Provides flexibility and scalability
+Authentication: JSON Web Tokens (JWT)
+Used for secure user authentication and authorization
+API Communication: RESTful APIs
+Enables communication between frontend and backend using JSON
+Version Control: Git & GitHub
+Used for source code management and collaboration
+Development Tools:
+Visual Studio Code (code editor)
+Postman (API testing)
+Node Package Manager (npm) for dependency management

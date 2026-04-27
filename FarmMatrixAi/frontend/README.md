@@ -22,7 +22,7 @@ Libreary and Dependencies / Packeges...
 2. react-icons
 3. react-toastify
 4. recharts
-5. i18.js
+5. react-liflet
 
 
 # 🌾 FarmMatrixAI
@@ -96,3 +96,5 @@ Use this section to track progress 👇
 ```bash
 npm install
 npm run dev
+
+
