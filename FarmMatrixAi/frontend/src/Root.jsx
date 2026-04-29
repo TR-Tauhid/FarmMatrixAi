@@ -4,6 +4,7 @@ import Footer from "./shared/Footer";
 import "./provider/i18n";
 import { LanguageProvider } from "./provider/LanguageProvider";
 import SidebarLayout from "./components/SidebarLayout";
+import AIChatWidget from "./components/chat/AIChatWidget";
 import L from "leaflet";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
@@ -25,6 +26,9 @@ export default function Root() {
             <div className="h-full overflow-y-auto custom-scrollbar">
               <Outlet />
               <Footer />
+              <div className="fixed bottom-6 right-6 z-40">
+                <AIChatWidget />
+              </div>
             </div>
           </SidebarLayout>
         </div>

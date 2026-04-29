@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { FiSettings } from "react-icons/fi";
 import { RxAvatar } from "react-icons/rx";
 import AuthContext from "../context/AuthContext";
 import { useTheme } from "../context/ThemeContext";
+import AIChatWidget from "./chat/AIChatWidget";
 
 import {
   MdDashboard,
@@ -15,12 +16,14 @@ import {
   MdNewspaper,
   MdInfo,
   MdChevronRight,
+  MdChat,
 } from "react-icons/md";
 
 const SidebarLayout = ({ children }) => {
   const { theme, toggleTheme } = useTheme();
   const AuthValue = useContext(AuthContext);
   const { user, notify, logOut } = AuthValue;
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   const menuItems = [
     { name: "Dashboard", icon: <MdDashboard />, path: "/" },
@@ -34,12 +37,12 @@ const SidebarLayout = ({ children }) => {
     { name: "Markets", icon: <MdTrendingUp />, path: "/markets" },
     { name: "News", icon: <MdNewspaper />, path: "/news" },
     { name: "About Us", icon: <MdInfo />, path: "/about" },
+    { name: "AI Assistant", icon: <MdChat />, path: "#", onClick: () => setIsChatOpen(true) },
   ];
 
   const handleLogOutBtn = () => {
     logOut()
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         notify("Bye Bye...!!!", "success");
       })
       .catch((err) => notify(err?.message, "error"));
@@ -61,6 +64,13 @@ const SidebarLayout = ({ children }) => {
       {/* Main Page Content Area */}
       <div className="drawer-content flex flex-col min-h-screen">
         <main className="grow">{children}</main>
+        {isChatOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm" onClick={() => setIsChatOpen(false)}>
+            <div className="w-full max-w-lg h-[600px] mx-4" onClick={(e) => e.stopPropagation()}>
+              <AIChatWidget embedded />
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Sidebar Side */}
@@ -76,29 +86,48 @@ const SidebarLayout = ({ children }) => {
           {/* Navigation Links */}
           <nav className="flex-1 pl-4 space-y-1">
             {menuItems.map((item) => (
-              <NavLink
-                key={item.name}
-                to={item.path}
-                onClick={() => {
-                  const drawer = document.getElementById("my-sidebar");
-                  if (drawer) drawer.checked = false;
-                }}
-                className={({ isActive }) => `
-                  flex items-center gap-4 px-4 py-3.5 rounded-lg font-semibold transition-all duration-500 ease-linear group 
-                  ${
-                    isActive
-                      ? "bg-emerald-50 dark:bg-black/30 border-r-4 border-emerald-600 rounded-r-none underline underline-offset-4 "
-                      : "hover:backdrop-blur-3xl relative after:absolute after:bg-black dark:after:bg-gray-200 after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-300"
-                  }
-                `}
-              >
-                <span className="text-2xl group-hover:scale-110 transition-transform">
-                  {item.icon}
-                </span>
-                <span className="text-[15px] menu-style-unerline menu-style-unerline ">
-                  {item.name}
-                </span>
-              </NavLink>
+              item.onClick ? (
+                <button
+                  key={item.name}
+                  onClick={() => {
+                    item.onClick();
+                    const drawer = document.getElementById("my-sidebar");
+                    if (drawer) drawer.checked = false;
+                  }}
+                  className="flex items-center gap-4 px-4 py-3.5 rounded-lg font-semibold transition-all duration-500 ease-linear group w-full text-left hover:backdrop-blur-3xl relative after:absolute after:bg-black dark:after:bg-gray-200 after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-300"
+                >
+                  <span className="text-2xl group-hover:scale-110 transition-transform">
+                    {item.icon}
+                  </span>
+                  <span className="text-[15px] menu-style-unerline menu-style-unerline ">
+                    {item.name}
+                  </span>
+                </button>
+              ) : (
+                <NavLink
+                  key={item.name}
+                  to={item.path}
+                  onClick={() => {
+                    const drawer = document.getElementById("my-sidebar");
+                    if (drawer) drawer.checked = false;
+                  }}
+                  className={({ isActive }) => `
+                    flex items-center gap-4 px-4 py-3.5 rounded-lg font-semibold transition-all duration-500 ease-linear group 
+                    ${
+                      isActive
+                        ? "bg-emerald-50 dark:bg-black/30 border-r-4 border-emerald-600 rounded-r-none underline underline-offset-4 "
+                        : "hover:backdrop-blur-3xl relative after:absolute after:bg-black dark:after:bg-gray-200 after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-300"
+                    }
+                  `}
+                >
+                  <span className="text-2xl group-hover:scale-110 transition-transform">
+                    {item.icon}
+                  </span>
+                  <span className="text-[15px] menu-style-unerline menu-style-unerline ">
+                    {item.name}
+                  </span>
+                </NavLink>
+              )
             ))}
           </nav>
 

@@ -5,8 +5,6 @@ import { FaCode, FaSyncAlt, FaHome } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 
 const WebErrorBoundary = ({ error, resetErrorBoundary }) => {
-  console.log(error, resetErrorBoundary);
-
   return (
     <div className="min-h-screen bg-white dark:bg-slate-950 flex items-center justify-center p-3 md:p-10 transition-colors duration-500 overflow-hidden relative">
       {/* Background Tech Glow */}
@@ -63,7 +61,10 @@ const WebErrorBoundary = ({ error, resetErrorBoundary }) => {
           </button>
 
           <NavLink to="/" className="w-full">
-            <button className="w-full flex items-center justify-center gap-2 py-3 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 font-black rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-all active:scale-95 text-[9px] md:text-xs uppercase tracking-widest">
+            <button
+              onClick={() => (window.location.href = "/")}
+              className="w-full flex items-center justify-center gap-2 py-3 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 font-black rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-all active:scale-95 text-[9px] md:text-xs uppercase tracking-widest"
+            >
               <FaHome className="text-[10px]" /> Base
             </button>
           </NavLink>

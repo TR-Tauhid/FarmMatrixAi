@@ -40,13 +40,13 @@ const HeroSection = () => {
 
           {/* FANCY BUTTONS */}
           <div className="mt-10 flex flex-wrap justify-center lg:justify-start gap-3 md:gap-5">
-            <NavLink to="CropRecommendationInput" className="w-full sm:w-auto">
+            <NavLink to="diagnostics" className="w-full sm:w-auto">
               <button className="w-full sm:w-auto px-8 py-4 bg-linear-to-r from-emerald-600 to-green-600 text-white font-black rounded-full shadow-[0_4px_20px_rgba(16,185,129,0.4)] hover:shadow-[0_6px_25px_rgba(16,185,129,0.6)] hover:-translate-y-0.5 transition-all active:scale-95 text-[10px] md:text-xs uppercase tracking-[0.2em]">
                 {t("cropRecommendation.title")}
               </button>
             </NavLink>
 
-            <NavLink to="DiseaseDetectionUpload" className="w-full sm:w-auto">
+            <NavLink to="diagnostics" className="w-full sm:w-auto">
               <button className="w-full sm:w-auto px-8 py-4 bg-slate-100 dark:bg-slate-900 border-2 border-emerald-500/50 text-emerald-800 dark:text-emerald-400 font-black rounded-full shadow-[0_4px_15px_rgba(16,185,129,0.1)] hover:border-emerald-500 hover:shadow-[0_6px_20px_rgba(16,185,129,0.2)] hover:-translate-y-0.5 transition-all active:scale-95 text-[10px] md:text-xs uppercase tracking-[0.2em]">
                 {t("diseaseDetection.title")}
               </button>

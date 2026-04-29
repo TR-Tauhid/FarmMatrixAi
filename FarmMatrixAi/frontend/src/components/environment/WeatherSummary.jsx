@@ -16,7 +16,7 @@ const WeatherSummary = () => (
       </div>
       <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl">
         <p className="text-[10px] uppercase font-bold text-slate-400">Wind Speed</p>
-        <p className="text-xl font-bold mt-1">12 km/h <span className="text-sm font-normal text-slate-500">NW</span></p>
+        <p className="tnext-xl font-bold mt-1">12 km/h <span className="text-sm font-normal text-slate-500">NW</span></p>
       </div>
     </div>
   </div>

@@ -4,11 +4,11 @@ import WeeklyForecast from "./WeeklyForecast";
 import SoilMoistureChart from "./SoilMoistureChart";
 import SoilHealthSummary from "./SoilHealthSummary";
 import DeepSoilProfile from "./DeepSoilProfile";
+import WeatherAlerts from "./WeatherAlerts";
 
 const InsightsDashboard = () => {
   return (
     <div className="w-11/12 mx-auto md:mt-10 rounded-sm p-6 min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
-      {/* Header Section */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">
@@ -29,7 +29,6 @@ const InsightsDashboard = () => {
         </div>
       </div>
 
-      {/* Top Row: Current Weather & Forecast */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
         <div className="lg:col-span-4">
           <WeatherSummary />
@@ -39,10 +38,12 @@ const InsightsDashboard = () => {
         </div>
       </div>
 
-      {/* Bottom Row: Charts & Health Stats */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <div className="lg:col-span-8">
-          <SoilMoistureChart />
+          <div className="flex flex-col gap-6">
+            <WeatherAlerts />
+            <SoilMoistureChart />
+          </div>
         </div>
         <div className="lg:col-span-4 flex flex-col gap-6">
           <SoilHealthSummary />
