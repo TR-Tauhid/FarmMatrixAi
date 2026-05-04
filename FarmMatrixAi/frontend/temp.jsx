@@ -126,4 +126,3 @@ Read [](file:///d%3A/Projects/capstone/FarmMatrixAi/backend/routes/news.js)
 
 
 
-GEMINI_API_KEY=AIzaSyAnLKYCoAyU-qK3DYOZtwVPBI0te09T064

@@ -76,7 +76,7 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
 
     try {
       // Use VITE_API_URL from .env in production
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      const API_URL = import.meta.env.VITE_API_URL || 'https://farmmatrixai.onrender.com/api';
       const response = await fetch(`${API_URL}/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
