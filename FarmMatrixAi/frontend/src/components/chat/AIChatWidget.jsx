@@ -74,37 +74,28 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
     setInput("");
     setIsLoading(true);
 
-    // Simulate AI response (replace with actual API call)
-    setTimeout(() => {
+    try {
+      // Use VITE_API_URL from .env in production
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      const response = await fetch(`${API_URL}/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: userMessage.content, history: messages })
+      });
+      const data = await response.json();
+      
       const aiResponse = {
         id: Date.now() + 1,
         role: "assistant",
-        content: getAIResponse(userMessage.content),
+        content: data.response || "Sorry, I couldn't reach the AI server.",
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, aiResponse]);
+    } catch (error) {
+      console.error("Chat error:", error);
+      setMessages((prev) => [...prev, { id: Date.now() + 1, role: "assistant", content: "Error connecting to backend.", timestamp: new Date() }]);
+    } finally {
       setIsLoading(false);
-    }, 1000);
-  };
-
-  const getAIResponse = (query) => {
-    const lowerQuery = query.toLowerCase();
-
-    if (lowerQuery.includes("disease") || lowerQuery.includes("blight")) {
-      return "For early blight treatment, I recommend:\n\n1. Remove infected leaves immediately\n2. Apply copper-based fungicide (follow label instructions)\n3. Improve air circulation between plants\n4. Avoid overhead watering - water at soil level\n5. Apply mulch to prevent soil splash\n\nWould you like more specific treatment details?";
-    } else if (
-      lowerQuery.includes("soil") ||
-      lowerQuery.includes("fertilizer")
-    ) {
-      return "For optimal soil health:\n\n• Test your soil pH (ideal: 6.0-7.0 for most crops)\n• Add organic matter (compost, aged manure)\n• Use cover crops in off-season\n• Rotate crops to prevent nutrient depletion\n\nWould you like soil testing recommendations?";
-    } else if (lowerQuery.includes("weather") || lowerQuery.includes("rain")) {
-      return "For weather-related farming decisions:\n\n• Check local forecasts daily\n• Protect sensitive crops from frost\n• Plan irrigation based on rainfall\n• Monitor humidity to prevent fungal issues\n\nShall I check the current weather for your area?";
-    } else if (lowerQuery.includes("crop") || lowerQuery.includes("plant")) {
-      return "I can help you with crop recommendations! To provide accurate suggestions, I'll need:\n\n• Your location/region\n• Soil type\n• Current season\n• Available irrigation\n\nWould you like to use our Crop Recommendation tool?";
-    } else if (lowerQuery.includes("price") || lowerQuery.includes("market")) {
-      return "For current market prices and trends:\n\n• Check our Market Overview section\n• View real-time commodity prices\n• Get historical price trends\n• Set price alerts for your crops\n\nWould you like me to redirect you to the Market section?";
-    } else {
-      return "Thank you for your question! I'm here to help with:\n\n• Disease diagnosis and treatment\n• Soil and crop management\n• Weather advisories\n• Market information\n• General farming guidance\n\nCould you please provide more details about your specific concern?";
     }
   };
 

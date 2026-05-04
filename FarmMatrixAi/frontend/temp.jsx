@@ -122,3 +122,8 @@ Read [](file:///d%3A/Projects/capstone/FarmMatrixAi/backend/routes/news.js)
 * **Alerts Information (`GET /alerts/get-alerts/`)**
     * **Request:** Query parameters for `crop` and `location`.
     * **Response:** `success`, `alerts` (array), and `weather`.
+    * 
+
+
+
+GEMINI_API_KEY=AIzaSyAnLKYCoAyU-qK3DYOZtwVPBI0te09T064
