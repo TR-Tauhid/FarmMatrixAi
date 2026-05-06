@@ -64,7 +64,7 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
     if (!input.trim() || isLoading) return;
 
     const userMessage = {
-      id: timeNow,
+      id: Date.now(),
       role: "user",
       content: input.trim(),
       timestamp: new Date(),
@@ -75,15 +75,28 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
     setIsLoading(true);
 
     try {
-      // Use VITE_API_URL from .env in production
-      const API_URL = import.meta.env.VITE_API_URL || 'https://farmmatrixai.onrender.com/api';
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      
+      // Force localhost URL if testing locally, otherwise use .env or fallback
+      const API_URL = isLocalhost 
+        ? 'http://localhost:5000/api' 
+        : (import.meta.env.VITE_API_URL || 'https://farmmatrixai.onrender.com/api');
+
+      const token = localStorage.getItem("token") || localStorage.getItem("accessToken");
+      const headers = { "Content-Type": "application/json" };
+      if (token) headers["Authorization"] = `Bearer ${token}`;
+
       const response = await fetch(`${API_URL}/chat`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers,
         body: JSON.stringify({ message: userMessage.content, history: messages })
       });
       const data = await response.json();
       
+      if (!response.ok) {
+        throw new Error(data.response || `Server error: ${response.status}`);
+      }
+
       const aiResponse = {
         id: Date.now() + 1,
         role: "assistant",
@@ -93,7 +106,7 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
       setMessages((prev) => [...prev, aiResponse]);
     } catch (error) {
       console.error("Chat error:", error);
-      setMessages((prev) => [...prev, { id: Date.now() + 1, role: "assistant", content: "Error connecting to backend.", timestamp: new Date() }]);
+      setMessages((prev) => [...prev, { id: Date.now() + 1, role: "assistant", content: error.message || "Error connecting to backend.", timestamp: new Date() }]);
     } finally {
       setIsLoading(false);
     }

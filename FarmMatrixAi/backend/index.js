@@ -81,17 +81,19 @@ app.get("/", (req, res) => {
   });
 });
 
+// Public API Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/chat", chatRoutes); // Allow unauthenticated users to use the AI
+
 // Apply auth middleware to all API routes
 app.use("/api", authMiddleware);
 
-// API Routes
-app.use("/api/auth", authRoutes);
+// Protected API Routes
 app.use("/api/crops", cropRoutes);
 app.use("/api/disease", diseaseRoutes);
 app.use("/api/environment", environmentRoutes);
 app.use("/api/market", marketRoutes);
 app.use("/api/news", newsRoutes);
-app.use("/api/chat", chatRoutes);
 
 // 404 handler for undefined routes
 app.use((req, res) => {

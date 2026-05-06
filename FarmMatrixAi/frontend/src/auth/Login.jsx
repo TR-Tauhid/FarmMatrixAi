@@ -7,7 +7,7 @@ import { MdOutlineEmail } from "react-icons/md";
 import { BsTwitterX } from "react-icons/bs";
 import { CiLock } from "react-icons/ci";
 import AuthContext from "../context/AuthContext";
-
+  
 export default function Login() {
   const { t } = useTranslation();
   const AuthValue = useContext(AuthContext);
