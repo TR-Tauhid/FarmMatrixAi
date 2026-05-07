@@ -1,48 +1,18 @@
 import React from "react";
 
-const articles = [
-  {
-    id: 1,
-    category: "LEGISLATION",
-    categoryColor: "text-emerald-600 bg-emerald-50 dark:bg-emerald-950/40",
-    title: "Revised Farm Bill Targets Carbon Capture...",
-    excerpt:
-      "The latest legislative draft introduces aggressive tax credits for farmers adopting high-sequestration tiling...",
-    image:
-      "https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&q=80&w=600",
-    author: "Julian Rossi",
-    role: "Policy Expert",
-    avatar: "https://i.pravatar.cc/150?u=julian",
-  },
-  {
-    id: 2,
-    category: "MARKETS",
-    categoryColor: "text-blue-600 bg-blue-50 dark:bg-blue-950/40",
-    title: "Fertilizer Supply Chains Stabilize as Natural Gas...",
-    excerpt:
-      "Operational costs for nitrogen-based fertilizers are expected to drop by 12% in the coming quarter, providi...",
-    image:
-      "https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&q=80&w=600",
-    author: "Maria Chen",
-    role: "Market Analyst",
-    avatar: "https://i.pravatar.cc/150?u=maria",
-  },
-  {
-    id: 3,
-    category: "GEOPOLITICS",
-    categoryColor: "text-slate-600 bg-slate-100 dark:bg-slate-800/40",
-    title: "Brazil-China Trade Pact Disrupts North America...",
-    excerpt:
-      "Shift in procurement strategy by Chinese state buyers marks a significant geopolitical pivot in...",
-    image:
-      "https://images.unsplash.com/photo-1611974714658-71d33116892a?auto=format&fit=crop&q=80&w=600",
-    author: "David Thorne",
-    role: "Global Reporter",
-    avatar: "https://i.pravatar.cc/150?u=david",
-  },
-];
+const ArticleGrid = ({ articles = [], loading }) => {
+  if (loading) {
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="h-[400px] bg-slate-200 dark:bg-slate-800 rounded-3xl animate-pulse" />
+        ))}
+      </div>
+    );
+  }
 
-const ArticleGrid = () => {
+  if (!articles.length) return null;
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {articles.map((article) => (
@@ -53,13 +23,17 @@ const ArticleGrid = () => {
           {/* Article Image */}
           <div className="relative h-48 overflow-hidden">
             <img
-              src={article.image}
+              src={article.imageUrl || "https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&q=80&w=600"}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&q=80&w=600";
+              }}
               alt={article.title}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
             <div className="absolute top-4 left-4">
               <span
-                className={`text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-tighter shadow-sm ${article.categoryColor}`}
+                className="text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-tighter shadow-sm text-emerald-600 bg-emerald-50 dark:bg-emerald-950/40"
               >
                 {article.category}
               </span>
@@ -70,30 +44,28 @@ const ArticleGrid = () => {
           <div className="p-6 flex flex-col grow">
             <div className="grow">
               <p className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 mb-2 uppercase tracking-widest">
-                Policy Updates
+                {new Date(article.publishedAt).toLocaleDateString()}
               </p>
               <h3 className="text-xl font-bold mb-3 leading-snug group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
                 {article.title}
               </h3>
               <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-3 leading-relaxed">
-                {article.excerpt}
+                {article.summary}
               </p>
             </div>
 
             {/* Footer / Author */}
             <div className="mt-6 pt-6 border-t border-slate-50 dark:border-slate-800 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <img
-                  src={article.avatar}
-                  className="w-8 h-8 rounded-full border border-slate-100 dark:border-slate-700"
-                  alt={article.author}
-                />
+                <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-lg">
+                  📝
+                </div>
                 <div>
-                  <p className="text-xs font-bold">{article.author}</p>
-                  <p className="text-[10px] text-slate-400">{article.role}</p>
+                  <p className="text-xs font-bold">{article.source || "FarmMatrixAI"}</p>
+                  <p className="text-[10px] text-slate-400">Reporter</p>
                 </div>
               </div>
-              <button className="text-slate-300 hover:text-emerald-600 transition-colors">
+              <button className="text-slate-300 hover:text-emerald-600 transition-colors cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"

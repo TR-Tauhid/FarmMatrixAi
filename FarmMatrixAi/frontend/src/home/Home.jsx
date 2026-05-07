@@ -1,6 +1,6 @@
 import React from "react";
 import Carousel from "./Carousel";
-import HeroSection from "./HeroSection";
+import Banner from "./Banner";
 import FeaturesSection from "./FeaturesSection";
 import CropRecCard from "./CropRecCard";
 import WeatherSection from "./WeatherSection";
@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <div className="text-center w-11/12 mx-auto">
       <div className="*:rounded-2xl flex flex-col gap-6 my-10">
-        <HeroSection/>
+        <Banner/>
         <CropRecommendationInput/>
         <CropRecommendationResult/>
         <DiseaseDetection/>

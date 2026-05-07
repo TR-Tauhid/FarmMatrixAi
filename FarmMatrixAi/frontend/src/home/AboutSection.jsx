@@ -150,7 +150,7 @@ const AboutPage = () => {
               Interdisciplinary collective of scientists and agronomists.
             </p>
           </div>
-          <button className="w-full md:w-auto btn bg-emerald-600 hover:bg-emerald-700 text-white border-none px-6 text-xs">
+          <button className="w-full md:w-auto btn bg-emerald-600 hover:bg-emerald-700 text-white border-none px-6 text-xs cursor-pointer">
             Open Positions
           </button>
         </div>
@@ -223,7 +223,7 @@ const AboutPage = () => {
               className="sm:col-span-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 placeholder:text-slate-400 resize-none"
             />
 
-            <button className="sm:col-span-2 w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm rounded-lg transition active:scale-95">
+            <button className="sm:col-span-2 w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm rounded-lg transition active:scale-95 cursor-pointer">
               Send Message
             </button>
           </form>

@@ -1,8 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 
 const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
-  const [isOpen, setIsOpen] = useState(!embedded);
-  const [isMaximized, setIsMaximized] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [timeNow] = useState(() => Date.now());
   const [messages, setMessages] = useState([
     {
@@ -106,7 +105,33 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
       setMessages((prev) => [...prev, aiResponse]);
     } catch (error) {
       console.error("Chat error:", error);
-      setMessages((prev) => [...prev, { id: Date.now() + 1, role: "assistant", content: error.message || "Error connecting to backend.", timestamp: new Date() }]);
+      
+      let displayMessage = "Sorry, I couldn't reach the AI server. Please try again later.";
+      if (error.message) {
+        const errStr = error.message.toLowerCase();
+        if (errStr.includes("503") || errStr.includes("high demand") || errStr.includes("overloaded")) {
+          displayMessage = "The AI is currently experiencing high demand. Please try again in a few moments.";
+        } else if (errStr.includes("429") || errStr.includes("quota")) {
+          displayMessage = "The AI is currently overloaded with requests. Please wait a moment and try again.";
+        } else if (errStr.includes("safety")) {
+          displayMessage = "Your message was blocked by safety filters. Please rephrase and try again.";
+        } else if (errStr.includes("googlegenerativeai") || errStr.includes("server error") || errStr.includes("fetch") || error.message.includes("[")) {
+          displayMessage = "An unexpected technical issue occurred while processing your request. Please try again later.";
+        } else {
+          displayMessage = error.message;
+        }
+      }
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now() + 1,
+          role: "assistant",
+          content: displayMessage,
+          timestamp: new Date(),
+          isError: true,
+        }
+      ]);
     } finally {
       setIsLoading(false);
     }
@@ -133,12 +158,8 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
   };
 
   const chatPositionClasses = {
-    "bottom-right": isMaximized
-      ? "bottom-0 right-0 w-full h-[calc(100vh-80px)]"
-      : "bottom-24 right-6",
-    "bottom-left": isMaximized
-      ? "bottom-0 left-0 w-full h-[calc(100vh-80px)]"
-      : "bottom-24 left-6",
+    "bottom-right": "bottom-24 right-6 h-[500px] max-h-[80vh]",
+    "bottom-left": "bottom-24 left-6 h-[500px] max-h-[80vh]",
   };
 
   const chatContainerClasses = embedded
@@ -149,7 +170,7 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed ${positionClasses[position]} z-50 w-14 h-14 bg-emerald-600 hover:bg-emerald-700 rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-110`}
+        className={`fixed ${positionClasses[position]} z-50 w-14 h-14 bg-emerald-600 hover:bg-emerald-700 rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-110 cursor-pointer`}
         aria-label="Open AI Chat"
       >
         <svg
@@ -196,7 +217,7 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
           <div className="flex gap-1">
             <button
               onClick={loadDemo}
-              className="p-1.5 hover:bg-white/20 rounded-lg transition-colors"
+              className="p-1.5 hover:bg-white/20 rounded-lg transition-colors cursor-pointer"
               title="Load Demo"
             >
               <svg
@@ -220,43 +241,30 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
               </svg>
             </button>
             <button
-              onClick={() => setIsMaximized(!isMaximized)}
-              className="p-1.5 hover:bg-white/20 rounded-lg transition-colors"
-              title={isMaximized ? "Minimize" : "Maximize"}
+              onClick={() => {
+                window.dispatchEvent(new Event("open-sidebar-chat"));
+                setIsOpen(false);
+              }}
+              className="p-1.5 hover:bg-white/20 rounded-lg transition-colors cursor-pointer"
+              title="Maximize"
             >
-              {isMaximized ? (
-                <svg
-                  className="w-5 h-5 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5l5.25 5.25"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  className="w-5 h-5 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
-                  />
-                </svg>
-              )}
+              <svg
+                className="w-5 h-5 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+                />
+              </svg>
             </button>
             <button
               onClick={() => setIsOpen(false)}
-              className="p-1.5 hover:bg-white/20 rounded-lg transition-colors"
+              className="p-1.5 hover:bg-white/20 rounded-lg transition-colors cursor-pointer"
               title="Close"
             >
               <svg
@@ -288,7 +296,9 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
               className={`max-w-[80%] rounded-2xl p-3 ${
                 msg.role === "user"
                   ? "bg-emerald-600 text-white"
-                  : "bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200"
+                : msg.isError
+                ? "bg-rose-100 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50"
+                : "bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200"
               }`}
             >
               <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
@@ -337,7 +347,7 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
           <button
             onClick={handleSend}
             disabled={!input.trim() || isLoading}
-            className="w-10 h-10 bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-300 dark:disabled:bg-slate-600 rounded-xl flex items-center justify-center transition-colors"
+            className="w-10 h-10 bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-300 dark:disabled:bg-slate-600 disabled:cursor-not-allowed rounded-xl flex items-center justify-center transition-colors cursor-pointer"
           >
             <svg
               className="w-5 h-5 text-white"

@@ -17,7 +17,7 @@ import { Bounce, toast } from "react-toastify";
 import { useTheme } from "../context/ThemeContext";
 
 export default function AuthProvider({ children }) {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [authChecked, setAuthChecked] = useState(null);
   const [user, setUser] = useState(null);
   const { theme } = useTheme();
@@ -84,10 +84,8 @@ export default function AuthProvider({ children }) {
       setUser(currentUser);
       setLoading(false);
       setAuthChecked(true);
-      return () => {
-        unsubscribe();
-      };
     });
+    return () => unsubscribe();
   }, []);
 
   const logOut = () => {

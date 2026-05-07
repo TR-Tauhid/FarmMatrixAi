@@ -2,6 +2,7 @@ import React from "react";
 import ParameterInputForm from "./ParameterInputForm";
 import DiagnosticResult from "./DiagnosticResult";
 import FooterStats from "./FooterStats";
+import MarketProjection from "./MarketProjection.jsx";
 
 const DiagnosticDashboard = () => {
   return (
@@ -16,6 +17,7 @@ const DiagnosticDashboard = () => {
           {/* Left Column: Form & Map */}
           <div className="lg:col-span-5 flex flex-col gap-6">
             <ParameterInputForm />
+            <MarketProjection />
           </div>
 
           {/* Right Column: Result */}

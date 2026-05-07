@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { FiSettings } from "react-icons/fi";
@@ -24,6 +24,12 @@ const SidebarLayout = ({ children }) => {
   const AuthValue = useContext(AuthContext);
   const { user, notify, logOut } = AuthValue;
   const [isChatOpen, setIsChatOpen] = useState(false);
+
+  useEffect(() => {
+    const handleOpenChat = () => setIsChatOpen(true);
+    window.addEventListener("open-sidebar-chat", handleOpenChat);
+    return () => window.removeEventListener("open-sidebar-chat", handleOpenChat);
+  }, []);
 
   const menuItems = [
     { name: "Dashboard", icon: <MdDashboard />, path: "/" },
@@ -94,7 +100,7 @@ const SidebarLayout = ({ children }) => {
                     const drawer = document.getElementById("my-sidebar");
                     if (drawer) drawer.checked = false;
                   }}
-                  className="flex items-center gap-4 px-4 py-3.5 rounded-lg font-semibold transition-all duration-500 ease-linear group w-full text-left hover:backdrop-blur-3xl relative after:absolute after:bg-black dark:after:bg-gray-200 after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-300"
+                  className="flex items-center gap-4 px-4 py-3.5 rounded-lg font-semibold transition-all duration-500 ease-linear group w-full text-left hover:backdrop-blur-3xl relative after:absolute after:bg-black dark:after:bg-gray-200 after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-300 cursor-pointer"
                 >
                   <span className="text-2xl group-hover:scale-110 transition-transform">
                     {item.icon}
@@ -165,7 +171,7 @@ const SidebarLayout = ({ children }) => {
               {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
-                className="btn btn-ghost btn-circle "
+                className="btn btn-ghost btn-circle cursor-pointer"
                 aria-label="Toggle theme"
               >
                 {theme === "light" ? (
@@ -238,7 +244,7 @@ const SidebarLayout = ({ children }) => {
                   <li className="backdrop-blur-2xl transition-colors">
                     <button
                       onClick={handleLogOutBtn}
-                      className="py-4 justify-center"
+                      className="py-4 justify-center w-full cursor-pointer"
                     >
                       Log Out
                     </button>

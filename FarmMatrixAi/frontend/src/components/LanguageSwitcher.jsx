@@ -22,7 +22,7 @@ const LanguageSwitcher = () => {
   return (
     <div className="dropdown max-sm:dropdown-top md:dropdown-end">
       <button
-        className="btn btn-neutral dark:text-white border-none shadow-none font-bold gap-2 justify-start text-lg"
+        className="btn btn-neutral dark:text-white border-none shadow-none font-bold gap-2 justify-start text-lg cursor-pointer"
         tabIndex={0}
         role="button"
       >

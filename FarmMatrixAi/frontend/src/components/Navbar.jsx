@@ -76,7 +76,7 @@ export default function Navbar() {
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="btn btn-ghost btn-circle "
+              className="btn btn-ghost btn-circle cursor-pointer"
               aria-label="Toggle theme"
             >
               {theme === "light" ? (
@@ -163,7 +163,7 @@ export default function Navbar() {
                   <li className="backdrop-blur-2xl transition-colors">
                     <button
                       onClick={handleLogOutBtn}
-                      className="py-4 justify-center"
+                      className="py-4 justify-center w-full cursor-pointer"
                     >
                       Log Out
                     </button>

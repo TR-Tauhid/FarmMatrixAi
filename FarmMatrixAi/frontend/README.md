@@ -23,7 +23,7 @@ Libreary and Dependencies / Packeges...
 3. react-toastify
 4. recharts
 5. react-liflet
-
+6. lucid-react
 
 # 🌾 FarmMatrixAI
 
@@ -65,6 +65,12 @@ The project is built using modern frontend tools and follows best practices for 
 - **npm** – Dependency management
 
 ---
+## API, 
+1. News Api
+2. Google gemini api
+3. Nvidia Api
+4. Firebase Api
+
 
 ## ✨ Key Highlights
 

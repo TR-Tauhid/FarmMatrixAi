@@ -11,75 +11,67 @@ const News = require('../models/News');
 // Get all news with filters
 exports.getAllNews = async (req, res) => {
   try {
-    const { category, limit = 20, page = 1 } = req.query;
+    const { category, location, limit = 20, page = 1 } = req.query;
+    let newsData = [];
 
-    // MongoDB placeholder - replace with:
-    // const news = await News.findAll({ category, limit: parseInt(limit), skip: (page-1) * limit });
+    // Uses your environment variable, or falls back to the provided key
+    const apiKey = process.env.NEWS_API_KEY || 'd67533b7139647cc97da9d3c3d4ed3af';
     
-    // Mock news data
-    const mockNews = [
-      {
-        id: "1",
-        title: "Government Announces New MSP for Kharif Crops",
-        summary: "The Cabinet Committee on Economic Affairs has approved the minimum support price for kharif crops for the 2024-25 season.",
-        category: "market",
-        source: "Agricultural Ministry",
-        publishedAt: "2024-04-20T10:00:00Z",
-        imageUrl: "https://example.com/news1.jpg",
-        isTrending: true
-      },
-      {
-        id: "2",
-        title: "New AI-Powered Disease Detection System Launched",
-        summary: "FarmMatrixAI introduces advanced plant disease detection using deep learning algorithms.",
-        category: "technology",
-        source: "Tech News",
-        publishedAt: "2024-04-19T14:30:00Z",
-        imageUrl: "https://example.com/news2.jpg",
-        isTrending: true
-      },
-      {
-        id: "3",
-        title: "Monsoon Forecast: Normal Rainfall Expected",
-        summary: "IMD predicts normal monsoon for the upcoming agricultural season.",
-        category: "weather",
-        source: "Weather Department",
-        publishedAt: "2024-04-18T09:00:00Z",
-        imageUrl: "https://example.com/news3.jpg",
-        isTrending: false
-      },
-      {
-        id: "4",
-        title: "Organic Farming Initiative Gets Budget Boost",
-        summary: "Government allocates additional funds for organic farming promotion.",
-        category: "policy",
-        source: "Finance Ministry",
-        publishedAt: "2024-04-17T11:00:00Z",
-        imageUrl: "https://example.com/news4.jpg",
-        isTrending: false
-      },
-      {
-        id: "5",
-        title: "Research Breakthrough: Drought-Resistant Wheat Variety",
-        summary: "Scientists develop new wheat variety resistant to drought conditions.",
-        category: "research",
-        source: "Agricultural Research Council",
-        publishedAt: "2024-04-16T16:00:00Z",
-        imageUrl: "https://example.com/news5.jpg",
-        isTrending: true
+    if (apiKey) {
+      try {
+        let query = 'agriculture OR farming OR crops';
+        if (location && location !== "Detecting location...") query += ` AND "${location}"`;
+        if (category && category !== 'All News') query += ` AND "${category}"`;
+        
+        const response = await fetch(`https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&sortBy=publishedAt&language=en&pageSize=${limit}&page=${page}&apiKey=${apiKey}`);
+        
+        if (response.ok) {
+          const data = await response.json();
+          newsData = data.articles.filter(a => a.title && a.description).map((article, index) => ({
+            id: index.toString(),
+            title: article.title,
+            summary: article.description,
+            category: category && category !== 'All News' ? category : 'Industry',
+            source: article.source.name,
+            publishedAt: article.publishedAt,
+            imageUrl: article.urlToImage || "https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&q=80&w=1000",
+            url: article.url,
+            isTrending: index < 3
+          }));
+        } else {
+          const errorData = await response.json();
+          console.error("News API Failed:", errorData);
+          return res.status(500).json({
+            success: false,
+            message: "External News API Error: " + (errorData.message || "Unknown error"),
+            error: errorData
+          });
+        }
+      } catch (apiError) {
+        console.error("News API Error:", apiError);
+        return res.status(500).json({
+          success: false,
+          message: "Failed to connect to External News API",
+          error: apiError.message
+        });
       }
-    ];
+    } else {
+      return res.status(400).json({
+        success: false,
+        message: "NEWS_API_KEY is missing from environment variables."
+      });
+    }
 
     res.status(200).json({
       success: true,
-      message: "News fetched successfully (MongoDB placeholder)",
+      message: "News fetched successfully",
       data: {
-        news: mockNews,
+        news: newsData,
         pagination: {
           page: parseInt(page),
           limit: parseInt(limit),
-          total: 50,
-          pages: 3
+          total: newsData.length,
+          pages: Math.ceil(newsData.length / parseInt(limit)) || 1
         }
       }
     });

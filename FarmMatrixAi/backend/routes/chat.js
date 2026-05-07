@@ -8,6 +8,10 @@ router.post("/", async (req, res) => {
   try {
     const { message, history } = req.body;
 
+    if (!message || typeof message !== "string" || message.trim() === "") {
+      return res.status(400).json({ response: "Please provide a valid message." });
+    }
+
     if (!process.env.GEMINI_API_KEY) {
       return res.json({
         response:
@@ -18,7 +22,6 @@ router.post("/", async (req, res) => {
     // const modelName = process.env.GEMINI_MODEL || "gemini-1.5-flash-latest";
     const modelName = process.env.GEMINI_MODEL || "gemini-1.5-flash-latest";
     
-    console.log(`[Chat API] Attempting to use model: ${modelName}`);
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: modelName });
 
@@ -51,11 +54,27 @@ router.post("/", async (req, res) => {
     res.status(200).json({ response: result.response.text() });
   } catch (error) {
     console.error("Chat API Error:", error.message || error);
-    res
-      .status(500)
-      .json({
-        response: `AI Error: ${error.message || "Trouble connecting to brain"}`,
-      });
+
+    let errorMessage = "Trouble connecting to the AI brain. Please try again later.";
+    let statusCode = 500;
+
+    const errStr = (error.message || error.toString() || "").toLowerCase();
+    if (errStr) {
+      if (errStr.includes("safety")) {
+        errorMessage = "Your message was blocked by safety filters. Please rephrase and try again.";
+        statusCode = 400;
+      } else if (errStr.includes("429") || errStr.includes("quota")) {
+        errorMessage = "The AI is currently overloaded with requests. Please wait a moment and try again.";
+        statusCode = 429;
+      } else if (errStr.includes("503") || errStr.includes("high demand") || errStr.includes("unavailable")) {
+        errorMessage = "The AI is currently experiencing high demand. Please try again in a few moments.";
+        statusCode = 503;
+      } else {
+        errorMessage = "An unexpected technical issue occurred while processing your request. Please try again later.";
+      }
+    }
+
+    res.status(statusCode).json({ response: errorMessage });
   }
 });
 

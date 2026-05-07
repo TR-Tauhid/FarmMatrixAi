@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const CategoryFilters = () => {
-  const [activeCategory, setActiveCategory] = useState('All News');
-
+const CategoryFilters = ({ activeCategory, setActiveCategory }) => {
   const categories = [
     'All News',
-    'Global Trade',
-    'Ag-Tech',
+    'Market',
+    'Technology',
+    'Weather',
     'Policy Updates',
-    'Commodity Prices'
+    'Research'
   ];
 
   return (
@@ -19,7 +18,7 @@ const CategoryFilters = () => {
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-5 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all duration-200 border ${
+            className={`px-5 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all duration-200 border cursor-pointer ${
               activeCategory === cat
                 ? 'bg-emerald-900 text-white border-emerald-900 dark:bg-emerald-600 dark:border-emerald-600 shadow-md'
                 : 'bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400 border-slate-200 dark:border-slate-800 hover:border-emerald-200 dark:hover:border-emerald-800'
