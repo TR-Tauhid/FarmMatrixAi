@@ -223,12 +223,12 @@ const SidebarLayout = ({ children }) => {
                         <img
                           className="w-full"
                           title={
-                            user?.photoUrl
+                            user?.photoURL
                               ? user?.displayName
                               : "You don't have a profile Picture...!!!"
                           }
                           src={
-                            user?.photoUrl ||
+                            user?.photoURL ||
                             "https://img.daisyui.com/images/profile/demo/yellingcat@192.webp"
                           }
                           alt="Profile Icon."

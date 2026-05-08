@@ -12,19 +12,27 @@ const AboutPage = () => {
 
   const teamData = [
     {
-      name: "Marcus Vane",
+      name: "Poojitha Kotagiri",
+      img: "",
+    },
+    {
+      name: "Tohibur Rahman",
+      img: "https://i.ibb.co/fdK1Qc5K/tauhid.jpg",
+    },
+    {
+      name: "Jeshan Karim",
       img: "https://i.pravatar.cc/300?img=12",
     },
     {
-      name: "Dr. Elena Rostova",
-      img: "https://i.pravatar.cc/300?img=5",
+      name: "Kamaleswar Ghosh",
+      img: "https://i.ibb.co/dJfL17kf/kamleshwar-gosh.jpg",
     },
     {
-      name: "Jacob Miller",
-      img: "https://i.pravatar.cc/300?img=8",
+      name: "Sweta",
+      img: "https://i.pravatar.cc/300?img=26",
     },
     {
-      name: "Sarah Chen",
+      name: "Dr Komal Singh Gill",
       img: "https://i.pravatar.cc/300?img=26",
     },
   ];
