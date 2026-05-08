@@ -11,6 +11,7 @@ const environmentRoutes = require("./routes/environment");
 const marketRoutes = require("./routes/market");
 const newsRoutes = require("./routes/news");
 const chatRoutes = require("./routes/chat");
+const recommendRoutes = require("./routes/recommend");
 
 // Import middleware
 const authMiddleware = require("./middleware/auth");
@@ -76,6 +77,7 @@ app.get("/", (req, res) => {
       market: "/api/market",
       news: "/api/news",
       chat: "/api/chat",
+      recommend: "/api/recommend",
     },
     mongodb: "Connected",
   });
@@ -94,6 +96,7 @@ app.use("/api/disease", diseaseRoutes);
 app.use("/api/environment", environmentRoutes);
 app.use("/api/market", marketRoutes);
 app.use("/api/news", newsRoutes);
+app.use("/api/recommend", recommendRoutes);
 
 // 404 handler for undefined routes
 app.use((req, res) => {
@@ -113,6 +116,7 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`API Base URL: http://localhost:${PORT}/api`);
+  console.log(`AI Engine Route: http://localhost:${PORT}/api/recommend [ACTIVE]`);
 });
 
 module.exports = app;

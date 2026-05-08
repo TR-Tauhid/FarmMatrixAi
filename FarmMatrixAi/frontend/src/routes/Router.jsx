@@ -7,7 +7,6 @@ import AboutSection from "../home/AboutSection";
 import { createBrowserRouter } from "react-router-dom";
 import PrivateRouter from "./PrivateRouter";
 import ErrorBoundaryPage from "../components/ErrorBoundaryPage";
-import CropRecommendationInput from "../home/CropRecommendationInput";
 import MarketNewsDashboard from "../components/news/MarketNewsDashboard";
 import MarketTrendDashboard from "../components/market/MarketTrendDashboard";
 import EnvironmentDashboard from "../components/environment/EnvironmentDashboard";
@@ -22,14 +21,6 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       {
-        path: "croprecommendationinput",
-        element: (
-          <PrivateRouter>
-            <CropRecommendationDashboard />
-          </PrivateRouter>
-        ),
-      },
-      {
         path: "recommendations",
         element: (
           <PrivateRouter>
@@ -38,18 +29,10 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "disease",
-        element: (
-          <PrivateRouter>
-            <DiseaseDetectionDashboard />
-          </PrivateRouter>
-        ),
-      },
-      {
         path: "diagnostics",
         element: (
           <PrivateRouter>
-            <DiagnosticDashboard />
+            <DiseaseDetectionDashboard />
           </PrivateRouter>
         ),
       },
@@ -70,6 +53,14 @@ const router = createBrowserRouter([
         ),
       },
       { path: "news", element: <MarketNewsDashboard /> },
+      {
+        path: "disease",
+        element: (
+          <PrivateRouter>
+            <DiseaseDetectionDashboard />
+          </PrivateRouter>
+        ),
+      },
       { path: "about", element: <AboutSection /> },
     ],
   },

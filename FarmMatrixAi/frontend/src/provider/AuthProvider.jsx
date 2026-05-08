@@ -106,6 +106,7 @@ export default function AuthProvider({ children }) {
     signInWithFacebook,
     signInWithGithub,
     signInWithTwitter,
+    theme,
   };
 
   return (

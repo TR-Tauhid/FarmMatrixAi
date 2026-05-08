@@ -193,7 +193,7 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
   return (
     <div className={chatContainerClasses}>
       {/* Header */}
-      <div className="bg-emerald-600 dark:bg-emerald-700 p-4 flex items-center gap-3">
+      <div className="bg-emerald-600 dark:bg-emerald-700 p-4 flex items-center gap-3 z-999">
         <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
           <svg
             className="w-6 h-6 text-white"

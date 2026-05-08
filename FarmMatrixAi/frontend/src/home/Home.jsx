@@ -13,7 +13,6 @@ import HowItWorksSection from "./HowItWorks";
 import AIModelsSection from "./AIModelsSection";
 import SystemArchSec from "./SystemArchSec";
 import ScreenshotsSection from "./ScreenshotsSec";
-import CropRecommendationInput from "./CropRecommendationInput";
 import CropRecommendationResult from "./CropRecommendationResult";
 import DiseaseDiagnosisOutput from "./DiseaseDiagnosisOutput";
 import VirtualSensorModule from "./VirtualSensorModule";
@@ -22,22 +21,21 @@ export default function Home() {
   return (
     <div className="text-center w-11/12 mx-auto">
       <div className="*:rounded-2xl flex flex-col gap-6 my-10">
-        <Banner/>
-        <CropRecommendationInput/>
-        <CropRecommendationResult/>
-        <DiseaseDetection/>
-        <DiseaseDiagnosisOutput/>
-        <VirtualSensorModule/>
-        <FeaturesSection/>
-        <HowItWorksSection/>
-        <AIModelsSection/>
-        <SystemArchSec/>
-        <ScreenshotsSection/>
-        <CropRecCard/>
-        <HistorySection/>
-        <AboutSection/>
+        <Banner />
+        <CropRecommendationResult />
+        <DiseaseDetection />
+        <DiseaseDiagnosisOutput />
+        <VirtualSensorModule />
+        <FeaturesSection />
+        <HowItWorksSection />
+        <AIModelsSection />
+        <SystemArchSec />
+        <ScreenshotsSection />
+        <CropRecCard />
+        <HistorySection />
+        <AboutSection />
       </div>
-      <Carousel/>
+      <Carousel />
     </div>
   );
 }

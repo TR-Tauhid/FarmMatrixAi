@@ -28,7 +28,8 @@ const SidebarLayout = ({ children }) => {
   useEffect(() => {
     const handleOpenChat = () => setIsChatOpen(true);
     window.addEventListener("open-sidebar-chat", handleOpenChat);
-    return () => window.removeEventListener("open-sidebar-chat", handleOpenChat);
+    return () =>
+      window.removeEventListener("open-sidebar-chat", handleOpenChat);
   }, []);
 
   const menuItems = [
@@ -43,7 +44,12 @@ const SidebarLayout = ({ children }) => {
     { name: "Markets", icon: <MdTrendingUp />, path: "/markets" },
     { name: "News", icon: <MdNewspaper />, path: "/news" },
     { name: "About Us", icon: <MdInfo />, path: "/about" },
-    { name: "AI Assistant", icon: <MdChat />, path: "#", onClick: () => setIsChatOpen(true) },
+    {
+      name: "AI Assistant",
+      icon: <MdChat />,
+      path: "#",
+      onClick: () => setIsChatOpen(true),
+    },
   ];
 
   const handleLogOutBtn = () => {
@@ -71,8 +77,14 @@ const SidebarLayout = ({ children }) => {
       <div className="drawer-content flex flex-col min-h-screen">
         <main className="grow">{children}</main>
         {isChatOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm" onClick={() => setIsChatOpen(false)}>
-            <div className="w-full max-w-lg h-[600px] mx-4" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm"
+            onClick={() => setIsChatOpen(false)}
+          >
+            <div
+              className="w-full max-w-lg h-[600px] mx-4"
+              onClick={(e) => e.stopPropagation()}
+            >
               <AIChatWidget embedded />
             </div>
           </div>
@@ -91,7 +103,7 @@ const SidebarLayout = ({ children }) => {
         <div className="relative w-72 min-h-full bg-transparent backdrop-blur-xl bg-top-right from-500% from-white to-50% to-black border-r border-slate-200 flex flex-col pt-10 overflow-visible transition-all duration-300">
           {/* Navigation Links */}
           <nav className="flex-1 pl-4 space-y-1">
-            {menuItems.map((item) => (
+            {menuItems.map((item) =>
               item.onClick ? (
                 <button
                   key={item.name}
@@ -133,8 +145,8 @@ const SidebarLayout = ({ children }) => {
                     {item.name}
                   </span>
                 </NavLink>
-              )
-            ))}
+              ),
+            )}
           </nav>
 
           {/* Utilities Section*/}

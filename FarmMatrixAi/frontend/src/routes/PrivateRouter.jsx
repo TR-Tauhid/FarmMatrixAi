@@ -15,7 +15,12 @@ export default function PrivateRouter({ children }) {
   }, [user, loading, notify]);
 
   if (loading) {
-    return <Loading theme={theme}></Loading>;
+    return (
+      <>
+        {user && <div className="pointer-events-none select-none blur-sm opacity-50 transition-all duration-300">{children}</div>}
+        <Loading theme={theme} />
+      </>
+    );
   }
 
   if (user) {
