@@ -1,42 +1,44 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { LuLeaf, LuTrendingUp } from "react-icons/lu";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { FaHandshakeSimple } from "react-icons/fa6";
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";import field from "../assets/field.jpg";
+import { motion } from "framer-motion";
+import field from "../assets/field.jpg";
 
 const AboutPage = () => {
-  const stats = [
-    { label: "FARMS EMPOWERED", value: "12k+" },
-    { label: "ACRES MONITORED", value: "4.2M" },
-  ];
+  const { t } = useTranslation();
 
-  const team = [
+  const teamData = [
     {
       name: "Marcus Vane",
-      role: "CHIEF EXECUTIVE OFFICER",
-      desc: "Ex-NASA telemetry lead with a passion for sustainable land management.",
       img: "https://i.pravatar.cc/300?img=12",
     },
     {
       name: "Dr. Elena Rostova",
-      role: "HEAD OF AI & SOIL SCIENCE",
-      desc: "PhD in Soil Microbiology. Pioneering the 'Neural Soil' predictive engine.",
       img: "https://i.pravatar.cc/300?img=5",
     },
     {
       name: "Jacob Miller",
-      role: "VP OPERATIONS",
-      desc: "Third-generation farmer. Ensuring our tech works in the mud, not just the lab.",
       img: "https://i.pravatar.cc/300?img=8",
     },
     {
       name: "Sarah Chen",
-      role: "DIRECTOR OF PRODUCT DESIGN",
-      desc: "Focused on making complex agrarian data intuitive for every user.",
       img: "https://i.pravatar.cc/300?img=26",
     },
   ];
+
+  const stats = [
+    { label: t("about.farmsEmpowered"), value: "12k+" },
+    { label: t("about.acresMonitored"), value: "4.2M" },
+  ];
+
+  const team = teamData.map((member, i) => ({
+    ...member,
+    role: t(`about.team.${i}.role`),
+    desc: t(`about.team.${i}.desc`),
+  }));
 
   return (
     <div className="space-y-16 md:space-y-24 mx-auto px-10 pb-20 transition-colors duration-500 bg-base-100 text-base-content overflow-x-hidden">
@@ -44,17 +46,13 @@ const AboutPage = () => {
       <section className="flex flex-col lg:flex-row items-center gap-8 md:gap-12 pt-10 md:pt-20">
         <div className="flex-1 space-y-4 md:space-y-6 text-center lg:text-left">
           <span className="bg-emerald-200 dark:bg-emerald-900/30 text-[#267700] dark:text-emerald-400 px-3 py-1 rounded-full text-[10px] md:text-xs font-extrabold uppercase tracking-wider">
-            Our Origin
+            {t("about.origin")}
           </span>
           <h1 className="text-4xl md:text-7xl font-black leading-tight">
-            Cultivating the{" "}
-            <span className="text-[#047857] dark:text-emerald-500">Future</span>{" "}
-            of Soil.
+            {t("about.heroTitle")}
           </h1>
           <p className="text-sm md:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed opacity-70">
-            Founded in the heart of the central plains, Farm Matrix AI Pro was
-            born from a simple observation: the most vital data in farming was
-            the hardest to see.
+            {t("about.heroDescription")}
           </p>
           <div className="flex justify-center lg:justify-start gap-8 md:gap-12 pt-4">
             {stats.map((stat, i) => (
@@ -87,11 +85,10 @@ const AboutPage = () => {
                 <LuLeaf className="text-xl text-emerald-700 dark:text-emerald-400" />
               </div>
               <h3 className="text-xl md:text-3xl font-bold tracking-tight text-emerald-900 dark:text-white">
-                Sustainability Through Intelligence
+                {t("about.sustainability")}
               </h3>
               <p className="max-w-md text-xs md:text-sm leading-relaxed opacity-70">
-                Reducing waste by applying nutrients only where the soil asks.
-                Our AI models predict depletion before it affects the yield.
+                {t("about.sustainabilityDesc")}
               </p>
             </div>
           </div>
@@ -101,10 +98,10 @@ const AboutPage = () => {
             <LuTrendingUp className="text-3xl md:text-4xl" />
             <div className="space-y-2">
               <h3 className="text-lg md:text-2xl font-bold">
-                Real-time Diagnostics
+                {t("about.realTimeDiagnostics")}
               </h3>
               <p className="opacity-80 text-[10px] md:text-sm leading-tight">
-                Captured in milliseconds, delivered instantly.
+                {t("about.realTimeDiagnosticsDesc")}
               </p>
             </div>
           </div>
@@ -113,14 +110,14 @@ const AboutPage = () => {
           <div className="rounded-3xl md:rounded-4xl bg-blue-50 dark:bg-blue-900/20 p-6 md:p-10 flex flex-col justify-between border border-blue-100 dark:border-blue-900/30">
             <div className="space-y-2">
               <h3 className="text-lg md:text-2xl font-bold text-blue-900 dark:text-blue-100">
-                Weather
+                {t("about.weather")}
               </h3>
               <p className="text-[10px] md:text-sm leading-relaxed opacity-70">
-                Micro-climate tracking that goes beyond the zip code.
+                {t("about.weatherDesc")}
               </p>
             </div>
             <button className="flex items-center gap-2 text-xs font-bold text-blue-700 dark:text-blue-400 mt-4">
-              Learn more <HiOutlineArrowNarrowRight />
+              {t("about.learnMore")} <HiOutlineArrowNarrowRight />
             </button>
           </div>
 
@@ -128,10 +125,10 @@ const AboutPage = () => {
           <div className="md:col-span-2 rounded-3xl md:rounded-4xl bg-slate-100 dark:bg-slate-800 p-6 md:p-10 flex items-center justify-between gap-4 border border-slate-200 dark:border-slate-700">
             <div className="space-y-2 md:space-y-4 max-w-md">
               <h3 className="text-xl md:text-3xl font-bold">
-                Bridging the Gap
+                {t("about.bridgingTheGap")}
               </h3>
               <p className="text-[10px] md:text-sm leading-relaxed opacity-70">
-                Connecting traditional wisdom with modern algorithmic precision.
+                {t("about.bridgingDesc")}
               </p>
             </div>
             <FaHandshakeSimple className="hidden sm:block w-12 h-12 md:w-16 md:h-16 text-emerald-700 dark:text-emerald-400 opacity-20 md:opacity-100" />
@@ -144,14 +141,14 @@ const AboutPage = () => {
         <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4">
           <div>
             <h2 className="text-2xl md:text-3xl font-black">
-              The Minds Behind the Pulse
+              {t("about.teamTitle")}
             </h2>
             <p className="text-xs md:text-base opacity-60">
-              Interdisciplinary collective of scientists and agronomists.
+              {t("about.teamSubtitle")}
             </p>
           </div>
           <button className="w-full md:w-auto btn bg-emerald-600 hover:bg-emerald-700 text-white border-none px-6 text-xs cursor-pointer">
-            Open Positions
+            {t("about.openPositions")}
           </button>
         </div>
 
@@ -187,10 +184,10 @@ const AboutPage = () => {
         <div className="flex flex-col items-center md:items-start justify-between md:justify-around gap-4 w-full md:w-1/3 border-b md:border-b-0 md:border-r border-slate-200 dark:border-slate-800 pb-4 md:pb-0 md:pr-8">
           <div>
             <h2 className="text-lg md:text-2xl font-bold tracking-tight">
-              Get in Touch
+              {t("about.getInTouch")}
             </h2>
             <p className="text-xs text-slate-500 dark:text-slate-400">
-              Partner for a sustainable future.
+              {t("about.partnerSustainable")}
             </p>
           </div>
 
@@ -198,7 +195,7 @@ const AboutPage = () => {
             <div className="w-7 h-7 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 dark:text-slate-400">
               @
             </div>
-            <p className="font-medium">hello@farmmatrixai.com</p>
+            <p className="font-medium">{t("about.email")}</p>
           </div>
         </div>
 
@@ -207,24 +204,24 @@ const AboutPage = () => {
           <form className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <input
               type="text"
-              placeholder="Name"
+              placeholder={t("about.namePlaceholder")}
               className="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 placeholder:text-slate-400"
             />
 
             <input
               type="email"
-              placeholder="Email"
+              placeholder={t("about.emailPlaceholder")}
               className="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 placeholder:text-slate-400"
             />
 
             <textarea
-              placeholder="Message"
+              placeholder={t("about.messagePlaceholder")}
               rows="3"
               className="sm:col-span-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 placeholder:text-slate-400 resize-none"
             />
 
             <button className="sm:col-span-2 w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm rounded-lg transition active:scale-95 cursor-pointer">
-              Send Message
+              {t("about.sendMessage")}
             </button>
           </form>
         </div>

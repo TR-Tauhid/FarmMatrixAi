@@ -2,40 +2,31 @@ import React from "react";
 import Carousel from "./Carousel";
 import Banner from "./Banner";
 import FeaturesSection from "./FeaturesSection";
+import HowItWorksSection from "./HowItWorks";
+import AIModelsSection from "./AIModelsSection";
+import SystemArchSec from "./SystemArchSec";
+import HistorySection from "./HistorySection";
+import AboutSection from "./AboutSection";
 import CropRecCard from "./CropRecCard";
 import WeatherSection from "./WeatherSection";
 import SoilSection from "./SoilSection";
 import CropCompare from "./CropCompare";
-import HistorySection from "./HistorySection";
 import DiseaseDetection from "./DiseaseDetection";
-import AboutSection from "./AboutSection";
-import HowItWorksSection from "./HowItWorks";
-import AIModelsSection from "./AIModelsSection";
-import SystemArchSec from "./SystemArchSec";
-import ScreenshotsSection from "./ScreenshotsSec";
-import CropRecommendationResult from "./CropRecommendationResult";
-import DiseaseDiagnosisOutput from "./DiseaseDiagnosisOutput";
-import VirtualSensorModule from "./VirtualSensorModule";
 
 export default function Home() {
   return (
     <div className="text-center w-11/12 mx-auto">
       <div className="*:rounded-2xl flex flex-col gap-6 my-10">
         <Banner />
-        <CropRecommendationResult />
-        <DiseaseDetection />
-        <DiseaseDiagnosisOutput />
-        <VirtualSensorModule />
         <FeaturesSection />
         <HowItWorksSection />
         <AIModelsSection />
         <SystemArchSec />
-        <ScreenshotsSection />
         <CropRecCard />
         <HistorySection />
-        <AboutSection />
       </div>
       <Carousel />
+      <AboutSection />
     </div>
   );
 }

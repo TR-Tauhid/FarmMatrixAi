@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [timeNow] = useState(() => Date.now());
   const [messages, setMessages] = useState([
@@ -172,6 +174,7 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
         onClick={() => setIsOpen(true)}
         className={`fixed ${positionClasses[position]} z-50 w-14 h-14 bg-emerald-600 hover:bg-emerald-700 rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-110 cursor-pointer`}
         aria-label="Open AI Chat"
+        aria-label={t("chat.openChat")}
       >
         <svg
           className="w-7 h-7 text-white"
@@ -212,6 +215,8 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
         <div className="flex-1">
           <h3 className="text-white font-bold">Farm AI Assistant</h3>
           <p className="text-emerald-100 text-xs">Online • Ready to help</p>
+          <h3 className="text-white font-bold">{t("chat.title")}</h3>
+          <p className="text-emerald-100 text-xs">{t("chat.status")}</p>
         </div>
         {!embedded && (
           <div className="flex gap-1">
@@ -219,6 +224,7 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
               onClick={loadDemo}
               className="p-1.5 hover:bg-white/20 rounded-lg transition-colors cursor-pointer"
               title="Load Demo"
+              title={t("chat.loadDemo")}
             >
               <svg
                 className="w-5 h-5 text-white"
@@ -247,6 +253,7 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
               }}
               className="p-1.5 hover:bg-white/20 rounded-lg transition-colors cursor-pointer"
               title="Maximize"
+              title={t("chat.maximize")}
             >
               <svg
                 className="w-5 h-5 text-white"
@@ -266,6 +273,7 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
               onClick={() => setIsOpen(false)}
               className="p-1.5 hover:bg-white/20 rounded-lg transition-colors cursor-pointer"
               title="Close"
+              title={t("chat.close")}
             >
               <svg
                 className="w-5 h-5 text-white"
@@ -342,6 +350,7 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder="Type your message..."
+            placeholder={t("chat.placeholder")}
             className="flex-1 bg-slate-100 dark:bg-slate-800 border-0 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:text-white"
           />
           <button
