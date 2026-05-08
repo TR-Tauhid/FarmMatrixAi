@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
       });
     }
 
-    const modelName = process.env.GEMINI_MODEL || "gemma-3-1b";
+    const modelName = process.env.GEMINI_MODEL || "gemini-3.1-flash-lite";
 
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: modelName });

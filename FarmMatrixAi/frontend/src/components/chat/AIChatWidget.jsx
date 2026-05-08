@@ -1,11 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
-  const { t } = useTranslation();
-  const [isOpen, setIsOpen] = useState(false);
-  const [timeNow] = useState(() => Date.now());
-  const [messages, setMessages] = useState([
+const chatStore = {
+  messages: [
     {
       id: 1,
       role: "assistant",
@@ -13,42 +10,85 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
         "Hello! I'm your Farm AI Assistant. I can help you with:\n\n• Crop disease identification and treatment\n• Soil health analysis\n• Weather and climate advice\n• Market prices and trends\n• General farming questions\n\nHow can I help you today?",
       timestamp: new Date(),
     },
-  ]);
-  const [input, setInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  ],
+  input: "",
+  isLoading: false,
+  listeners: new Set(),
+  subscribe(listener) {
+    this.listeners.add(listener);
+    return () => this.listeners.delete(listener);
+  },
+  notify() {
+    this.listeners.forEach((l) => l());
+  },
+  setMessages(updater) {
+    this.messages = typeof updater === "function" ? updater(this.messages) : updater;
+    this.notify();
+  },
+  setInput(val) {
+    this.input = typeof val === "function" ? val(this.input) : val;
+    this.notify();
+  },
+  setIsLoading(val) {
+    this.isLoading = typeof val === "function" ? val(this.isLoading) : val;
+    this.notify();
+  }
+};
+
+const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
+  const { t } = useTranslation();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const [messages, setLocalMessages] = useState(chatStore.messages);
+  const [input, setLocalInput] = useState(chatStore.input);
+  const [isLoading, setLocalIsLoading] = useState(chatStore.isLoading);
+
+  useEffect(() => {
+    return chatStore.subscribe(() => {
+      setLocalMessages(chatStore.messages);
+      setLocalInput(chatStore.input);
+      setLocalIsLoading(chatStore.isLoading);
+    });
+  }, []);
+
+  const setMessages = (updater) => chatStore.setMessages(updater);
+  const setInput = (val) => chatStore.setInput(val);
+  const setIsLoading = (val) => chatStore.setIsLoading(val);
+
   const messagesEndRef = useRef(null);
-  // Demo conversation about tomato disease
-  const demoConversation = [
-    {
-      id: 1,
-      role: "user",
-      content:
-        "My tomato plants have dark spots on leaves with yellow halos. What could this be?",
-      timestamp: timeNow - 60000,
-    },
-    {
-      id: 2,
-      role: "assistant",
-      content:
-        "Based on your description, your tomato plants likely have **Early Blight** (Alternaria solani). This is a common fungal disease that shows:\n\n• Dark brown to black concentric spots\n• Yellow halos around lesions\n• Lower leaves affected first\n• Can spread rapidly in humid conditions",
-      timestamp: timeNow - 55000,
-    },
-    {
-      id: 3,
-      role: "user",
-      content: "How do I treat this and prevent it from spreading?",
-      timestamp: timeNow - 45000,
-    },
-    {
-      id: 4,
-      role: "assistant",
-      content:
-        "Here's a comprehensive treatment plan:\n\n**Immediate Actions:**\n1. Remove and destroy infected leaves (don't compost)\n2. Improve air circulation between plants\n3. Avoid overhead watering - water at soil level\n\n**Chemical Treatment:**\n• Apply copper-based fungicide (follow label rates)\n• Chlorothalonil or mancozeb also effective\n• Rotate fungicides to prevent resistance\n\n**Prevention:**\n• Mulch to prevent soil splash\n• Remove plant debris after harvest\n• Rotate crops (3-4 year cycle)\n• Choose resistant varieties like 'Mountain Pride'\n\n⚠️ Act quickly - untreated early blight can cause 20-50% yield loss!",
-      timestamp: timeNow - 35000,
-    },
-  ];
 
   const loadDemo = () => {
+    const timeNow = Date.now();
+    // Demo conversation about tomato disease
+    const demoConversation = [
+      {
+        id: 1,
+        role: "user",
+        content:
+          "My tomato plants have dark spots on leaves with yellow halos. What could this be?",
+        timestamp: timeNow - 60000,
+      },
+      {
+        id: 2,
+        role: "assistant",
+        content:
+          "Based on your description, your tomato plants likely have **Early Blight** (Alternaria solani). This is a common fungal disease that shows:\n\n• Dark brown to black concentric spots\n• Yellow halos around lesions\n• Lower leaves affected first\n• Can spread rapidly in humid conditions",
+        timestamp: timeNow - 55000,
+      },
+      {
+        id: 3,
+        role: "user",
+        content: "How do I treat this and prevent it from spreading?",
+        timestamp: timeNow - 45000,
+      },
+      {
+        id: 4,
+        role: "assistant",
+        content:
+          "Here's a comprehensive treatment plan:\n\n**Immediate Actions:**\n1. Remove and destroy infected leaves (don't compost)\n2. Improve air circulation between plants\n3. Avoid overhead watering - water at soil level\n\n**Chemical Treatment:**\n• Apply copper-based fungicide (follow label rates)\n• Chlorothalonil or mancozeb also effective\n• Rotate fungicides to prevent resistance\n\n**Prevention:**\n• Mulch to prevent soil splash\n• Remove plant debris after harvest\n• Rotate crops (3-4 year cycle)\n• Choose resistant varieties like 'Mountain Pride'\n\n⚠️ Act quickly - untreated early blight can cause 20-50% yield loss!",
+        timestamp: timeNow - 35000,
+      },
+    ];
     setMessages(demoConversation);
     setIsOpen(true);
   };
