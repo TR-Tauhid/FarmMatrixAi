@@ -9,7 +9,9 @@ router.post("/", async (req, res) => {
     const { message, history } = req.body;
 
     if (!message || typeof message !== "string" || message.trim() === "") {
-      return res.status(400).json({ response: "Please provide a valid message." });
+      return res
+        .status(400)
+        .json({ response: "Please provide a valid message." });
     }
 
     if (!process.env.GEMINI_API_KEY) {
@@ -19,11 +21,11 @@ router.post("/", async (req, res) => {
       });
     }
 
-    // const modelName = process.env.GEMINI_MODEL || "gemini-1.5-flash-latest";
-    const modelName = process.env.GEMINI_MODEL || "gemini-1.5-flash-latest";
-    
+    const modelName = process.env.GEMINI_MODEL || "gemma-3-1b";
+
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: modelName });
+    console.log(modelName);
 
     // Map history to Gemini's expected format
     const formattedHistory = [];
@@ -31,7 +33,7 @@ router.post("/", async (req, res) => {
 
     (history || []).forEach((msg) => {
       if (msg.role === "system") return;
-      if (!msg.content) return; // Prevent empty content from crashing the loop
+      if (!msg.content) return;
 
       const role = msg.role === "assistant" ? "model" : "user";
 
@@ -55,22 +57,31 @@ router.post("/", async (req, res) => {
   } catch (error) {
     console.error("Chat API Error:", error.message || error);
 
-    let errorMessage = "Trouble connecting to the AI brain. Please try again later.";
+    let errorMessage =
+      "Trouble connecting to the AI brain. Please try again later.";
     let statusCode = 500;
 
     const errStr = (error.message || error.toString() || "").toLowerCase();
     if (errStr) {
       if (errStr.includes("safety")) {
-        errorMessage = "Your message was blocked by safety filters. Please rephrase and try again.";
+        errorMessage =
+          "Your message was blocked by safety filters. Please rephrase and try again.";
         statusCode = 400;
       } else if (errStr.includes("429") || errStr.includes("quota")) {
-        errorMessage = "The AI is currently overloaded with requests. Please wait a moment and try again.";
+        errorMessage =
+          "The AI is currently overloaded with requests. Please wait a moment and try again.";
         statusCode = 429;
-      } else if (errStr.includes("503") || errStr.includes("high demand") || errStr.includes("unavailable")) {
-        errorMessage = "The AI is currently experiencing high demand. Please try again in a few moments.";
+      } else if (
+        errStr.includes("503") ||
+        errStr.includes("high demand") ||
+        errStr.includes("unavailable")
+      ) {
+        errorMessage =
+          "The AI is currently experiencing high demand. Please try again in a few moments.";
         statusCode = 503;
       } else {
-        errorMessage = "An unexpected technical issue occurred while processing your request. Please try again later.";
+        errorMessage =
+          "An unexpected technical issue occurred while processing your request. Please try again later.";
       }
     }
 

@@ -17,10 +17,6 @@ const mockDiagnosisResult = {
   management: ["Apply fungicides", "Resistant varieties", "Crop rotation"],
 };
 
-const listItemVariants = {
-  hidden: { opacity: 0, x: -5 },
-  visible: { opacity: 1, x: 0 },
-};
 
 const DiseaseDiagnosisOutput = () => {
   const { t } = useTranslation();
@@ -51,7 +47,7 @@ const DiseaseDiagnosisOutput = () => {
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="bg-base-200 dark:bg-slate-900 p-4 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] shadow-xl border border-emerald-100 dark:border-slate-800 relative overflow-hidden"
+          className="bg-base-200 dark:bg-slate-900 p-4 md:p-8 rounded-3xl md:rounded-[2.5rem] shadow-xl border border-emerald-100 dark:border-slate-800 relative overflow-hidden"
         >
           <div className="flex flex-col md:flex-row items-center gap-6">
             {/* Critical Data (Left/Top) */}

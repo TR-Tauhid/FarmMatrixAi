@@ -1,5 +1,5 @@
 const DiagnosticPulse = () => (
-  <div className="bg-emerald-600 dark:bg-emerald-700 p-8 rounded-4xl text-white h-full relative overflow-hidden flex flex-col justify-between">
+  <div className="bg-emerald-600 dark:bg-emerald-700 p-6 md:p-8 rounded-4xl md:rounded-4xl text-white h-full relative overflow-hidden flex flex-col justify-between min-h-[200px]">
     <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl -mr-16 -mt-16" />
     <div>
       <span className="bg-black/20 px-3 py-1 rounded-full text-[8px] font-black tracking-widest uppercase mb-4 inline-block">Real-time Insights</span>

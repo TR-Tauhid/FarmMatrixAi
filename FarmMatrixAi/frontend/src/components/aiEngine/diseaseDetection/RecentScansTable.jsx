@@ -40,8 +40,8 @@ const RecentScansTable = () => {
         </button>
       </div>
 
-      <div className="overflow-x-auto bg-white dark:bg-[#0f172a] rounded-4xl border border-slate-100 dark:border-slate-800 shadow-sm">
-        <table className="table w-full border-separate border-spacing-y-0">
+      <div className="overflow-x-auto bg-white dark:bg-[#0f172a] rounded-4xl md:rounded-4xl border border-slate-100 dark:border-slate-800 shadow-sm">
+        <table className="table w-full border-separate border-spacing-y-0 min-w-[600px]">
           <thead>
             <tr className="text-slate-400 border-b border-slate-50 dark:border-slate-800">
               <th className="bg-transparent py-6 px-8 text-[10px] font-black uppercase tracking-widest">Timestamp</th>

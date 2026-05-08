@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
     }
 
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
 
     const prompt = `Act as an expert agronomist AI. Based on the following field telemetry, recommend the single best crop to plant:
     Nitrogen (N): ${nitrogen} mg/kg | Phosphorus (P): ${phosphorus} mg/kg | Potassium (K): ${potassium} mg/kg

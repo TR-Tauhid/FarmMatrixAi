@@ -6,7 +6,6 @@ export const getChatResponse = async (message) => {
   const model = genAI.getGenerativeModel({
     // model: "gemini-2.5-flash",
     model: "Gemma-3-1B",
-
   });
 
   const prompt = `

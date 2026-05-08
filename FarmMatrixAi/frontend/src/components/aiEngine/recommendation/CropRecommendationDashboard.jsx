@@ -33,18 +33,12 @@ const CropRecommendationDashboard = () => {
     setIsSubmitting(true);
     setResult(null);
     try {
-      const isLocalhost =
-        window.location.hostname === "localhost" ||
-        window.location.hostname === "127.0.0.1";
-      const API_URL = isLocalhost
-        ? "http://localhost:5000/api"
-        : import.meta.env.VITE_API_URL ||
-          "https://farmmatrixai.onrender.com/api";
+      const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+      const API_URL = isLocalhost ? "http://localhost:5000/api" : (import.meta.env.VITE_API_URL || "https://farmmatrixai.onrender.com/api");
 
       const payload = { ...params, lat, lng };
-
-      const token =
-        localStorage.getItem("token") || localStorage.getItem("accessToken");
+      
+      const token = localStorage.getItem("token") || localStorage.getItem("accessToken");
       const headers = { "Content-Type": "application/json" };
       if (token) headers["Authorization"] = `Bearer ${token}`;
 
@@ -55,12 +49,9 @@ const CropRecommendationDashboard = () => {
       });
       const data = await response.json();
       console.log("Response from server:", data);
-
-      // Simulate a small network delay to show the beautiful animation
-      setTimeout(() => {
-        setResult(data);
-        setIsSubmitting(false);
-      }, 3000);
+      
+      setResult(data);
+      setIsSubmitting(false);
     } catch (error) {
       console.error("Failed to send parameters:", error);
       setIsSubmitting(false);
@@ -72,12 +63,7 @@ const CropRecommendationDashboard = () => {
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left Column: Inputs & Mapping */}
         <div className="lg:col-span-7 space-y-6">
-          <LocationMapping
-            lat={lat}
-            lng={lng}
-            setLat={setLat}
-            setLng={setLng}
-          />
+          <LocationMapping lat={lat} lng={lng} setLat={setLat} setLng={setLng} />
           <ParameterInputForm params={params} handleChange={handleChange} />
           <button
             onClick={handleSubmit}
@@ -94,46 +80,36 @@ const CropRecommendationDashboard = () => {
           {isSubmitting ? (
             <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm rounded-2xl border border-slate-200 dark:border-slate-800 z-10">
               <Cpu size={48} className="text-emerald-500 animate-pulse mb-4" />
-              <h3 className="text-lg font-bold text-slate-800 dark:text-white mb-2">
-                Processing Telemetry
-              </h3>
+              <h3 className="text-lg font-bold text-slate-800 dark:text-white mb-2">Processing Telemetry</h3>
               <p className="text-sm text-slate-500 dark:text-slate-400 text-center max-w-[250px]">
-                Running neural diagnostics on your soil and environmental
-                parameters...
+                Running neural diagnostics on your soil and environmental parameters...
               </p>
               <div className="mt-6 flex gap-1">
-                <div
-                  className="w-2 h-2 rounded-full bg-emerald-500 animate-bounce"
-                  style={{ animationDelay: "0ms" }}
-                />
-                <div
-                  className="w-2 h-2 rounded-full bg-emerald-500 animate-bounce"
-                  style={{ animationDelay: "150ms" }}
-                />
-                <div
-                  className="w-2 h-2 rounded-full bg-emerald-500 animate-bounce"
-                  style={{ animationDelay: "300ms" }}
-                />
+                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-bounce" style={{ animationDelay: "0ms" }} />
+                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-bounce" style={{ animationDelay: "150ms" }} />
+                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-bounce" style={{ animationDelay: "300ms" }} />
               </div>
             </div>
           ) : result ? (
-            <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
-              <VerifiedMatchCard data={result.data} />
-              <MarketProjectionCard data={result.data} />
-              <AgronomistTip data={result.data} />
-            </div>
+            result.success ? (
+              <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                <VerifiedMatchCard data={result.data} params={params} />
+                <MarketProjectionCard data={result.data} />
+                <AgronomistTip data={result.data} />
+              </div>
+            ) : (
+              <div className="h-full flex flex-col items-center justify-center bg-rose-50/50 dark:bg-rose-900/10 rounded-2xl border border-dashed border-rose-300 dark:border-rose-800 p-8 text-center min-h-[400px]">
+                <Cpu size={48} className="text-rose-500/50 dark:text-rose-400/50 mb-4" />
+                <h3 className="text-lg font-bold text-rose-800 dark:text-rose-400 mb-2">Analysis Failed</h3>
+                <p className="text-sm text-rose-600 dark:text-rose-500">{result.message || "An error occurred during AI analysis. Please try again."}</p>
+              </div>
+            )
           ) : (
             <div className="h-full flex flex-col items-center justify-center bg-white/60 dark:bg-slate-800/30 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 p-8 text-center min-h-[400px]">
-              <Sprout
-                size={48}
-                className="text-emerald-500/50 dark:text-emerald-400/50 mb-4"
-              />
-              <h3 className="text-lg font-bold text-slate-800 dark:text-white mb-2">
-                Awaiting Data
-              </h3>
+              <Sprout size={48} className="text-emerald-500/50 dark:text-emerald-400/50 mb-4" />
+              <h3 className="text-lg font-bold text-slate-800 dark:text-white mb-2">Awaiting Data</h3>
               <p className="text-sm text-slate-500 dark:text-slate-400">
-                Configure your location and soil parameters on the left, then
-                request a recommendation to see the AI's analysis.
+                Configure your location and soil parameters on the left, then request a recommendation to see the AI's analysis.
               </p>
             </div>
           )}

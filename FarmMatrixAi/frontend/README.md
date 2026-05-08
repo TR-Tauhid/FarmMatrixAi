@@ -24,7 +24,7 @@ Libreary and Dependencies / Packeges...
 4. recharts
 5. react-liflet
 6. lucid-react
-
+7.  @google/generative-ai
 # 🌾 FarmMatrixAI
 
 FarmMatrixAI is a modern, scalable web application focused on clean UI, smooth user experience, and extensible architecture.  
