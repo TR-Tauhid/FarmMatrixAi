@@ -13,7 +13,7 @@ const AboutPage = () => {
   const teamData = [
     {
       name: "Poojitha Kotagiri",
-      img: "",
+      img: "https://i.ibb.co/2HVPNWX/poojita.png",
     },
     {
       name: "Tohibur Rahman",
