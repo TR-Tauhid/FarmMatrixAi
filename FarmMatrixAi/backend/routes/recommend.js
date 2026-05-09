@@ -36,7 +36,7 @@ router.post("/", async (req, res) => {
     Temperature: ${temperature}°C | Humidity: ${humidity}% | Soil pH: ${ph} | Rainfall: ${rainfall}mm
     Additional Notes: ${additionalNotes} | Coordinates: Lat ${lat}, Lng ${lng}
     
-    Add an explaination why it's good for this location this season and this soil content and so on.
+    Add an explaination why it's good for this location this season and this soil content, future market trendy crop and so on.
 
     Return ONLY a raw JSON object (no markdown formatting, no backticks) with these exact keys:
     optimalCrop (string), confidence (number between 0 and 100), modelUsed (string, e.g., "Neural Ensemble v2.1"), yieldProjection (string, e.g., "4.2 Tons/Acre"), marketDemand (string, e.g., "High"), agronomistTip (string).`;
