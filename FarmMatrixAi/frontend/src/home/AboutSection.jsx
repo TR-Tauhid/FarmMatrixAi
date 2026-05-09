@@ -49,7 +49,7 @@ const AboutPage = () => {
   }));
 
   return (
-    <div className="space-y-16 md:space-y-24 mx-auto px-10 pb-20 transition-colors duration-500 bg-base-100 text-base-content overflow-x-hidden">
+    <div className="space-y-16 rounded-2xl my-10 md:space-y-24 mx-auto px-10 pb-20 transition-colors duration-500 bg-base-100 text-base-content overflow-x-hidden">
       {/* Hero Section */}
       <section className="flex flex-col lg:flex-row items-center gap-8 md:gap-12 pt-10 md:pt-20">
         <div className="flex-1 space-y-4 md:space-y-6 text-center lg:text-left">
