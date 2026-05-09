@@ -26,13 +26,11 @@ Farm Matrix AI combines:
 
 ### 🔌 Frontend Libraries & Tools
 - **React Router DOM 7.9** – Client-side routing and navigation
-- **React i18next 16.5** – Internationalization (i18n) support
 - **Framer Motion 12.23** – Smooth animations and transitions
 - **React Icons 5.6** – Icon library (Lucide & more)
 - **Recharts 3.8** – Interactive data visualization charts
 - **Keen Slider 6.8** – Touch-friendly carousel/slider component
 - **React Leaflet 5.0** – Interactive maps integration
-- **Lightgallery 2.9** – Image gallery with zoom and thumbnail plugins
 - **Firebase 12.11** – Authentication and real-time database
 - **React Toastify 11.0** – Toast notifications
 - **i18next 25.8** – Translation engine

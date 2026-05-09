@@ -21,7 +21,7 @@ const AboutPage = () => {
     },
     {
       name: "Jeshan Karim",
-      img: "https://i.pravatar.cc/300?img=12",
+      img: "https://i.ibb.co/RkWdjKLT/image.png",
     },
     {
       name: "Kamaleswar Ghosh",
@@ -29,7 +29,7 @@ const AboutPage = () => {
     },
     {
       name: "Sweta",
-      img: "https://i.pravatar.cc/300?img=26",
+      img: "https://i.ibb.co/RkWdjKLT/image.png",
     },
     {
       name: "Dr Komal Singh Gill",
