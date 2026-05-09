@@ -255,8 +255,6 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
         <div className="flex-1">
           <h3 className="text-white font-bold">Farm AI Assistant</h3>
           <p className="text-emerald-100 text-xs">Online • Ready to help</p>
-          <h3 className="text-white font-bold">{t("chat.title")}</h3>
-          <p className="text-emerald-100 text-xs">{t("chat.status")}</p>
         </div>
         {!embedded && (
           <div className="flex gap-1">
@@ -390,7 +388,6 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder="Type your message..."
-            placeholder={t("chat.placeholder")}
             className="flex-1 bg-slate-100 dark:bg-slate-800 border-0 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:text-white"
           />
           <button
