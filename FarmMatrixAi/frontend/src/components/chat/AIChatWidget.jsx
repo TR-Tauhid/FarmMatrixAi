@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import { useTranslation } from "react-i18next";
 
 const chatStore = {
   messages: [
@@ -22,7 +21,8 @@ const chatStore = {
     this.listeners.forEach((l) => l());
   },
   setMessages(updater) {
-    this.messages = typeof updater === "function" ? updater(this.messages) : updater;
+    this.messages =
+      typeof updater === "function" ? updater(this.messages) : updater;
     this.notify();
   },
   setInput(val) {
@@ -32,11 +32,10 @@ const chatStore = {
   setIsLoading(val) {
     this.isLoading = typeof val === "function" ? val(this.isLoading) : val;
     this.notify();
-  }
+  },
 };
 
 const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
-  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
 
   const [messages, setLocalMessages] = useState(chatStore.messages);
@@ -116,24 +115,31 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
     setIsLoading(true);
 
     try {
-      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-      
-      // Force localhost URL if testing locally, otherwise use .env or fallback
-      const API_URL = isLocalhost 
-        ? 'http://localhost:5000/api' 
-        : (import.meta.env.VITE_API_URL || 'https://farmmatrixai.onrender.com/api');
+      const isLocalhost =
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1";
 
-      const token = localStorage.getItem("token") || localStorage.getItem("accessToken");
+      // Force localhost URL if testing locally, otherwise use .env or fallback
+      const API_URL = isLocalhost
+        ? "http://localhost:5000/api"
+        : import.meta.env.VITE_API_URL ||
+          "https://farmmatrixai.onrender.com/api";
+
+      const token =
+        localStorage.getItem("token") || localStorage.getItem("accessToken");
       const headers = { "Content-Type": "application/json" };
       if (token) headers["Authorization"] = `Bearer ${token}`;
 
       const response = await fetch(`${API_URL}/chat`, {
         method: "POST",
         headers,
-        body: JSON.stringify({ message: userMessage.content, history: messages })
+        body: JSON.stringify({
+          message: userMessage.content,
+          history: messages,
+        }),
       });
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.response || `Server error: ${response.status}`);
       }
@@ -147,18 +153,32 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
       setMessages((prev) => [...prev, aiResponse]);
     } catch (error) {
       console.error("Chat error:", error);
-      
-      let displayMessage = "Sorry, I couldn't reach the AI server. Please try again later.";
+
+      let displayMessage =
+        "Sorry, I couldn't reach the AI server. Please try again later.";
       if (error.message) {
         const errStr = error.message.toLowerCase();
-        if (errStr.includes("503") || errStr.includes("high demand") || errStr.includes("overloaded")) {
-          displayMessage = "The AI is currently experiencing high demand. Please try again in a few moments.";
+        if (
+          errStr.includes("503") ||
+          errStr.includes("high demand") ||
+          errStr.includes("overloaded")
+        ) {
+          displayMessage =
+            "The AI is currently experiencing high demand. Please try again in a few moments.";
         } else if (errStr.includes("429") || errStr.includes("quota")) {
-          displayMessage = "The AI is currently overloaded with requests. Please wait a moment and try again.";
+          displayMessage =
+            "The AI is currently overloaded with requests. Please wait a moment and try again.";
         } else if (errStr.includes("safety")) {
-          displayMessage = "Your message was blocked by safety filters. Please rephrase and try again.";
-        } else if (errStr.includes("googlegenerativeai") || errStr.includes("server error") || errStr.includes("fetch") || error.message.includes("[")) {
-          displayMessage = "An unexpected technical issue occurred while processing your request. Please try again later.";
+          displayMessage =
+            "Your message was blocked by safety filters. Please rephrase and try again.";
+        } else if (
+          errStr.includes("googlegenerativeai") ||
+          errStr.includes("server error") ||
+          errStr.includes("fetch") ||
+          error.message.includes("[")
+        ) {
+          displayMessage =
+            "An unexpected technical issue occurred while processing your request. Please try again later.";
         } else {
           displayMessage = error.message;
         }
@@ -172,7 +192,7 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
           content: displayMessage,
           timestamp: new Date(),
           isError: true,
-        }
+        },
       ]);
     } finally {
       setIsLoading(false);
@@ -214,7 +234,7 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
         onClick={() => setIsOpen(true)}
         className={`fixed ${positionClasses[position]} z-50 w-14 h-14 bg-emerald-600 hover:bg-emerald-700 rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-110 cursor-pointer`}
         aria-label="Open AI Chat"
-        aria-label={t("chat.openChat")}
+        aria-
       >
         <svg
           className="w-7 h-7 text-white"
@@ -262,7 +282,6 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
               onClick={loadDemo}
               className="p-1.5 hover:bg-white/20 rounded-lg transition-colors cursor-pointer"
               title="Load Demo"
-              title={t("chat.loadDemo")}
             >
               <svg
                 className="w-5 h-5 text-white"
@@ -291,7 +310,6 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
               }}
               className="p-1.5 hover:bg-white/20 rounded-lg transition-colors cursor-pointer"
               title="Maximize"
-              title={t("chat.maximize")}
             >
               <svg
                 className="w-5 h-5 text-white"
@@ -311,7 +329,6 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
               onClick={() => setIsOpen(false)}
               className="p-1.5 hover:bg-white/20 rounded-lg transition-colors cursor-pointer"
               title="Close"
-              title={t("chat.close")}
             >
               <svg
                 className="w-5 h-5 text-white"
@@ -342,9 +359,9 @@ const AIChatWidget = ({ position = "bottom-right", embedded = false }) => {
               className={`max-w-[80%] rounded-2xl p-3 ${
                 msg.role === "user"
                   ? "bg-emerald-600 text-white"
-                : msg.isError
-                ? "bg-rose-100 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50"
-                : "bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200"
+                  : msg.isError
+                    ? "bg-rose-100 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50"
+                    : "bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200"
               }`}
             >
               <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
