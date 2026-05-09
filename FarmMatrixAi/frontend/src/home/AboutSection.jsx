@@ -33,7 +33,7 @@ const AboutPage = () => {
     },
     {
       name: "Dr Komal Singh Gill",
-      img: "https://i.pravatar.cc/300?img=26",
+      img: "https://i.ibb.co/RkWdjKLT/image.png",
     },
   ];
 

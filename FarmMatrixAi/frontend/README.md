@@ -395,18 +395,6 @@ npm test
 
 ---
 
-## 📝 License
-
-This project is licensed under the ISC License - see the LICENSE file for details.
-
----
-
-## 👨‍💻 Authors
-
-- **Team Lead**: Development team
-- **Contributors**: Open to contributions!
-
----
 
 ## 🐛 Troubleshooting
 
@@ -455,14 +443,6 @@ docker-compose up --build
 
 ---
 
-## 📞 Support
-
-For issues and questions:
-- Open an issue on GitHub
-- Check existing issues and discussions
-- Contact the development team
-
----
 
 **Happy Farming with AI! 🚜🤖**
 

@@ -33,8 +33,6 @@ export default function Navbar() {
       .catch((err) => notify(err?.message, "error"));
   };
 
-  console.log(user?.photoURL)
-
   return (
     <div
       className={`w-full fixed left-0 z-100 rounded-sm md:rounded-2xl backdrop-blur-2xl bg-base-100/30 transition-all duration-500 ease-in-out md:p-10 ${scrolling ? "md:-top-4 md:px-3 md:scale-75 p-2 md:p-4" : "p-4 md:px-10"}`}

@@ -47,9 +47,7 @@ const CropRecommendationDashboard = () => {
         headers,
         body: JSON.stringify(payload),
       });
-      const data = await response.json();
-      console.log("Response from server:", data);
-      
+      const data = await response.json();      
       setResult(data);
       setIsSubmitting(false);
     } catch (error) {

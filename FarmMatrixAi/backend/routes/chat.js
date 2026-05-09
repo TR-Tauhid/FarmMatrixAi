@@ -25,7 +25,6 @@ router.post("/", async (req, res) => {
 
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: modelName });
-    console.log(modelName);
 
     // Map history to Gemini's expected format
     const formattedHistory = [];
