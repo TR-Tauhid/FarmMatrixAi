@@ -294,20 +294,28 @@
     "openPositions": "Open Positions",
     "team": [
       {
-        "role": "CHIEF EXECUTIVE OFFICER",
+        "role": "Software Testing Engineer",
         "desc": "Ex-NASA telemetry lead with a passion for sustainable land management."
       },
       {
-        "role": "HEAD OF AI & SOIL SCIENCE",
-        "desc": "PhD in Soil Microbiology. Pioneering the 'Neural Soil' predictive engine."
+        "role": "Full Stack Developer",
+        "desc": "Focused on making complex agrarian data intuitive for every user."
       },
       {
-        "role": "VP OPERATIONS",
+        "role": "Cyber Security Specialist",
         "desc": "Third-generation farmer. Ensuring our tech works in the mud, not just the lab."
       },
       {
-        "role": "DIRECTOR OF PRODUCT DESIGN",
+        "role": "Software Testing Engineer",
         "desc": "Focused on making complex agrarian data intuitive for every user."
+      },
+      {
+        "role": "Computer Science",
+        "desc": "Focused on making complex agrarian data intuitive for every user."
+      },
+      {
+        "role": "The Project Cordinator",
+        "desc": "PhD in Soil Microbiology. Pioneering the 'Neural Soil' predictive engine."
       }
     ],
     "getInTouch": "Get in Touch",
